@@ -167,9 +167,13 @@ class GameViewModel: ObservableObject {
     }
 
     func checkWinner() {
-        if let winnerIndex = players.firstIndex(where: { $0.count == 52 }) {
-            winner = winnerIndex
-            message = "🎉 Giocatore \(winnerIndex + 1) ha vinto!"
+        for (index, player) in players.enumerated() {
+            if player.isEmpty {
+                let other = (index + 1) % players.count
+                winner = other
+                message = "🎉 Giocatore \(other + 1) ha vinto!"
+                return
+            }
         }
     }
 }

@@ -171,6 +171,14 @@ struct ContentView: View {
                                 .shadow(radius: 2)
                         }
                     }
+                    .onAppear {
+                        if !showVictoryBanner {
+                            showVictoryBanner = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                showVictoryBanner = false
+                            }
+                        }
+                    }
                 }
 
                 Spacer()
