@@ -32,7 +32,7 @@ struct ContentView: View {
 
                 // BOT DECK
                 VStack(spacing: 8) {
-                    Text("Bot – Giocatore 2")
+                    Text("Bot – Player 2")
                         .font(.subheadline)
                         .foregroundColor(.gray)
 
@@ -57,7 +57,7 @@ struct ContentView: View {
                         }
                     }
 
-                    Text("Carte: \(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
+                    Text("Cards: \(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -86,7 +86,7 @@ struct ContentView: View {
                             RoundedRectangle(cornerRadius: 14)
                                 .fill(Color.gray.opacity(0.15))
                                 .frame(width: 200, height: 250)
-                                .overlay(Text("Vuoto").font(.caption).foregroundColor(.gray))
+                                .overlay(Text("Empty").font(.caption).foregroundColor(.gray))
                         }
                     }
                 }
@@ -94,7 +94,7 @@ struct ContentView: View {
 
                 // PLAYER DECK
                 VStack(spacing: 8) {
-                    Text("Tu – Giocatore 1")
+                    Text("You – Player 1")
                         .font(.subheadline)
                         .foregroundColor(.gray)
 
@@ -143,7 +143,7 @@ struct ContentView: View {
                             )
                     }
 
-                    Text("Carte: \(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
+                    Text("Cards: \(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -188,7 +188,7 @@ struct ContentView: View {
             if showVictoryBanner, let winner = viewModel.winner {
                 VStack {
                     Spacer()
-                    Text("🏆 Giocatore \(winner + 1) ha vinto la partita!")
+                    Text("🏆 Player \(winner + 1) won the game!")
                         .font(.system(size: 22, weight: .semibold))
                         .foregroundColor(.white)
                         .padding()

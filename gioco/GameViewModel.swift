@@ -47,7 +47,6 @@ class GameViewModel: ObservableObject {
         winner = nil
         forcedPlaysRemaining = 0
         doppiaContesa = false
-        message = "Turno del giocatore 1"
     }
 
     func playCard() {
@@ -60,30 +59,25 @@ class GameViewModel: ObservableObject {
         let card = players[currentPlayer].removeFirst()
         centralPile.append(card)
         doppiaContesa = false
-        message = "Giocatore \(currentPlayer + 1) ha giocato \(card.value.capitalized) di \(card.suit.capitalized)"
 
         if forcedPlaysRemaining > 0 {
             forcedPlaysRemaining -= 1
             if card.isWinningCard {
                 forcedPlaysRemaining = card.rankNumber
                 currentPlayer = (currentPlayer + 1) % players.count
-                message += " – Carta vincente! Ora tocca al giocatore \(currentPlayer + 1) per \(forcedPlaysRemaining) carte."
                 autoPlayIfNeeded()
                 return
             }
 
             if forcedPlaysRemaining == 0 {
                 let winnerPlayer = (currentPlayer + 1) % players.count
-                message += " – Nessuna carta vincente! Il mazzo andrà al giocatore \(winnerPlayer + 1)..."
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.message += "\nGiocatore \(winnerPlayer + 1) prenderà il mazzo..."
 
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                         self.players[winnerPlayer].append(contentsOf: self.centralPile)
                         self.centralPile.removeAll()
                         self.checkWinner()
-                        self.message = "Giocatore \(winnerPlayer + 1) prende il mazzo!"
                         self.currentPlayer = winnerPlayer
                         self.autoPlayIfNeeded()
                     }
@@ -93,12 +87,10 @@ class GameViewModel: ObservableObject {
         } else if card.isWinningCard {
             forcedPlaysRemaining = card.rankNumber
             currentPlayer = (currentPlayer + 1) % players.count
-            message += " – Carta vincente! Ora tocca al giocatore \(currentPlayer + 1) per \(forcedPlaysRemaining) carte."
             autoPlayIfNeeded()
             return
         } else {
             currentPlayer = (currentPlayer + 1) % players.count
-            message += "\nOra tocca al giocatore \(currentPlayer + 1)"
         }
 
         if players[currentPlayer].isEmpty {
@@ -125,7 +117,6 @@ class GameViewModel: ObservableObject {
             doppiaContesa = true
             players[playerIndex].append(contentsOf: centralPile)
             centralPile.removeAll()
-            message = "Giocatore \(playerIndex + 1) ha preso il mazzo con una doppia!"
             currentPlayer = playerIndex
             forcedPlaysRemaining = 0
             checkWinner()
@@ -156,7 +147,6 @@ class GameViewModel: ObservableObject {
                     self.doppiaContesa = true
                     self.players[1].append(contentsOf: self.centralPile)
                     self.centralPile.removeAll()
-                    self.message = "🤖 Il bot ha preso il mazzo con una doppia!"
                     self.currentPlayer = 1
                     self.forcedPlaysRemaining = 0
                     self.checkWinner()
@@ -171,7 +161,7 @@ class GameViewModel: ObservableObject {
             if player.isEmpty {
                 let other = (index + 1) % players.count
                 winner = other
-                message = "🎉 Giocatore \(other + 1) ha vinto!"
+                message = "🎉 Player \(other + 1) won!"
                 return
             }
         }
