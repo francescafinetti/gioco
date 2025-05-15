@@ -1,3 +1,4 @@
+
 //
 //  ContentView.swift
 //  gioco
@@ -15,19 +16,18 @@ struct ContentView: View {
     @State private var isDragging = false
     @State private var showVictoryBanner = false
     @State private var showBotCard = false
+    @State private var progress: CGFloat = 0.0
+    @State private var timer: Timer?
+    let duration: TimeInterval = 7.0
 
     var body: some View {
         ZStack {
             // Background
-            LinearGradient(
-                gradient: Gradient(colors: [Color.white, Color(UIColor.systemGray6)]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            Image("es")
+                .ignoresSafeArea()
 
             VStack(spacing: 50) {
-                
+
                 Spacer()
 
                 // BOT DECK
@@ -37,7 +37,6 @@ struct ContentView: View {
                         .foregroundColor(.gray)
 
                     ZStack {
-                        
                         // Mazzo sotto
                         Image("back")
                             .resizable()
@@ -49,8 +48,15 @@ struct ContentView: View {
                         if showBotCard {
                             Image("back")
                                 .resizable()
-                                .frame(width: 80, height: 110)                                .cornerRadius(10)
+                                .frame(width: 80, height: 110)
+                                .cornerRadius(10)
                                 .shadow(radius: 4)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(viewModel.currentPlayer == 1 ? Color.green.opacity(0.8) : Color.clear, lineWidth: 4)
+                                        .blur(radius: 1)
+                                        .opacity(viewModel.currentPlayer == 1 ? 1 : 0)
+                                )
                                 .offset(botOffset)
                                 .zIndex(1)
                                 .animation(.easeInOut(duration: 0.4), value: botOffset)
@@ -66,6 +72,15 @@ struct ContentView: View {
                 VStack(spacing: 10) {
                     ZStack {
                         if let lastCard = viewModel.centralPile.last {
+
+                            // TIMER AROUND THE CARD
+                            RoundedRectangle(cornerRadius: 16)
+                                .trim(from: 0.0, to: progress / CGFloat(duration))
+                                .stroke(Color.black, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                                .frame(width: 170, height: 263)
+                                .animation(.linear(duration: 0.01), value: progress)
+
+                            // CARD DISPLAYED
                             Image(lastCard.imageName)
                                 .resizable()
                                 .scaledToFit()
@@ -91,7 +106,6 @@ struct ContentView: View {
                     }
                 }
 
-
                 // PLAYER DECK
                 VStack(spacing: 8) {
                     Text("You – Player 1")
@@ -112,11 +126,17 @@ struct ContentView: View {
                             .frame(width: 80, height: 110)
                             .cornerRadius(12)
                             .shadow(radius: 4)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(viewModel.currentPlayer == 0 ? Color.green.opacity(0.8) : Color.clear, lineWidth: 4)
+                                    .blur(radius: 1)
+                                    .opacity(viewModel.currentPlayer == 0 ? 1 : 0)
+                            )
                             .offset(dragOffset)
                             .gesture(
                                 DragGesture()
                                     .onChanged { gesture in
-                                        guard viewModel.currentPlayer == 0 else { return } // 👈 blocco se non è il tuo turno
+                                        guard viewModel.currentPlayer == 0 else { return }
                                         dragOffset = gesture.translation
                                         isDragging = true
                                     }
@@ -147,8 +167,6 @@ struct ContentView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-
-                
 
                 // FINE PARTITA
                 if let winner = viewModel.winner {
@@ -225,10 +243,27 @@ struct ContentView: View {
                 }
             }
         }
+        .onChange(of: viewModel.currentPlayer) { newValue in
+            if newValue == 0 {
+                startTimer()
+            }
+        }
+    }
+
+    func startTimer() {
+        progress = CGFloat(duration) // parte sempre pieno
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { t in
+            if progress > 0 {
+                progress -= 0.01
+            } else {
+                progress = 0
+                t.invalidate()
+            }
+        }
     }
 }
 
 #Preview {
     ContentView()
 }
-
