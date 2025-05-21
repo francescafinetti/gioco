@@ -1,3 +1,10 @@
+//
+//  SettingsView.swift
+//  gioco
+//
+//  Created by Francesca Finetti on 21/05/25.
+//
+
 import SwiftUI
 
 struct SettingsView: View {
