@@ -1,4 +1,4 @@
-# Head in the Clouds ☁️🃏  
+# rako 🟠🟨🟣🔵  
 **iOS card game** inspired by *Beggar My Neighbor*, reimagined as a fast-paced, engaging experience that challenges **attention**, **reaction time**, and **focus** — without ever feeling like "training."
 
 Built entirely with **SwiftUI**, the app uses simple rules and quick interactions to create a dynamic mental workout that feels like play.
