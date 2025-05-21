@@ -57,9 +57,8 @@ Play is the vehicle — any mental benefit is a natural side effect of how the g
 ---
 
 ## 📦 Testing
-
-1. Install **TestFlight** on your device:[](https://apps.apple.com/it/app/testflight/id899247664?l=en-GB)
-2. Install the **app** through the following TestFlight link: [](https://testflight.apple.com/join/ne6Meh5d)
+1. Install **TestFlight** on your device: [TestFlight su App Store](https://apps.apple.com/it/app/testflight/id899247664?l=en-GB)
+2. Install the **app** through the following TestFlight link: [Join TestFlight](https://testflight.apple.com/join/ne6Meh5d)
 
 ---
 
