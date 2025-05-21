@@ -12,7 +12,6 @@ Built entirely with **SwiftUI**, the app uses simple rules and quick interaction
 
 ## 🎮 Features
 
-- **Fast-paced reinterpretation** of *Beggar My Neighbor*
 - **Tap-based mechanic** to trigger real-time reflex and focus
 - **Minimal UI with symbolic visual system**:
   - ☁️ Calm & focus
