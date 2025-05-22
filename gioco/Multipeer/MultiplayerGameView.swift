@@ -61,7 +61,3 @@ struct MultiplayerGameView: View {
         }
     }
 }
-
-#Preview {
-    MultiplayerGameView(multipeerManager: MultipeerManager())
-}
