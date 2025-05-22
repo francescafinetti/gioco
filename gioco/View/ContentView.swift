@@ -46,12 +46,7 @@ struct ContentView: View {
                 
                 PlayerDeckView(viewModel: viewModel, dragOffset: $dragOffset, isDragging: $isDragging)
                 
-                // FINE PARTITA
-                if let winner = viewModel.winner {
-                    VictoryBannerView(winner: winner) {
-                        viewModel.startGame(playerCount: 2)
-                    }
-                }
+               
                 
                 Spacer()
             }
