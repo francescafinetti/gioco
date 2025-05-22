@@ -11,7 +11,7 @@ import SwiftUI
 struct giocoApp: App {
     var body: some Scene {
         WindowGroup {
-            ConnectView()
+            ContentView()
         }
     }
 }
