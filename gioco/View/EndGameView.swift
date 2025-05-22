@@ -9,55 +9,21 @@ import SwiftUI
 
 struct EndGameView: View {
     let winner: Int
-    let onRestart: () -> Void
-    let onGoHome: () -> Void
 
     var body: some View {
-        VStack(spacing: 30) {
+        VStack {
             Spacer()
-
-            if winner == 0 {
-                Text("🎉 Hai vinto!")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.green)
-            } else {
-                Text("💀 Hai perso!")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.red)
-            }
-
-            Spacer()
-
-            VStack(spacing: 20) {
-                ForEach([
-                    ("🔁 Gioca una nuova partita", onRestart, Color.blue),
-                    ("🏠 Torna alla Home", onGoHome, Color.gray)
-                ], id: \.0) { (title, action, color) in
-                    Button(action: action) {
-                        Text(title)
-                            .font(.headline)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(color)
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
-                    }
-                }
-            }
-            .padding(.horizontal)
-
+            Text(winner == 0 ? "🎉 Hai vinto!" : "😞 Hai perso")
+                .font(.largeTitle)
+                .bold()
+                .foregroundColor(.white)
+                .padding()
             Spacer()
         }
-        .padding()
-        .background(Color(.systemBackground))
-        .ignoresSafeArea()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black.ignoresSafeArea())
     }
 }
-
-#Preview("Hai Vinto") {
-    EndGameView(winner: 0,
-                onRestart: { print("Restart tapped") },
-                onGoHome: { print("Home tapped") })
+#Preview {
+    EndGameView(winner: 1)
 }

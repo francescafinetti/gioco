@@ -32,68 +32,43 @@ struct ContentView: View {
             // Background
             Image("es")
                 .ignoresSafeArea()
-
+            
             VStack(spacing: 50) {
-
+                
                 Spacer()
-
+                
                 // BOT DECK
                 BotDeckView(viewModel: viewModel, showBotCard: $showBotCard, botOffset: $botOffset)
                 // MAZZO CENTRALE
                 CentralPileView(viewModel: viewModel, progress: $progress, duration: duration, centralDragOffset: $centralDragOffset, isDraggingCentral: $isDraggingCentral)
-
+                
                 // PLAYER DECK
                 
                 PlayerDeckView(viewModel: viewModel, dragOffset: $dragOffset, isDragging: $isDragging)
-
+                
                 // FINE PARTITA
                 if let winner = viewModel.winner {
                     VictoryBannerView(winner: winner) {
-                                           viewModel.startGame(playerCount: 2)
-                                       }
+                        viewModel.startGame(playerCount: 2)
+                    }
                 }
-
+                
                 Spacer()
-            }
-
-            // BANNER DI VITTORIA
-            if showVictoryBanner, let winner = viewModel.winner {
-                VStack {
-                    Spacer()
-                    Text("🏆 Player \(winner + 1) won the game!")
-                        .font(.system(size: 22, weight: .semibold))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(.black.opacity(0.85))
-                        .cornerRadius(16)
-                        .shadow(radius: 10)
-                        .transition(.opacity)
-                    Spacer()
-                }
-                .zIndex(2)
             }
         }
         .onChange(of: viewModel.currentPlayer) { newValue in
             if newValue == 1 {
                 showBotCard = true
                 botOffset = .zero
-
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     withAnimation {
                         botOffset = CGSize(width: 0, height: 200)
                     }
                 }
-
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     showBotCard = false
-                }
-            }
-        }
-        .onChange(of: viewModel.winner) { winner in
-            if winner != nil {
-                showVictoryBanner = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    showVictoryBanner = false
                 }
             }
         }
@@ -102,8 +77,11 @@ struct ContentView: View {
                 startTimer()
             }
         }
+        // da aggiungere and game view
     }
-
+        
+                 
+                 
     func startTimer() {
         progress = CGFloat(duration) // parte sempre pieno
         timer?.invalidate()
