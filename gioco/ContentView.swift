@@ -19,6 +19,13 @@ struct ContentView: View {
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
     let duration: TimeInterval = 7.0
+    
+    //var per drag coppiauz
+    @State private var centralDragOffset: CGSize = .zero//tracciare movimento
+    /* da usare in caso di cambio visuale*/
+     @State private var isDraggingCentral = false
+   
+    
 
     var body: some View {
         ZStack {
@@ -88,7 +95,45 @@ struct ContentView: View {
                                 .cornerRadius(14)
                                 .shadow(radius: 6)
                                 .transition(.scale)
-                                .onTapGesture {
+                                .gesture(
+                                    DragGesture()
+                                        .onChanged { gesture in
+                                            //valuta solo coordinate Y nel drag
+                                            centralDragOffset = CGSize(width: 0, height: gesture.translation.height)
+                                            isDraggingCentral = true
+                                        }
+                                        .onEnded { gesture in
+                                            //rimettere carta in posizione dritta alla fine
+                                            defer {
+                                                withAnimation(.easeOut) {
+                                                    centralDragOffset = .zero
+                                                    isDraggingCentral = false
+                                                }
+                                            }
+                                            
+                                            //ci soo almeno 2 carte?
+                                            guard viewModel.centralPile.count >= 2 else { return }
+                                            let topValue    = viewModel.centralPile.last!.value
+                                            let secondValue = viewModel.centralPile[viewModel.centralPile.count - 2].value
+                                            guard topValue == secondValue else { return }
+                                            
+                                            //soglia è per dare un minimo di trascinamento
+                                            let soglia: CGFloat = 100
+                                            if gesture.translation.height > soglia {
+                                                //drag verso il basso carte verso player 1
+                                                print("Giocatore 1 ha trascinato coppia")
+                                                viewModel.tapForDoppia(by: 0)
+                                            } else if gesture.translation.height < -soglia {
+                                                //drag verso l’alto carte player 2 (o bot)
+                                                print("Giocatore 2 ha trascinato coppia")
+                                                viewModel.tapForDoppia(by: 1)
+                                            }
+                                        }
+                                )
+                                .transition(.scale)
+                                /*
+                                 vecchio vers "tap" per la coppia
+                                 .onTapGesture {
                                     if viewModel.centralPile.count >= 2 {
                                         let top = viewModel.centralPile.last!
                                         let second = viewModel.centralPile[viewModel.centralPile.count - 2]
@@ -96,7 +141,7 @@ struct ContentView: View {
                                             viewModel.tapForDoppia(by: 0)
                                         }
                                     }
-                                }
+                                }*/
                         } else {
                             RoundedRectangle(cornerRadius: 14)
                                 .fill(Color.gray.opacity(0.15))
