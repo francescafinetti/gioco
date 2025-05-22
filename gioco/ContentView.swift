@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    var onExitToHome: (() -> Void)? = nil
-    
     @StateObject var viewModel = GameViewModel(playerCount: 2)
     @Namespace private var animation
     @State private var dragOffset: CGSize = .zero
@@ -20,30 +18,40 @@ struct ContentView: View {
     @State private var showBotCard = false
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
-    @State private var showEndGameScreen = false
     let duration: TimeInterval = 7.0
+    
+    //var per drag coppiauz
+    @State private var centralDragOffset: CGSize = .zero//tracciare movimento
+    /* da usare in caso di cambio visuale*/
+     @State private var isDraggingCentral = false
+   
+    
 
     var body: some View {
         ZStack {
+            // Background
             Image("es")
                 .ignoresSafeArea()
 
             VStack(spacing: 50) {
+
                 Spacer()
 
-                // BOT
+                // BOT DECK
                 VStack(spacing: 8) {
                     Text("Bot – Player 2")
                         .font(.subheadline)
                         .foregroundColor(.gray)
 
                     ZStack {
+                        // Mazzo sotto
                         Image("back")
                             .resizable()
                             .frame(width: 80, height: 110)
                             .cornerRadius(10)
                             .shadow(radius: 2)
 
+                        // Carta animata sopra (solo se visibile)
                         if showBotCard {
                             Image("back")
                                 .resizable()
@@ -71,12 +79,15 @@ struct ContentView: View {
                 VStack(spacing: 10) {
                     ZStack {
                         if let lastCard = viewModel.centralPile.last {
+
+                            // TIMER AROUND THE CARD
                             RoundedRectangle(cornerRadius: 16)
                                 .trim(from: 0.0, to: progress / CGFloat(duration))
                                 .stroke(Color.black, style: StrokeStyle(lineWidth: 4, lineCap: .round))
                                 .frame(width: 170, height: 263)
                                 .animation(.linear(duration: 0.01), value: progress)
 
+                            // CARD DISPLAYED
                             Image(lastCard.imageName)
                                 .resizable()
                                 .scaledToFit()
@@ -84,7 +95,45 @@ struct ContentView: View {
                                 .cornerRadius(14)
                                 .shadow(radius: 6)
                                 .transition(.scale)
-                                .onTapGesture {
+                                .gesture(
+                                    DragGesture()
+                                        .onChanged { gesture in
+                                            //valuta solo coordinate Y nel drag
+                                            centralDragOffset = CGSize(width: 0, height: gesture.translation.height)
+                                            isDraggingCentral = true
+                                        }
+                                        .onEnded { gesture in
+                                            //rimettere carta in posizione dritta alla fine
+                                            defer {
+                                                withAnimation(.easeOut) {
+                                                    centralDragOffset = .zero
+                                                    isDraggingCentral = false
+                                                }
+                                            }
+                                            
+                                            //ci soo almeno 2 carte?
+                                            guard viewModel.centralPile.count >= 2 else { return }
+                                            let topValue    = viewModel.centralPile.last!.value
+                                            let secondValue = viewModel.centralPile[viewModel.centralPile.count - 2].value
+                                            guard topValue == secondValue else { return }
+                                            
+                                            //soglia è per dare un minimo di trascinamento
+                                            let soglia: CGFloat = 100
+                                            if gesture.translation.height > soglia {
+                                                //drag verso il basso carte verso player 1
+                                                print("Giocatore 1 ha trascinato coppia")
+                                                viewModel.tapForDoppia(by: 0)
+                                            } else if gesture.translation.height < -soglia {
+                                                //drag verso l’alto carte player 2 (o bot)
+                                                print("Giocatore 2 ha trascinato coppia")
+                                                viewModel.tapForDoppia(by: 1)
+                                            }
+                                        }
+                                )
+                                .transition(.scale)
+                                /*
+                                 vecchio vers "tap" per la coppia
+                                 .onTapGesture {
                                     if viewModel.centralPile.count >= 2 {
                                         let top = viewModel.centralPile.last!
                                         let second = viewModel.centralPile[viewModel.centralPile.count - 2]
@@ -92,7 +141,7 @@ struct ContentView: View {
                                             viewModel.tapForDoppia(by: 0)
                                         }
                                     }
-                                }
+                                }*/
                         } else {
                             RoundedRectangle(cornerRadius: 14)
                                 .fill(Color.gray.opacity(0.15))
@@ -102,19 +151,21 @@ struct ContentView: View {
                     }
                 }
 
-                // GIOCATORE
+                // PLAYER DECK
                 VStack(spacing: 8) {
                     Text("You – Player 1")
                         .font(.subheadline)
                         .foregroundColor(.gray)
 
                     ZStack {
+                        // Mazzo visibile sotto
                         Image("back")
                             .resizable()
                             .frame(width: 80, height: 110)
                             .cornerRadius(10)
                             .shadow(radius: 2)
 
+                        // Carta da trascinare sopra
                         Image("back")
                             .resizable()
                             .frame(width: 80, height: 110)
@@ -162,9 +213,41 @@ struct ContentView: View {
                         .foregroundColor(.secondary)
                 }
 
+                // FINE PARTITA
+                if let winner = viewModel.winner {
+                    VStack(spacing: 12) {
+                        Text("🎉 Giocatore \(winner + 1) ha vinto!")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                            .bold()
+
+                        Button(action: {
+                            viewModel.startGame(playerCount: 2)
+                        }) {
+                            Text("🔁 Nuova Partita")
+                                .font(.headline)
+                                .padding(.horizontal, 24)
+                                .padding(.vertical, 10)
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                                .shadow(radius: 2)
+                        }
+                    }
+                    .onAppear {
+                        if !showVictoryBanner {
+                            showVictoryBanner = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                showVictoryBanner = false
+                            }
+                        }
+                    }
+                }
+
                 Spacer()
             }
 
+            // BANNER DI VITTORIA
             if showVictoryBanner, let winner = viewModel.winner {
                 VStack {
                     Spacer()
@@ -196,41 +279,24 @@ struct ContentView: View {
                     showBotCard = false
                 }
             }
-
-            if newValue == 0 {
-                startTimer()
-            }
         }
         .onChange(of: viewModel.winner) { winner in
             if winner != nil {
                 showVictoryBanner = true
-                showEndGameScreen = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     showVictoryBanner = false
                 }
             }
         }
-        .fullScreenCover(isPresented: $showEndGameScreen) {
-            if let winner = viewModel.winner {
-                EndGameView(
-                    winner: winner,
-                    onRestart: {
-                        viewModel.startGame(playerCount: 2)
-                        showEndGameScreen = false
-                    },
-                    onGoHome: {
-                        showEndGameScreen = false
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                            onExitToHome?()
-                        }
-                    }
-                )
+        .onChange(of: viewModel.currentPlayer) { newValue in
+            if newValue == 0 {
+                startTimer()
             }
         }
     }
 
     func startTimer() {
-        progress = CGFloat(duration)
+        progress = CGFloat(duration) // parte sempre pieno
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { t in
             if progress > 0 {
