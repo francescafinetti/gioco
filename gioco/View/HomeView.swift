@@ -1,74 +1,89 @@
-//
-//  HomeView.swift
-//  gioco
-//
-//  Created by Serena Pia Capasso on 19/05/25.
-//
 import SwiftUI
 
 struct HomeView: View {
     @State private var isGameActive = false
-    @State private var angle: Double = 0
+    @State private var showSettings = false
+    @State private var selectedMode = 0
 
-    // Solo 4 risorse, ma ripetute
-    let baseSymbols = ["Risorsa 1", "Risorsa 2", "Risorsa 3", "Risorsa 4"]
-    var repeatedSymbols: [String] {
-        baseSymbols + baseSymbols // 8 elementi
-    }
+    let gameModes = ["Classic", "Speed", "Mirror"]
 
     var body: some View {
-        ZStack {
-            // Sfondo
-          
+        NavigationStack {
+            ZStack {
+                Image("es")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea()
 
-            GeometryReader { geo in
-                let size = min(geo.size.width, geo.size.height) * 0.6
-                let radius = size / 2
+                VStack {
+                    Spacer()
 
-                ZStack {
-                    // Simboli su traiettoria circolare
-                    ForEach(0..<repeatedSymbols.count, id: \.self) { i in
-                        let angleOffset = Angle.degrees(Double(i) / Double(repeatedSymbols.count) * 360)
-                        let totalAngle = angleOffset + Angle.degrees(angle)
+                    TabView(selection: $selectedMode) {
+                        ForEach(0..<gameModes.count, id: \.self) { index in
+                            ZStack {
+                                Image("back")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 220, height: 500)
+                                    .scaleEffect(index == selectedMode ? 1.0 : 0.85)
+                                    .opacity(index == selectedMode ? 1.0 : 0.6)
+                                    .shadow(radius: index == selectedMode ? 10 : 0)
+                                    .animation(.easeInOut(duration: 0.3), value: selectedMode)
 
-                        Image(repeatedSymbols[i])
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                            .position(x: geo.size.width / 2 + CGFloat(cos(totalAngle.radians)) * radius,
-                                      y: geo.size.height / 2 + CGFloat(sin(totalAngle.radians)) * radius)
-                            .rotationEffect(Angle(degrees: angle))
+                                VStack {
+                                    Spacer()
+                                    Text(gameModes[index])
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .shadow(radius: 3)
+                                        .padding(.bottom, 40)
+                                }
+                            }
+                            .tag(index)
+                            .padding(.horizontal, 40)
+                        }
                     }
+                    .tabViewStyle(.page(indexDisplayMode: .never))
+                    .frame(height: 520)
+                    .padding(.top, 20)
 
-                    // Scritta centrale
                     Text("Tap to Start")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .shadow(radius: 6)
+                        .padding(.bottom, 60)
+
+                    Spacer()
+                }
+
+                // Tapping anywhere starts the game
+                NavigationLink(destination: ContentView(), isActive: $isGameActive) {
+                    EmptyView()
                 }
             }
-
-            // NavigationLink invisibile
-            NavigationLink(destination: ContentView(), isActive: $isGameActive) {
-                EmptyView()
+            .contentShape(Rectangle())
+            .onTapGesture {
+                isGameActive = true
             }
-        }
-        .onAppear {
-            // Avvia rotazione
-            withAnimation(Animation.linear(duration: 20).repeatForever(autoreverses: false)) {
-                angle = 360
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
             }
-        }
-        .contentShape(Rectangle()) // consente tap ovunque
-        .onTapGesture {
-            isGameActive = true
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gearshape.fill")
+                            .foregroundColor(.black)
+                    }
+                }
+            }
         }
     }
 }
 
 #Preview {
-    NavigationView {
-        HomeView()
-    }
+    HomeView()
 }
-

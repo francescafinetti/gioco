@@ -174,12 +174,12 @@ struct TwoPlayerGameView: View {
                 // GAME OVER
                 if let winner = viewModel.winner {
                     VStack(spacing: 12) {
-                        Text("🎉 Player \(winner + 1) ha vinto!")
+                        Text("Player \(winner + 1) won!")
                             .font(.title2)
                             .foregroundColor(.green)
                             .bold()
 
-                        Button("🔁 Nuova Partita") {
+                        Button("New Game") {
                             viewModel.startGame(playerCount: 2)
                         }
                         .font(.headline)
