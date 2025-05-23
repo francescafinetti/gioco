@@ -4,7 +4,6 @@
 //
 //  Created by Francesca Finetti on 08/05/25.
 //
-
 import Foundation
 import SwiftUI
 
@@ -20,8 +19,10 @@ class GameViewModel: ObservableObject {
 
     private var forcedPlaysRemaining = 0
     private var doppiaContesa = false
+    private let isCPUEnabled: Bool
 
-    init(playerCount: Int = 2) {
+    init(playerCount: Int = 2, isCPUEnabled: Bool = true) {
+        self.isCPUEnabled = isCPUEnabled
         startGame(playerCount: playerCount)
     }
 
@@ -71,9 +72,7 @@ class GameViewModel: ObservableObject {
 
             if forcedPlaysRemaining == 0 {
                 let winnerPlayer = (currentPlayer + 1) % players.count
-
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                         self.players[winnerPlayer].append(contentsOf: self.centralPile)
                         self.centralPile.removeAll()
@@ -99,7 +98,8 @@ class GameViewModel: ObservableObject {
             autoPlayIfNeeded()
         }
 
-        if currentPlayer != 1 {
+        // Controlla la "doppia" solo se la CPU è abilitata
+        if isCPUEnabled {
             checkForBotDoppia()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -124,6 +124,7 @@ class GameViewModel: ObservableObject {
     }
 
     private func autoPlayIfNeeded() {
+        guard isCPUEnabled else { return }
         if currentPlayer == 1 && winner == nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.playCard()
@@ -132,18 +133,17 @@ class GameViewModel: ObservableObject {
     }
 
     private func checkForBotDoppia() {
-        guard centralPile.count >= 2 else { return }
+        guard isCPUEnabled, centralPile.count >= 2 else { return }
 
         let last = centralPile[centralPile.count - 1]
         let secondLast = centralPile[centralPile.count - 2]
 
         if last.value == secondLast.value {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                guard self.isCPUEnabled else { return }
                 if !self.doppiaContesa &&
-                    self.centralPile.count >= 2 &&
-                    self.centralPile[self.centralPile.count - 1].value ==
-                    self.centralPile[self.centralPile.count - 2].value {
-
+                   self.centralPile[self.centralPile.count - 1].value ==
+                   self.centralPile[self.centralPile.count - 2].value {
                     self.doppiaContesa = true
                     self.players[1].append(contentsOf: self.centralPile)
                     self.centralPile.removeAll()
@@ -167,4 +167,3 @@ class GameViewModel: ObservableObject {
         }
     }
 }
-
