@@ -13,7 +13,7 @@ struct ConnectView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                Text("🎮 Multiplayer Match")
+                Text("Multiplayer Match")
                     .font(.largeTitle)
                     .bold()
 
@@ -23,7 +23,7 @@ struct ConnectView: View {
                 if !multipeerManager.connectedPeers.isEmpty {
                     VStack(alignment: .leading) {
                         ForEach(multipeerManager.connectedPeers, id: \.self) { peer in
-                            Text("✅ \(peer.displayName)")
+                            Text("\(peer.displayName)")
                                 .foregroundColor(.green)
                         }
                     }
@@ -37,7 +37,7 @@ struct ConnectView: View {
 
                 if !isConnected {
                     if !isSearching {
-                        Button("🔍 Cerca persone") {
+                        Button("Look for nearby players") {
                             multipeerManager.startLooking()
                             isSearching = true
                         }
@@ -46,7 +46,7 @@ struct ConnectView: View {
                         .foregroundColor(.white)
                         .cornerRadius(10)
                     } else {
-                        Text("🔎 Sto cercando persone nelle vicinanze…")
+                        Text("Looking for nearby players...")
                             .foregroundColor(.blue)
                     }
 
@@ -76,12 +76,12 @@ struct ConnectView: View {
                         }
                         .padding(.top)
                     } else {
-                        Text("⏳ Nessun peer trovato ancora...")
+                        Text("No peer found yet...")
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
                 } else {
-                    Text("🎉 Connected! Starting the game...")
+                    Text("Connected! Starting the game...")
                         .foregroundColor(.green)
                 }
             }

@@ -32,10 +32,10 @@ struct GameCenterConnectView: View {
                 )
 
                 if gameCenterManager.isConnected {
-                    Text("✅ Connesso! Caricamento partita...")
+                    Text("Connected, Loading the Game...")
                         .foregroundColor(.green)
                 } else {
-                    Text("⏳ In attesa di connessione...")
+                    Text("Waiting for Connection...")
                         .foregroundColor(.gray)
                 }
             }

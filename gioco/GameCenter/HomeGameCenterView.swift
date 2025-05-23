@@ -11,12 +11,12 @@ struct HomeGameCenterView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 40) {
-                Text("Scegli modalità")
+                Text("Select Game Mode")
                     .font(.title)
                     .bold()
 
                 NavigationLink(destination: ConnectView()) {
-                    Text("Gioco Locale (Bluetooth/Wi-Fi)")
+                    Text("Local Game (Bluetooth - Wi-Fi)")
                         .padding()
                         .background(Color.orange)
                         .foregroundColor(.white)

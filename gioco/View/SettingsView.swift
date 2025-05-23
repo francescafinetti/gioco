@@ -13,8 +13,11 @@ struct SettingsView: View {
     @AppStorage("isLeftHanded") private var isLeftHanded = false
     @AppStorage("difficulty") private var difficulty = "Medium"
     
-    let difficulties = ["Easy", "Medium", "Hard"]
-    
+    let difficulties = [
+        String(localized: "Easy"),
+        String(localized: "Medium"),
+        String(localized: "Hard")
+    ]
     var body: some View {
         NavigationView {
             Form {
@@ -29,7 +32,7 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("Preferences")) {
-                    Picker("Mano dominante", selection: $isLeftHanded) {
+                    Picker("Dominant Hand", selection: $isLeftHanded) {
                         Text("Left hand").tag(false)
                         Text("Right Hand").tag(true)
                     }

@@ -21,7 +21,7 @@ struct MultiplayerGameView: View {
             }
             .disabled(viewModel.currentPlayer != localPlayerIndex)
 
-            Button("Tap for Doppia") {
+            Button("Tap for double") {
                 viewModel.tapForDoppia(by: localPlayerIndex)
                 sendAction(.tapForDoppia)
             }
@@ -30,7 +30,7 @@ struct MultiplayerGameView: View {
             Text("Player 2 cards: \(viewModel.players[1].count)")
 
             if let winner = viewModel.winner {
-                Text("🎉 Player \(winner + 1) won!")
+                Text("Player \(winner + 1) won!")
                     .font(.title)
                     .foregroundColor(.green)
             }
