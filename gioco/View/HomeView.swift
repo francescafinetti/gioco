@@ -7,8 +7,8 @@ struct HomeView: View {
     @State private var dragOffset: CGFloat = 0.0
 
     let gameModes = ["Classic", "Speed", "Mirror"]
-    let cardWidth: CGFloat = 220
-    let spacing: CGFloat = 20
+    let cardWidth: CGFloat = 250
+    let spacing: CGFloat = 10
     let dragThreshold: CGFloat = 80
 
     var body: some View {
@@ -30,7 +30,7 @@ struct HomeView: View {
                         HStack(spacing: spacing) {
                             ForEach(gameModes.indices, id: \.self) { index in
                                 deckImage(for: index)
-                                    .frame(width: cardWidth, height: index == selectedMode ? 600 : 400)
+                                    .frame(width: cardWidth, height: index == selectedMode ? 600 : 500)
                                     .scaleEffect(index == selectedMode ? 1.0 : 0.85)
                                     .opacity(index == selectedMode ? 1.0 : 0.6)
                                     .shadow(radius: index == selectedMode ? 10 : 0)
