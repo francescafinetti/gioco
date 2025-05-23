@@ -16,8 +16,8 @@ struct GameCenterGameView: View {
                 .font(.largeTitle)
                 .bold()
 
-            Button("Invia messaggio test") {
-                let testMessage = "ciao dal tuo avversario"
+            Button("Send message") {
+                let testMessage = "hi"
                 if let data = testMessage.data(using: .utf8) {
                     gameCenterManager.send(data)
                 }
@@ -27,7 +27,7 @@ struct GameCenterGameView: View {
             .foregroundColor(.white)
             .cornerRadius(10)
 
-            Text("Messaggi scambiati saranno gestiti qui ✉️")
+            Text("messages are controlled here")
                 .font(.caption)
                 .foregroundColor(.secondary)
         }

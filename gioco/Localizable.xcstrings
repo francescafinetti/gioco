@@ -1,0 +1,446 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
+    },
+    "Bot – Player 2" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bot - Giocatore 2"
+          }
+        }
+      }
+    },
+    "Cards: %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carte: %lld"
+          }
+        }
+      }
+    },
+    "Connected Peers: %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori Connessi: %lld"
+          }
+        }
+      }
+    },
+    "Connected with: %@" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connesso con: %@"
+          }
+        }
+      }
+    },
+    "Connected, Loading the Game..." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connesso, Caricando il Gioco…"
+          }
+        }
+      }
+    },
+    "Connected! Starting the game..." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connesso! Inizia il Gioco…"
+          }
+        }
+      }
+    },
+    "Difficulty" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Difficoltà"
+          }
+        }
+      }
+    },
+    "Dominant Hand" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mano Dominante"
+          }
+        }
+      }
+    },
+    "Easy" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Facile"
+          }
+        }
+      }
+    },
+    "Empty" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vuoto"
+          }
+        }
+      }
+    },
+    "Game Center Multiplayer" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Center Multiplayer"
+          }
+        }
+      }
+    },
+    "Game Center Online" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Center Online"
+          }
+        }
+      }
+    },
+    "Hard" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Difficile"
+          }
+        }
+      }
+    },
+    "Left hand" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mano Sinistra"
+          }
+        }
+      }
+    },
+    "Local Game (Bluetooth - Wi-Fi)" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Locale (Bluetooth - Wi-Fi)"
+          }
+        }
+      }
+    },
+    "Look for nearby players" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca Giocatori"
+          }
+        }
+      }
+    },
+    "Looking for nearby players..." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cercando Giocatori"
+          }
+        }
+      }
+    },
+    "Matchmaking Online" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matchmaking Online"
+          }
+        }
+      }
+    },
+    "Medium" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medio"
+          }
+        }
+      }
+    },
+    "messages are controlled here" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Messaggi controllati qui"
+          }
+        }
+      }
+    },
+    "Multiplayer Match" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Multiplayer Match"
+          }
+        }
+      }
+    },
+    "No peer found yet..." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ancora nessun partecipante trovato "
+          }
+        }
+      }
+    },
+    "Online Game View" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gioco Online"
+          }
+        }
+      }
+    },
+    "Peers found:" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatori trovati:"
+          }
+        }
+      }
+    },
+    "Play Card" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gioca la carta"
+          }
+        }
+      }
+    },
+    "Player %lld won!" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Giocatore %lld vince!"
+          }
+        }
+      }
+    },
+    "Player %lld's Turn" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Turno del Giocatore %lld"
+          }
+        }
+      }
+    },
+    "Player 1 cards: %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carte del Giocatore 1: %lld"
+          }
+        }
+      }
+    },
+    "Player 2 cards: %lld" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carte del Giocatore 2: %lld"
+          }
+        }
+      }
+    },
+    "Preferences" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preferenze"
+          }
+        }
+      }
+    },
+    "Right Hand" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mano Destra"
+          }
+        }
+      }
+    },
+    "Select Game Mode" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona Modalità di gioco"
+          }
+        }
+      }
+    },
+    "Send message" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invio Messaggio"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazioni"
+          }
+        }
+      }
+    },
+    "Sound & Feedback" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suoni & Feedback"
+          }
+        }
+      }
+    },
+    "Tap for double" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap per Doppia"
+          }
+        }
+      }
+    },
+    "Tap to Start" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gioca Ora"
+          }
+        }
+      }
+    },
+    "Vibrations" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vibrazioni"
+          }
+        }
+      }
+    },
+    "Volume" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume"
+          }
+        }
+      }
+    },
+    "Waiting for Connection..." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In attesa di Connessione…"
+          }
+        }
+      }
+    },
+    "You – Player 1" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu - Giocatore 1"
+          }
+        }
+      }
+    },
+    "You lost" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai Perso"
+          }
+        }
+      }
+    },
+    "You win" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hai Vinto"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

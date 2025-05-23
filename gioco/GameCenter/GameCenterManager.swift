@@ -29,7 +29,7 @@ class GameCenterManager: NSObject, ObservableObject, GKMatchmakerViewControllerD
     }
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
-        print("✅ Match trovato!")
+        print("✅ Match found!")
         self.match = match
         match.delegate = self
         isConnected = true

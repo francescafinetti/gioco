@@ -13,7 +13,7 @@ struct EndGameView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text(winner == 0 ? "🎉 Hai vinto!" : "😞 Hai perso")
+            Text(winner == 0 ? "You win" : "You lost")
                 .font(.largeTitle)
                 .bold()
                 .foregroundColor(.white)
