@@ -6,12 +6,7 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		F902C42B2DDF189800635681 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F902C42A2DDF189800635681 /* MultipeerConnectivity.framework */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		F902C42A2DDF189800635681 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		F92661CE2DCCF97500597D7D /* gioco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gioco.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -28,26 +23,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F902C42B2DDF189800635681 /* MultipeerConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F902C4292DDF189800635681 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F902C42A2DDF189800635681 /* MultipeerConnectivity.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		F92661C52DCCF97500597D7D = {
 			isa = PBXGroup;
 			children = (
 				F92661D02DCCF97500597D7D /* gioco */,
-				F902C4292DDF189800635681 /* Frameworks */,
 				F92661CF2DCCF97500597D7D /* Products */,
 			);
 			sourceTree = "<group>";

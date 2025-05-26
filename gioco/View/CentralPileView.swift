@@ -21,17 +21,17 @@ struct CentralPileView: View {
                 if let lastCard = viewModel.centralPile.last {
 
                     // TIMER AROUND THE CARD
-                    RoundedRectangle(cornerRadius: 16)
+                    RoundedRectangle(cornerRadius: 25)
                         .trim(from: 0.0, to: progress / CGFloat(duration))
                         .stroke(Color.black, style: StrokeStyle(lineWidth: 4, lineCap: .round))
-                        .frame(width: 170, height: 263)
+                        .frame(width: 260, height: 410)
                         .animation(.linear(duration: 0.01), value: progress)
 
                     // CARD DISPLAYED
                     Image(lastCard.imageName)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 200, height: 250)
+                        .frame(width: 280, height: 400)
                         .cornerRadius(14)
                         .shadow(radius: 6)
                         .transition(.scale)
@@ -85,10 +85,16 @@ struct CentralPileView: View {
                 } else {
                     RoundedRectangle(cornerRadius: 14)
                         .fill(Color.gray.opacity(0.15))
-                        .frame(width: 200, height: 250)
+                        .frame(width: 280, height: 400)
                         .overlay(Text("Empty").font(.caption).foregroundColor(.gray))
                 }
             }
         }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        ContentView()
     }
 }
