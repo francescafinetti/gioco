@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.dismiss) private var dismiss
-
+    
     @StateObject var viewModel = GameViewModel(playerCount: 2)
     @Namespace private var animation
     @State private var dragOffset: CGSize = .zero
@@ -21,20 +21,21 @@ struct ContentView: View {
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
     let duration: TimeInterval = 7.0
-
+    
     @State private var centralDragOffset: CGSize = .zero
     @State private var isDraggingCentral = false
-
+    @State private var showExitConfirmation = false
+    
     var body: some View {
+        
         ZStack {
             Image("es")
                 .ignoresSafeArea()
-
-            VStack(spacing: 50) {
-                Spacer()
-
+            
+            VStack {
+                
                 BotDeckView(viewModel: viewModel, showBotCard: $showBotCard, botOffset: $botOffset)
-
+                
                 CentralPileView(
                     viewModel: viewModel,
                     progress: $progress,
@@ -42,17 +43,17 @@ struct ContentView: View {
                     centralDragOffset: $centralDragOffset,
                     isDraggingCentral: $isDraggingCentral
                 )
-
+                
                 PlayerDeckView(viewModel: viewModel, dragOffset: $dragOffset, isDragging: $isDragging)
-
+                
                 Spacer()
             }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    dismiss()
+                    showExitConfirmation = true
                 } label: {
                     Image(systemName: "house.fill")
                         .foregroundColor(.black)
@@ -64,22 +65,28 @@ struct ContentView: View {
             if newValue == 1 {
                 showBotCard = true
                 botOffset = .zero
-
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     withAnimation {
                         botOffset = CGSize(width: 0, height: 200)
                     }
                 }
-
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     showBotCard = false
                 }
             } else if newValue == 0 {
                 startTimer()
             }
+        }.alert("Are you sure you want to leave the match?", isPresented: $showExitConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Leave", role: .destructive) {
+                dismiss()
+            }
+            
         }
     }
-
+    
     func startTimer() {
         progress = CGFloat(duration)
         timer?.invalidate()

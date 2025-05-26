@@ -14,42 +14,65 @@ struct BotDeckView: View {
     @Binding var botOffset: CGSize
 
     var body: some View {
-        VStack(spacing: 8) {
-            Text("Bot – Player 2")
-                .font(.subheadline)
-                .foregroundColor(.gray)
-
-            ZStack {
-                // Mazzo sotto
-                Image("back")
-                    .resizable()
-                    .frame(width: 80, height: 110)
-                    .cornerRadius(10)
-                    .shadow(radius: 2)
-
-                // Carta animata sopra (solo se visibile)
-                if showBotCard {
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            let screenWidth = geometry.size.width
+            let screenHeight = geometry.size.height
+            
+            HStack {
+                ZStack {
+                    // Mazzo sotto
                     Image("back")
                         .resizable()
-                        .frame(width: 80, height: 110)
+                        .frame(width: 200, height: 300)
                         .cornerRadius(10)
-                        .shadow(radius: 4)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(viewModel.currentPlayer == 1 ? Color.green.opacity(0.8) : Color.clear, lineWidth: 4)
-                                .blur(radius: 1)
-                                .opacity(viewModel.currentPlayer == 1 ? 1 : 0)
-                        )
-                        .offset(botOffset)
-                        .zIndex(1)
-                        .animation(.easeInOut(duration: 0.4), value: botOffset)
+                        .shadow(radius: 2)
+
+                    // Carta animata sopra (solo se visibile)
+                    if showBotCard {
+                        Image("back")
+                            .resizable()
+                            .frame(width: 200, height: 300)
+                            .cornerRadius(10)
+                            .shadow(radius: 4)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(viewModel.currentPlayer == 1 ? Color.green.opacity(0.8) : Color.clear, lineWidth: 4)
+                                    .blur(radius: 1)
+                                    .opacity(viewModel.currentPlayer == 1 ? 1 : 0)
+                            )
+                            .offset(botOffset)
+                            .zIndex(1)
+                            .animation(.easeInOut(duration: 0.4), value: botOffset)
+                    }
                 }
-            }
+                .rotationEffect(.degrees(-35))
+                .position(x: width * 0.26, y: height * 0.5)
+     
+                //PER SEGNARE I PUNTI LATERALMENTE
+                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Player 2")
+                                        .font(.subheadline)
+                                        .bold()
+                                        .foregroundColor(.black)
 
-            Text("Cards: \(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                                    Text("Cards: \(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
+                                        .font(.caption)
+                                        .foregroundColor(.black)
+                                }
+                                .padding(12)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.2)))
+                                .frame(width: 140)
+                                .position(x: screenWidth - 695, y: screenHeight - 50)
+                            }
         }
+        .frame(height: 300)
+    }
+}
 
+#Preview {
+    NavigationStack {
+        ContentView()
     }
 }

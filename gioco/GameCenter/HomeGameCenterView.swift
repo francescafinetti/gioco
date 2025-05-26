@@ -15,14 +15,6 @@ struct HomeGameCenterView: View {
                     .font(.title)
                     .bold()
 
-                NavigationLink(destination: ConnectView()) {
-                    Text("Local Game (Bluetooth - Wi-Fi)")
-                        .padding()
-                        .background(Color.orange)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-
                 NavigationLink(destination: GameCenterConnectView()) {
                     Text("Game Center Online")
                         .padding()

@@ -7,50 +7,40 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct SettingsCardView: View {
     @AppStorage("volumeEnabled") private var volumeEnabled = true
     @AppStorage("vibrationEnabled") private var vibrationEnabled = true
     @AppStorage("isLeftHanded") private var isLeftHanded = false
     @AppStorage("difficulty") private var difficulty = "Medium"
-    
-    let difficulties = [
-        String(localized: "Easy"),
-        String(localized: "Medium"),
-        String(localized: "Hard")
-    ]
+
+    let difficulties = ["Easy", "Medium", "Hard"]
+
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Sound & Feedback")) {
-                    Toggle(isOn: $volumeEnabled) {
-                        Label("Volume", systemImage: "speaker.wave.2.fill")
-                    }
-                    
-                    Toggle(isOn: $vibrationEnabled) {
-                        Label("Vibrations", systemImage: "iphone.radiowaves.left.and.right")
-                    }
-                }
-                
-                Section(header: Text("Preferences")) {
-                    Picker("Dominant Hand", selection: $isLeftHanded) {
-                        Text("Left hand").tag(false)
-                        Text("Right Hand").tag(true)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                    
-                    Picker("Difficulty", selection: $difficulty) {
-                        ForEach(difficulties, id: \.self) {
-                            Text($0)
-                        }
-                    }
-                }
+        VStack(spacing: 12) {
+            Toggle("Volume", isOn: $volumeEnabled)
+            Toggle("Vibration", isOn: $vibrationEnabled)
+
+            Picker("Hand", selection: $isLeftHanded) {
+                Text("Left").tag(false)
+                Text("Right").tag(true)
             }
-            .navigationTitle("Settings")
+            .pickerStyle(SegmentedPickerStyle())
+
+            Picker("Difficulty", selection: $difficulty) {
+                ForEach(difficulties, id: \.self) { Text($0) }
+            }
+            .pickerStyle(MenuPickerStyle())
+
+            Spacer()
         }
+        .padding()
+        .background(.ultraThinMaterial)
+        .cornerRadius(20)
     }
 }
 
 
 #Preview {
-       SettingsView()
+       SettingsCardView()
     }
+
