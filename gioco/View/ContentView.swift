@@ -22,6 +22,7 @@ struct ContentView: View {
     @State private var showBotCard = false
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
+    @State private var showExitConfirmation: Bool = false
 
     @State private var centralDragOffset: CGSize = .zero
     @State private var isDraggingCentral = false
@@ -41,8 +42,8 @@ struct ContentView: View {
                     .scaledToFill()
                     .ignoresSafeArea()
 
-                VStack(spacing: 50) {
-                    Spacer()
+                VStack {
+                    
 
                     BotDeckView(
                         viewModel: viewModel,
@@ -65,13 +66,15 @@ struct ContentView: View {
                     )
 
                     Spacer()
+                        
                 }
+                .padding(.bottom, 250)
             }
             .navigationBarBackButtonHidden(true)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        dismiss()
+                        showExitConfirmation = true
                     } label: {
                         Image(systemName: "house.fill")
                             .foregroundColor(.black)

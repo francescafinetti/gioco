@@ -15,7 +15,11 @@
     "🏆 Player %lld won the game!" : {
 
     },
+    "Are you sure you want to leave the match?" : {
+
+    },
     "Bot – Player 2" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -24,6 +28,9 @@
           }
         }
       }
+    },
+    "Cancel" : {
+
     },
     "Cards: %lld" : {
       "localizations" : {
@@ -140,9 +147,10 @@
         }
       }
     },
+    "Game Over" : {
 
+    },
     "Hand" : {
-
 
     },
     "Hard" : {
@@ -155,6 +163,9 @@
           }
         }
       }
+    },
+    "Leave" : {
+
     },
     "Left" : {
 
@@ -432,9 +443,10 @@
         }
       }
     },
+    "Vai alla Home" : {
 
+    },
     "Vibration" : {
-
 
     },
     "Vibrations" : {
@@ -469,6 +481,7 @@
       }
     },
     "You – Player 1" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
