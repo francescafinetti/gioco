@@ -150,6 +150,9 @@
         }
       }
     },
+    "Game Over" : {
+
+    },
     "Hand" : {
 
     },
@@ -290,6 +293,9 @@
           }
         }
       }
+    },
+    "Play Again" : {
+
     },
     "Play Card" : {
       "extractionState" : "stale",
@@ -439,6 +445,9 @@
           }
         }
       }
+    },
+    "Vai alla Home" : {
+
     },
     "Vibration" : {
 

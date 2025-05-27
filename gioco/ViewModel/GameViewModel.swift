@@ -13,6 +13,8 @@ class GameViewModel: ObservableObject {
     @Published var currentPlayer = 0
     @Published var winner: Int? = nil
     @Published var message: String = ""
+    @Published var isGameOver: Bool = false
+   
 
     private let values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     private let suits = ["arancione", "viola", "blu", "giallo"]
@@ -162,6 +164,7 @@ class GameViewModel: ObservableObject {
                 let other = (index + 1) % players.count
                 winner = other
                 message = "🎉 Player \(other + 1) won!"
+                isGameOver = true
                 return
             }
         }
