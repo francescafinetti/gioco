@@ -73,41 +73,38 @@ struct ContentView: View {
             if newValue == 1 {
                 showBotCard = true
                 botOffset = .zero
-                
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     withAnimation {
                         botOffset = CGSize(width: 0, height: -200)
                     }
+
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         showBotCard = false
                     }
-                } else {
-                    startTimer()
                 }
-
+            } else {
+                startTimer()
             }
-            // MARK: – Ricevi il publisher di isGameOver
-            .onReceive(viewModel.$isGameOver) { over in
-                if over {
-                    showEndGame = true
-                }
+        }
+        .onReceive(viewModel.$isGameOver) { over in
+            if over {
+                showEndGame = true
             }
-
-            // MARK: – Link “nascosto” per EndGameView
-            .background(
-                NavigationLink(
-                    destination: EndGameView(winner: viewModel.winner ?? 0),
-                    isActive: $showEndGame
-                ) {
-                    EmptyView()
-                }
-            )
-        }.alert("Are you sure you want to leave the match?", isPresented: $showExitConfirmation) {
+        }
+        .background(
+            NavigationLink(
+                destination: EndGameView(winner: viewModel.winner ?? 0),
+                isActive: $showEndGame
+            ) {
+                EmptyView()
+            }
+        )
+        .alert("Are you sure you want to leave the match?", isPresented: $showExitConfirmation) {
             Button("Cancel", role: .cancel) { }
             Button("Leave", role: .destructive) {
                 dismiss()
             }
-            
         }
     }
 
