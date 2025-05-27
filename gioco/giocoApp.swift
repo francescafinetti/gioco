@@ -16,7 +16,10 @@ struct giocoApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationStack{
+                HomeView()
+            }
+
         }
     }
 

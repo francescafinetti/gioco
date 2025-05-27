@@ -1,12 +1,22 @@
+
+
+//HO MESSO I SETTINGS A SINISTRA - è COMUNQUE IMPOSTATA LA SELECTED MODE COME SINGLE PLAYER, QUINDI LA SECONDA CARD, PERò SCORRENDO A SINISTRA CI SONO I SETTINGS, SCORRENDO A DESTRA CI SONO LE ALTRE MODALITà DI GIOCO
+
 import SwiftUI
+import GameKit
 
 struct HomeView: View {
-    @State private var isGameActive = false
-    @State private var showSettings = false
-    @State private var selectedMode = 0
+    @State private var selectedMode = 1
     @State private var dragOffset: CGFloat = 0.0
+    @State private var isSettingsFlipped = false
+    @State private var showSinglePlayer = false
+    @State private var showTwoPlayer = false
+    @State private var showMultiplayer = false
 
-    let gameModes = ["Classic", "Speed", "Mirror"]
+    @AppStorage("volumeEnabled") private var volumeEnabled = true
+    @StateObject var gameCenterManager = GameCenterManager()
+
+    let gameModes = ["Settings", "Single Player", "Two Players", "Multiplayer"]
     let cardWidth: CGFloat = 250
     let spacing: CGFloat = 10
     let dragThreshold: CGFloat = 80
@@ -29,23 +39,64 @@ struct HomeView: View {
 
                         HStack(spacing: spacing) {
                             ForEach(gameModes.indices, id: \.self) { index in
-                                deckImage(for: index)
-                                    .frame(width: cardWidth, height: index == selectedMode ? 600 : 500)
-                                    .scaleEffect(index == selectedMode ? 1.0 : 0.85)
-                                    .opacity(index == selectedMode ? 1.0 : 0.6)
-                                    .shadow(radius: index == selectedMode ? 10 : 0)
-                                    .rotation3DEffect(.degrees(index == selectedMode ? 0 : (index < selectedMode ? 8 : -8)),
-                                                      axis: (x: 0, y: 1, z: 0))
-                                    .animation(.easeInOut(duration: 0.25), value: selectedMode)
+                                let isSelected = index == selectedMode
+                                let rotationAngle: Double = isSelected ? 0 : (index < selectedMode ? 8 : -8)
+                                let scale: CGFloat = isSelected ? 1.0 : 0.85
+                                let opacity: Double = isSelected ? 1.0 : 0.6
+                                let shadow: CGFloat = isSelected ? 10 : 0
+
+                                Group {
+                                    if gameModes[index] == "Settings" {
+                                        FlipView(isFlipped: isSettingsFlipped) {
+                                            Image("back")
+                                                .resizable()
+                                                .scaledToFit()
+                                        } back: {
+                                            SettingsCardView()
+                                                .frame(width: cardWidth, height: 500)
+                                        }
+                                    } else {
+                                        Image("back")
+                                            .resizable()
+                                            .scaledToFit()
+                                    }
+                                }
+                                .frame(width: cardWidth, height: isSelected ? 600 : 500)
+                                .scaleEffect(scale)
+                                .opacity(opacity)
+                                .shadow(radius: shadow)
+                                .rotation3DEffect(.degrees(rotationAngle), axis: (x: 0, y: 1, z: 0))
+                                .animation(.easeInOut(duration: 0.25), value: selectedMode)
+                                .onTapGesture {
+                                    guard isSelected else { return }
+
+                                    switch gameModes[index] {
+                                    case "Single Player":
+                                        showSinglePlayer = true
+                                    case "Two Players":
+                                        showTwoPlayer = true
+                                    case "Multiplayer":
+                                        showMultiplayer = true
+                                    case "Settings":
+                                        withAnimation(.easeInOut(duration: 0.6)) {
+                                            isSettingsFlipped.toggle()
+                                        }
+                                    default:
+                                        break
+                                    }
+                                }
                             }
                         }
                         .offset(x: offsetX)
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
-                                    dragOffset = value.translation.width
+                                    if !isSettingsFlipped {
+                                        dragOffset = value.translation.width
+                                    }
                                 }
                                 .onEnded { value in
+                                    guard !isSettingsFlipped else { return }
                                     if value.translation.width < -dragThreshold && selectedMode < gameModes.count - 1 {
                                         selectedMode += 1
                                     } else if value.translation.width > dragThreshold && selectedMode > 0 {
@@ -66,9 +117,7 @@ struct HomeView: View {
                         .shadow(radius: 3)
                         .padding(.top, 20)
 
-                    Spacer()
-
-                    Text("Tap to Start")
+                    Text(tapInstructionText)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -78,35 +127,66 @@ struct HomeView: View {
                     Spacer()
                 }
 
-                NavigationLink(destination: ContentView(), isActive: $isGameActive) {
+                // Navigation links
+                NavigationLink(destination: ContentView(), isActive: $showSinglePlayer) {
+                    EmptyView()
+                }
+                NavigationLink(destination: TwoPlayerGameView(), isActive: $showTwoPlayer) {
+                    EmptyView()
+                }
+                NavigationLink(destination: GameCenterGameView(gameCenterManager: gameCenterManager), isActive: $showMultiplayer) {
                     EmptyView()
                 }
             }
-            .contentShape(Rectangle())
-            .onTapGesture {
-                isGameActive = true
+            .onAppear {
+                // 🎮 Access Point Game Center solo qui
+                GKAccessPoint.shared.location = .topTrailing
+                GKAccessPoint.shared.isActive = true
+
+                // 🎵 Musica solo se volume abilitato
+                if volumeEnabled {
+                    AudioManager.shared.startBackgroundMusic()
+                }
             }
-            .sheet(isPresented: $showSettings) {
-                SettingsView()
+            .onDisappear {
+                GKAccessPoint.shared.isActive = false
+                AudioManager.shared.stopBackgroundMusic()
             }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showSettings = true
-                    } label: {
-                        Image(systemName: "gearshape.fill")
-                            .foregroundColor(.black)
-                    }
+            .onChange(of: volumeEnabled) { newValue in
+                if newValue {
+                    AudioManager.shared.startBackgroundMusic()
+                } else {
+                    AudioManager.shared.stopBackgroundMusic()
                 }
             }
         }
     }
 
-    @ViewBuilder
-    private func deckImage(for index: Int) -> some View {
-        Image("back")
-            .resizable()
-            .scaledToFit()
+    private var tapInstructionText: String {
+        if gameModes[selectedMode] == "Settings" {
+            return isSettingsFlipped ? "Tap to Close" : "Tap to Open"
+        } else {
+            return "Tap to Start"
+        }
+    }
+}
+
+struct FlipView<Front: View, Back: View>: View {
+    var isFlipped: Bool
+    var front: () -> Front
+    var back: () -> Back
+
+    var body: some View {
+        ZStack {
+            front()
+                .opacity(isFlipped ? 0.0 : 1.0)
+                .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+
+            back()
+                .opacity(isFlipped ? 1.0 : 0.0)
+                .rotation3DEffect(.degrees(isFlipped ? 0 : -180), axis: (x: 0, y: 1, z: 0))
+        }
+        .animation(.easeInOut(duration: 0.6), value: isFlipped)
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  Untitled.swift
+//  GameCenterManager.swift
 //  gioco
 //
 //  Created by Francesca Finetti on 22/05/25.
@@ -61,6 +61,3 @@ class GameCenterManager: NSObject, ObservableObject, GKMatchmakerViewControllerD
         }
     }
 }
-
-
-

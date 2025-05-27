@@ -12,6 +12,7 @@ import UniformTypeIdentifiers
 struct TwoPlayerGameView: View {
     @StateObject var viewModel = GameViewModel(playerCount: 2, isCPUEnabled: false)
     @Namespace private var animation
+    @Environment(\.dismiss) private var dismiss
 
     // Drag states for central card
     @State private var centralDragOffset: CGSize = .zero
@@ -202,6 +203,8 @@ struct TwoPlayerGameView: View {
 
                 Spacer()
             }
+            
+            
 
             // VICTORY BANNER OVERLAY
             if showVictoryBanner, let winner = viewModel.winner {
@@ -220,9 +223,23 @@ struct TwoPlayerGameView: View {
                 .zIndex(2)
             }
         }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "house.fill")
+                        .foregroundColor(.black)
+                }
+            }
+        }
         .onChange(of: viewModel.currentPlayer) { _ in
             startTimer()
+            
+        
         }
+        
     }
 
     func startTimer() {

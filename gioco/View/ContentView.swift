@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var viewModel = GameViewModel(playerCount: 2)
+
+    
+    @StateObject var viewModel = GameViewModel(playerCount: 2)
+
     @Namespace private var animation
 
     // MARK: – Stati di UI
@@ -19,6 +22,7 @@ struct ContentView: View {
     @State private var showBotCard = false
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
+
     @State private var centralDragOffset: CGSize = .zero
     @State private var isDraggingCentral = false
 
@@ -84,10 +88,12 @@ struct ContentView: View {
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         showBotCard = false
+
                     }
                 } else {
                     startTimer()
                 }
+
             }
             // MARK: – Ricevi il publisher di isGameOver
             .onReceive(viewModel.$isGameOver) { over in
@@ -95,6 +101,7 @@ struct ContentView: View {
                     showEndGame = true
                 }
             }
+
             // MARK: – Link “nascosto” per EndGameView
             .background(
                 NavigationLink(
@@ -104,10 +111,17 @@ struct ContentView: View {
                     EmptyView()
                 }
             )
+        }.alert("Are you sure you want to leave the match?", isPresented: $showExitConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Leave", role: .destructive) {
+                dismiss()
+            }
+            
         }
     }
 
     private func startTimer() {
+
         progress = CGFloat(duration)
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { t in

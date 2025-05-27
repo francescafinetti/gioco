@@ -2,6 +2,7 @@
   "sourceLanguage" : "en",
   "strings" : {
     "%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -35,6 +36,7 @@
       }
     },
     "Connected Peers: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -45,6 +47,7 @@
       }
     },
     "Connected with: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -65,6 +68,7 @@
       }
     },
     "Connected! Starting the game..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -85,6 +89,7 @@
       }
     },
     "Dominant Hand" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -95,6 +100,7 @@
       }
     },
     "Easy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -134,10 +140,13 @@
         }
       }
     },
-    "Game Over" : {
+
+    "Hand" : {
+
 
     },
     "Hard" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -147,7 +156,11 @@
         }
       }
     },
+    "Left" : {
+
+    },
     "Left hand" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -158,6 +171,7 @@
       }
     },
     "Local Game (Bluetooth - Wi-Fi)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -168,6 +182,7 @@
       }
     },
     "Look for nearby players" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -178,6 +193,7 @@
       }
     },
     "Looking for nearby players..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -198,6 +214,7 @@
       }
     },
     "Medium" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -218,6 +235,7 @@
       }
     },
     "Multiplayer Match" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -231,6 +249,7 @@
 
     },
     "No peer found yet..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -251,6 +270,7 @@
       }
     },
     "Peers found:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -264,6 +284,7 @@
 
     },
     "Play Card" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -284,6 +305,7 @@
       }
     },
     "Player %lld's Turn" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -297,6 +319,7 @@
 
     },
     "Player 1 cards: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -310,6 +333,7 @@
 
     },
     "Player 2 cards: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -320,6 +344,7 @@
       }
     },
     "Preferences" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -329,7 +354,11 @@
         }
       }
     },
+    "Right" : {
+
+    },
     "Right Hand" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -360,6 +389,7 @@
       }
     },
     "Settings" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -370,6 +400,7 @@
       }
     },
     "Sound & Feedback" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -380,6 +411,7 @@
       }
     },
     "Tap for double" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -390,6 +422,7 @@
       }
     },
     "Tap to Start" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -399,10 +432,13 @@
         }
       }
     },
-    "Vai alla Home" : {
+
+    "Vibration" : {
+
 
     },
     "Vibrations" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
