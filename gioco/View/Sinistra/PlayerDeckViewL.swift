@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PlayerDeckView: View {
+struct PlayerDeckViewL: View {
     @ObservedObject var viewModel: GameViewModel
     @Binding var dragOffset: CGSize
     @Binding var isDragging: Bool
@@ -36,7 +36,7 @@ struct PlayerDeckView: View {
                 .padding(12)
                 .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
                 .frame(width: 140)
-                .position(x: screenWidth - 495, y: screenHeight - 50)
+                .position(x: screenWidth - 295, y: screenHeight - 50)
                 
                 
                 ZStack {
@@ -86,8 +86,8 @@ struct PlayerDeckView: View {
                                     }
                                 }
                         )
-                }.rotationEffect(.degrees(-35))
-                    .position(x: width * 0.24, y: height * 1.8)
+                }.rotationEffect(.degrees(35))
+                    .position(x: width * -0.20, y: height * 1.8)
             }
             
         } .frame(height: 100)
@@ -96,5 +96,5 @@ struct PlayerDeckView: View {
 }
 
 #Preview {
-    ContentView()
+    SinglePlayerL()
 }

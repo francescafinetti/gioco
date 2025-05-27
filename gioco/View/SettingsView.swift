@@ -21,8 +21,8 @@ struct SettingsCardView: View {
             Toggle("Vibration", isOn: $vibrationEnabled)
 
             Picker("Hand", selection: $isLeftHanded) {
-                Text("Left").tag(false)
-                Text("Right").tag(true)
+                Text("Left").tag(true)
+                Text("Right").tag(false)
             }
             .pickerStyle(SegmentedPickerStyle())
 

@@ -1,7 +1,3 @@
-
-
-//HO MESSO I SETTINGS A SINISTRA - è COMUNQUE IMPOSTATA LA SELECTED MODE COME SINGLE PLAYER, QUINDI LA SECONDA CARD, PERò SCORRENDO A SINISTRA CI SONO I SETTINGS, SCORRENDO A DESTRA CI SONO LE ALTRE MODALITà DI GIOCO
-
 import SwiftUI
 import GameKit
 
@@ -14,6 +10,7 @@ struct HomeView: View {
     @State private var showMultiplayer = false
 
     @AppStorage("volumeEnabled") private var volumeEnabled = true
+    @AppStorage("isLeftHanded") private var isLeftHanded = false
     @StateObject var gameCenterManager = GameCenterManager()
 
     let gameModes = ["Settings", "Single Player", "Two Players", "Multiplayer"]
@@ -124,7 +121,10 @@ struct HomeView: View {
                 }
 
                 // Navigation links
-                NavigationLink(destination: ContentView(), isActive: $showSinglePlayer) {
+                NavigationLink(
+                    destination: isLeftHanded ? AnyView(SinglePlayerL()) : AnyView(SinglePlayerR()),
+                    isActive: $showSinglePlayer
+                ) {
                     EmptyView()
                 }
                 NavigationLink(destination: TwoPlayerGameView(), isActive: $showTwoPlayer) {
