@@ -54,7 +54,7 @@ struct HomeView: View {
                                                 .scaledToFit()
                                         } back: {
                                             SettingsCardView()
-                                                .frame(width: cardWidth, height: 500)
+                                                .frame(width: cardWidth, height: 400)
                                         }
                                     } else {
                                         Image(cardImages[index])
