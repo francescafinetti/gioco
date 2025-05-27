@@ -7,7 +7,7 @@
 //
 import SwiftUI
 
-struct ContentView: View {
+struct SinglePlayerR: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel = GameViewModel(playerCount: 2)
 
@@ -38,7 +38,7 @@ struct ContentView: View {
 
             VStack {
                 // Bot deck animato posizionato sopra al mazzo centrale
-                BotDeckView(
+                BotDeckViewR(
                     viewModel: viewModel,
                     showBotCard: $showBotCard,
                     botOffset: $botOffset
@@ -56,7 +56,7 @@ struct ContentView: View {
                 .zIndex(0)
 
                 // Deck giocatore
-                PlayerDeckView(
+                PlayerDeckViewR(
                     viewModel: viewModel,
                     dragOffset: $dragOffset,
                     isDragging: $isDragging
@@ -135,6 +135,6 @@ struct ContentView: View {
 
 #Preview {
     NavigationStack {
-        ContentView()
+        SinglePlayerR()
     }
 }

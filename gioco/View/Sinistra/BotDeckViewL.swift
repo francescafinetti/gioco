@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BotDeckView: View {
+struct BotDeckViewL: View {
     @ObservedObject var viewModel: GameViewModel
     @Binding var showBotCard: Bool
     @Binding var botOffset: CGSize
@@ -47,8 +47,8 @@ struct BotDeckView: View {
                             .animation(.easeInOut(duration: 0.4), value: botOffset)
                     }
                 }
-                .rotationEffect(.degrees(-210))
-                .position(x: width * 0.26, y: height * 0.5)
+                .rotationEffect(.degrees(210))
+                .position(x: width * 0.70, y: height * 0.5)
      
                 //PER SEGNARE I PUNTI LATERALMENTE
                 VStack(alignment: .center, spacing: 4) {
@@ -64,7 +64,7 @@ struct BotDeckView: View {
                                 .padding(12)
                                 .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
                                 .frame(width: 140)
-                                .position(x: screenWidth - 695, y: screenHeight - 50)
+                                .position(x: screenWidth - 895, y: screenHeight - 50)
                             }
         }
         .frame(height: 300)
@@ -73,6 +73,6 @@ struct BotDeckView: View {
 
 #Preview {
     NavigationStack {
-        ContentView()
+        SinglePlayerL()
     }
 }

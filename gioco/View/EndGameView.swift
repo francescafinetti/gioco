@@ -33,7 +33,7 @@ struct EndGameView: View {
                     }
                     
                   
-                    NavigationLink(destination: ContentView()) {
+                    NavigationLink(destination: SinglePlayerR()) {
                         Text("Play Again")
                             .fontWeight(.semibold)
                             .padding()
