@@ -34,64 +34,52 @@ struct ContentView: View {
     private let duration: TimeInterval = 7.0
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                // Sfondo
-                Image("es")
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-
-                VStack {
-                    
-
-                    BotDeckView(
-                        viewModel: viewModel,
-                        showBotCard: $showBotCard,
-                        botOffset: $botOffset
-                    )
-
-                    CentralPileView(
-                        viewModel: viewModel,
-                        progress: $progress,
-                        duration: duration,
-                        centralDragOffset: $centralDragOffset,
-                        isDraggingCentral: $isDraggingCentral
-                    )
-
-                    PlayerDeckView(
-                        viewModel: viewModel,
-                        dragOffset: $dragOffset,
-                        isDragging: $isDragging
-                    )
-
-                    Spacer()
-                        
-                }
-                .padding(.bottom, 250)
-            }
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showExitConfirmation = true
-                    } label: {
-                        Image(systemName: "house.fill")
-                            .foregroundColor(.black)
-                    }
+        
+        ZStack {
+            Image("es")
+                .ignoresSafeArea()
+            
+            VStack {
+                
+                BotDeckView(viewModel: viewModel, showBotCard: $showBotCard, botOffset: $botOffset)
+                
+                CentralPileView(
+                    viewModel: viewModel,
+                    progress: $progress,
+                    duration: duration,
+                    centralDragOffset: $centralDragOffset,
+                    isDraggingCentral: $isDraggingCentral
+                )
+                
+                PlayerDeckView(viewModel: viewModel, dragOffset: $dragOffset, isDragging: $isDragging)
+                
+                Spacer()
+                
+            }.padding(.bottom, 250)
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    showExitConfirmation = true
+                } label: {
+                    Image(systemName: "house.fill")
+                        .foregroundColor(.black)
                 }
             }
-            // MARK: – Turno bot e timer
-            .onChange(of: viewModel.currentPlayer) { newValue in
-                if newValue == 1 {
-                    showBotCard = true
-                    botOffset = .zero
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                        withAnimation { botOffset = CGSize(width: 0, height: 200) }
+        }
+        
+        .onChange(of: viewModel.currentPlayer) { newValue in
+            if newValue == 1 {
+                showBotCard = true
+                botOffset = .zero
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    withAnimation {
+                        botOffset = CGSize(width: 0, height: -200)
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         showBotCard = false
-
                     }
                 } else {
                     startTimer()

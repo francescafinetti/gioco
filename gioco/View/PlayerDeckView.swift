@@ -12,7 +12,7 @@ struct PlayerDeckView: View {
     @ObservedObject var viewModel: GameViewModel
     @Binding var dragOffset: CGSize
     @Binding var isDragging: Bool
-
+    
     var body: some View {
         GeometryReader { geometry in
             let width = geometry.size.width
@@ -21,30 +21,32 @@ struct PlayerDeckView: View {
             let screenHeight = geometry.size.height
             
             HStack {
-                VStack(alignment: .trailing, spacing: 4) {
-                                    Text("Player 1")
-                                        .font(.subheadline)
-                                        .bold()
-                                        .foregroundColor(.black)
-
-                                    Text("Cards: \(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
-                                        .font(.caption)
-                                        .foregroundColor(.black)
-                                }
-                                .padding(12)
-                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.2)))
-                                .frame(width: 140)
-                                .position(x: screenWidth - 495, y: screenHeight - 50)
-
-
+                VStack(alignment: .center, spacing: 4) {
+                    Text("Player 1")
+                        .font(.subheadline)
+                        .bold()
+                        .foregroundColor(.black)
+                    
+                    Text("\(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
+                        .font(.title3)
+                        .foregroundColor(.black)
+                        .bold()
+                    
+                }
+                .padding(12)
+                .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
+                .frame(width: 140)
+                .position(x: screenWidth - 495, y: screenHeight - 50)
+                
+                
                 ZStack {
-                    Image("back")
+                    Image("back_chiaro")
                         .resizable()
                         .frame(width: 200, height: 300)
                         .cornerRadius(10)
                         .shadow(radius: 2)
                     
-                    Image("back")
+                    Image("back_chiaro")
                         .resizable()
                         .frame(width: 200, height: 300)
                         .cornerRadius(12)
@@ -85,7 +87,7 @@ struct PlayerDeckView: View {
                                 }
                         )
                 }.rotationEffect(.degrees(-35))
-                    .position(x: width * 0.2, y: height * 1.8)
+                    .position(x: width * 0.24, y: height * 1.8)
             }
             
         } .frame(height: 100)

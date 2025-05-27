@@ -12,6 +12,9 @@
         }
       }
     },
+    "%lld" : {
+
+    },
     "🏆 Player %lld won the game!" : {
 
     },

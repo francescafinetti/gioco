@@ -17,7 +17,7 @@ class GameViewModel: ObservableObject {
    
 
     private let values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-    private let suits = ["nuvola", "luna", "stella", "sole"]
+    private let suits = ["arancione", "viola", "blu", "giallo"]
 
     private var forcedPlaysRemaining = 0
     private var doppiaContesa = false
