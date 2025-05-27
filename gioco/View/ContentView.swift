@@ -31,9 +31,9 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            Image("es")
-                .resizable()
-                .scaledToFill()
+
+            Image("sfondo")
+
                 .ignoresSafeArea()
 
             VStack {
