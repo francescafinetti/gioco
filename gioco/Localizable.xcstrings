@@ -11,6 +11,9 @@
         }
       }
     },
+    "🏆 Player %lld won the game!" : {
+
+    },
     "Bot – Player 2" : {
       "localizations" : {
         "it" : {
@@ -131,6 +134,9 @@
         }
       }
     },
+    "Game Over" : {
+
+    },
     "Hard" : {
       "localizations" : {
         "it" : {
@@ -221,6 +227,9 @@
         }
       }
     },
+    "New Game" : {
+
+    },
     "No peer found yet..." : {
       "localizations" : {
         "it" : {
@@ -250,6 +259,9 @@
           }
         }
       }
+    },
+    "Play Again" : {
+
     },
     "Play Card" : {
       "localizations" : {
@@ -281,6 +293,9 @@
         }
       }
     },
+    "Player 1" : {
+
+    },
     "Player 1 cards: %lld" : {
       "localizations" : {
         "it" : {
@@ -290,6 +305,9 @@
           }
         }
       }
+    },
+    "Player 2" : {
+
     },
     "Player 2 cards: %lld" : {
       "localizations" : {
@@ -380,6 +398,9 @@
           }
         }
       }
+    },
+    "Vai alla Home" : {
+
     },
     "Vibrations" : {
       "localizations" : {
