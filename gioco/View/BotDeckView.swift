@@ -23,7 +23,7 @@ struct BotDeckView: View {
             HStack {
                 ZStack {
                     // Mazzo sotto
-                    Image("back")
+                    Image("back_chiaro")
                         .resizable()
                         .frame(width: 200, height: 300)
                         .cornerRadius(10)
@@ -31,7 +31,7 @@ struct BotDeckView: View {
 
                     // Carta animata sopra (solo se visibile)
                     if showBotCard {
-                        Image("back")
+                        Image("back_chiaro")
                             .resizable()
                             .frame(width: 200, height: 300)
                             .cornerRadius(10)
@@ -47,22 +47,22 @@ struct BotDeckView: View {
                             .animation(.easeInOut(duration: 0.4), value: botOffset)
                     }
                 }
-                .rotationEffect(.degrees(-35))
+                .rotationEffect(.degrees(-210))
                 .position(x: width * 0.26, y: height * 0.5)
      
                 //PER SEGNARE I PUNTI LATERALMENTE
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .center, spacing: 4) {
                                     Text("Player 2")
                                         .font(.subheadline)
                                         .bold()
                                         .foregroundColor(.black)
-
-                                    Text("Cards: \(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
-                                        .font(.caption)
-                                        .foregroundColor(.black)
+                                    Text("\(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
+                        .font(.title3)
+                        .foregroundColor(.black)
+                        .bold()
                                 }
                                 .padding(12)
-                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.2)))
+                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
                                 .frame(width: 140)
                                 .position(x: screenWidth - 695, y: screenHeight - 50)
                             }

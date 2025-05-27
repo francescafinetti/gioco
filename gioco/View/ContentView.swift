@@ -47,7 +47,8 @@ struct ContentView: View {
                 PlayerDeckView(viewModel: viewModel, dragOffset: $dragOffset, isDragging: $isDragging)
                 
                 Spacer()
-            }
+                
+            }.padding(.bottom, 250)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -68,7 +69,7 @@ struct ContentView: View {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                     withAnimation {
-                        botOffset = CGSize(width: 0, height: 200)
+                        botOffset = CGSize(width: 0, height: -200)
                     }
                 }
                 

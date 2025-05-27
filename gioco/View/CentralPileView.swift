@@ -85,7 +85,7 @@ struct CentralPileView: View {
                 } else {
                     RoundedRectangle(cornerRadius: 14)
                         .fill(Color.gray.opacity(0.15))
-                        .frame(width: 280, height: 400)
+                        .frame(width: 260, height: 410)
                         .overlay(Text("Empty").font(.caption).foregroundColor(.gray))
                 }
             }
