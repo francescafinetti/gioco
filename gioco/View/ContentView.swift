@@ -9,11 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.dismiss) private var dismiss
-
-    
     @StateObject var viewModel = GameViewModel(playerCount: 2)
-
-    @Namespace private var animation
 
     // MARK: – Stati di UI
     @State private var dragOffset: CGSize = .zero
@@ -34,15 +30,22 @@ struct ContentView: View {
     private let duration: TimeInterval = 7.0
 
     var body: some View {
-        
         ZStack {
+
             Image("sfondo")
+
                 .ignoresSafeArea()
-            
+
             VStack {
-                
-                BotDeckView(viewModel: viewModel, showBotCard: $showBotCard, botOffset: $botOffset)
-                
+                // Bot deck animato posizionato sopra al mazzo centrale
+                BotDeckView(
+                    viewModel: viewModel,
+                    showBotCard: $showBotCard,
+                    botOffset: $botOffset
+                )
+                .zIndex(showBotCard ? 1 : 0)
+
+                // Mazzo centrale
                 CentralPileView(
                     viewModel: viewModel,
                     progress: $progress,
@@ -50,12 +53,19 @@ struct ContentView: View {
                     centralDragOffset: $centralDragOffset,
                     isDraggingCentral: $isDraggingCentral
                 )
-                
-                PlayerDeckView(viewModel: viewModel, dragOffset: $dragOffset, isDragging: $isDragging)
-                
+                .zIndex(0)
+
+                // Deck giocatore
+                PlayerDeckView(
+                    viewModel: viewModel,
+                    dragOffset: $dragOffset,
+                    isDragging: $isDragging
+                )
+                .zIndex(1)
+
                 Spacer()
-                
-            }.padding(.bottom, 250)
+            }
+            .padding(.bottom, 250)
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -68,18 +78,19 @@ struct ContentView: View {
                 }
             }
         }
-        
+        // Animazione bot: tempi mantenuti
         .onChange(of: viewModel.currentPlayer) { newValue in
             if newValue == 1 {
                 showBotCard = true
                 botOffset = .zero
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                    withAnimation {
+                // Animazione immediata
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                    withAnimation(.easeOut(duration: 0.5)) {
                         botOffset = CGSize(width: 0, height: -200)
                     }
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    // Sparisce dopo 0.5 secondi
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         showBotCard = false
                     }
                 }
@@ -109,7 +120,6 @@ struct ContentView: View {
     }
 
     private func startTimer() {
-
         progress = CGFloat(duration)
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { t in
