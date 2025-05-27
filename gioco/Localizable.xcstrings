@@ -140,7 +140,9 @@
         }
       }
     },
+
     "Hand" : {
+
 
     },
     "Hard" : {
@@ -277,6 +279,9 @@
           }
         }
       }
+    },
+    "Play Again" : {
+
     },
     "Play Card" : {
       "extractionState" : "stale",
@@ -427,7 +432,9 @@
         }
       }
     },
+
     "Vibration" : {
+
 
     },
     "Vibrations" : {

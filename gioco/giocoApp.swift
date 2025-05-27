@@ -19,6 +19,7 @@ struct giocoApp: App {
             NavigationStack{
                 HomeView()
             }
+
         }
     }
 
