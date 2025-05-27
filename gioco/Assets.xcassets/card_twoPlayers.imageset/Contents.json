@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "card_twoPlayers.png",
+      "filename" : "card_multiplayer.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

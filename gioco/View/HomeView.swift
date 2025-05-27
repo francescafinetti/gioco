@@ -17,6 +17,7 @@ struct HomeView: View {
     @StateObject var gameCenterManager = GameCenterManager()
 
     let gameModes = ["Settings", "Single Player", "Two Players", "Multiplayer"]
+    let cardImages = ["card_settings", "card_singlePlayer", "card_twoPlayers", "card_multiplayer"]
     let cardWidth: CGFloat = 250
     let spacing: CGFloat = 10
     let dragThreshold: CGFloat = 80
@@ -48,7 +49,7 @@ struct HomeView: View {
                                 Group {
                                     if gameModes[index] == "Settings" {
                                         FlipView(isFlipped: isSettingsFlipped) {
-                                            Image("back")
+                                            Image("card_settings")
                                                 .resizable()
                                                 .scaledToFit()
                                         } back: {
@@ -56,7 +57,7 @@ struct HomeView: View {
                                                 .frame(width: cardWidth, height: 500)
                                         }
                                     } else {
-                                        Image("back")
+                                        Image(cardImages[index])
                                             .resizable()
                                             .scaledToFit()
                                     }
@@ -110,12 +111,7 @@ struct HomeView: View {
                     }
                     .frame(height: 520)
 
-                    Text(gameModes[selectedMode])
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .shadow(radius: 3)
-                        .padding(.top, 20)
+                    
 
                     Text(tapInstructionText)
                         .font(.largeTitle)
@@ -143,7 +139,7 @@ struct HomeView: View {
                 GKAccessPoint.shared.location = .topTrailing
                 GKAccessPoint.shared.isActive = true
 
-                // 🎵 Musica solo se volume abilitato
+                // 🎵 é solo se volume abilitato
                 if volumeEnabled {
                     AudioManager.shared.startBackgroundMusic()
                 }
