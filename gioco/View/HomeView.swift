@@ -25,7 +25,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Image("es")
+                Image("sfondo")
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
@@ -114,11 +114,11 @@ struct HomeView: View {
                     
 
                     Text(tapInstructionText)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
+                        .font(.custom("FuturaPT", size: 32))
                         .foregroundColor(.white)
                         .shadow(radius: 6)
                         .padding(.bottom, 60)
+                    
 
                     Spacer()
                 }
@@ -164,7 +164,7 @@ struct HomeView: View {
         } else {
             return "Tap to Start"
         }
-    }
+    } 
 }
 
 struct FlipView<Front: View, Back: View>: View {
