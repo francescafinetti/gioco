@@ -1,4 +1,3 @@
-
 //
 //  ContentView.swift
 //  gioco
@@ -31,9 +30,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-
-            Image("sfondo")
-
+            Image("SFONDO")
                 .ignoresSafeArea()
 
             VStack {
@@ -78,24 +75,21 @@ struct ContentView: View {
                 }
             }
         }
-        // Animazione bot: tempi mantenuti
+        // Quando è il turno del giocatore, parte il timer
         .onChange(of: viewModel.currentPlayer) { newValue in
-            if newValue == 1 {
-                showBotCard = true
-                botOffset = .zero
-
-                // Animazione immediata
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                    withAnimation(.easeOut(duration: 0.5)) {
-                        botOffset = CGSize(width: 0, height: -200)
-                    }
-                    // Sparisce dopo 0.5 secondi
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        showBotCard = false
-                    }
-                }
-            } else {
+            if newValue == 0 {
                 startTimer()
+            }
+        }
+        // Animazione del bot ogni volta che gioca una carta
+        .onReceive(viewModel.$botPlayCount) { _ in
+            showBotCard = true
+            botOffset = .zero
+            withAnimation(.easeOut(duration: 0.5)) {
+                botOffset = CGSize(width: 0, height: -200)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                showBotCard = false
             }
         }
         .onReceive(viewModel.$isGameOver) { over in

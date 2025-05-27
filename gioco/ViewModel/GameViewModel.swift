@@ -14,7 +14,7 @@ class GameViewModel: ObservableObject {
     @Published var winner: Int? = nil
     @Published var message: String = ""
     @Published var isGameOver: Bool = false
-   
+    @Published var botPlayCount = 0
 
     private let values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     private let suits = ["arancione", "viola", "blu", "giallo"]
@@ -59,7 +59,12 @@ class GameViewModel: ObservableObject {
             return
         }
 
+      
+        let isBot = currentPlayer == 1
         let card = players[currentPlayer].removeFirst()
+        if isBot {
+            botPlayCount += 1
+        }
         centralPile.append(card)
         doppiaContesa = false
 
