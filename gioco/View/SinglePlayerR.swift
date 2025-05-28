@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct ContentView: View {
+struct SinglePlayerR: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel = GameViewModel(playerCount: 2)
 
@@ -129,6 +129,6 @@ struct ContentView: View {
 
 #Preview {
     NavigationStack {
-        ContentView()
+        SinglePlayerR()
     }
 }

@@ -96,5 +96,5 @@ struct PlayerDeckView: View {
 }
 
 #Preview {
-    ContentView()
+    SinglePlayerR()
 }

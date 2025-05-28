@@ -124,7 +124,7 @@ struct HomeView: View {
                 }
 
                 // Navigation links
-                NavigationLink(destination: ContentView(), isActive: $showSinglePlayer) {
+                NavigationLink(destination: SinglePlayerR(), isActive: $showSinglePlayer) {
                     EmptyView()
                 }
                 NavigationLink(destination: TwoPlayerGameView(), isActive: $showTwoPlayer) {

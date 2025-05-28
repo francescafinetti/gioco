@@ -73,6 +73,6 @@ struct BotDeckView: View {
 
 #Preview {
     NavigationStack {
-        ContentView()
+        SinglePlayerR()
     }
 }
