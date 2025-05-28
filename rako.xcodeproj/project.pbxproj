@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		F92661CE2DCCF97500597D7D /* gioco.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = gioco.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F92661CE2DCCF97500597D7D /* rako.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rako.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		F92661D02DCCF97500597D7D /* gioco */ = {
+		F92661D02DCCF97500597D7D /* rako */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = gioco;
+			path = rako;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		F92661C52DCCF97500597D7D = {
 			isa = PBXGroup;
 			children = (
-				F92661D02DCCF97500597D7D /* gioco */,
+				F92661D02DCCF97500597D7D /* rako */,
 				F92661CF2DCCF97500597D7D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		F92661CF2DCCF97500597D7D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F92661CE2DCCF97500597D7D /* gioco.app */,
+				F92661CE2DCCF97500597D7D /* rako.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F92661CD2DCCF97500597D7D /* gioco */ = {
+		F92661CD2DCCF97500597D7D /* rako */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F92661DC2DCCF97800597D7D /* Build configuration list for PBXNativeTarget "gioco" */;
+			buildConfigurationList = F92661DC2DCCF97800597D7D /* Build configuration list for PBXNativeTarget "rako" */;
 			buildPhases = (
 				F92661CA2DCCF97500597D7D /* Sources */,
 				F92661CB2DCCF97500597D7D /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				F92661D02DCCF97500597D7D /* gioco */,
+				F92661D02DCCF97500597D7D /* rako */,
 			);
-			name = gioco;
+			name = rako;
 			packageProductDependencies = (
 			);
 			productName = gioco;
-			productReference = F92661CE2DCCF97500597D7D /* gioco.app */;
+			productReference = F92661CE2DCCF97500597D7D /* rako.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F92661C92DCCF97500597D7D /* Build configuration list for PBXProject "gioco" */;
+			buildConfigurationList = F92661C92DCCF97500597D7D /* Build configuration list for PBXProject "rako" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -103,7 +103,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F92661CD2DCCF97500597D7D /* gioco */,
+				F92661CD2DCCF97500597D7D /* rako */,
 			);
 		};
 /* End PBXProject section */
@@ -255,11 +255,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = gioco/gioco.entitlements;
+				CODE_SIGN_ENTITLEMENTS = rako/rako.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"gioco/Preview Content\"";
-				DEVELOPMENT_TEAM = 79DJA69MKY;
+				DEVELOPMENT_TEAM = E73CXZ7E4M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -272,7 +271,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fiorettogiovanni.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fran.rako;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -289,11 +288,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = gioco/gioco.entitlements;
+				CODE_SIGN_ENTITLEMENTS = rako/rako.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"gioco/Preview Content\"";
-				DEVELOPMENT_TEAM = 79DJA69MKY;
+				DEVELOPMENT_TEAM = E73CXZ7E4M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -306,7 +304,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.fiorettogiovanni.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fran.rako;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -321,7 +319,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F92661C92DCCF97500597D7D /* Build configuration list for PBXProject "gioco" */ = {
+		F92661C92DCCF97500597D7D /* Build configuration list for PBXProject "rako" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F92661DA2DCCF97800597D7D /* Debug */,
@@ -330,7 +328,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F92661DC2DCCF97800597D7D /* Build configuration list for PBXNativeTarget "gioco" */ = {
+		F92661DC2DCCF97800597D7D /* Build configuration list for PBXNativeTarget "rako" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F92661DD2DCCF97800597D7D /* Debug */,

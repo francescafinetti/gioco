@@ -9,7 +9,7 @@ import SwiftUI
 import GameKit
 
 @main
-struct giocoApp: App {
+struct rakoApp: App {
     init() {
         authenticateGameCenterUser()
     }

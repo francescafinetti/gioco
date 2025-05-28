@@ -29,7 +29,7 @@ struct SettingsCardView: View {
             Picker("Difficulty", selection: $difficulty) {
                 ForEach(difficulties, id: \.self) { Text($0) }
             }
-            .pickerStyle(MenuPickerStyle())
+            .pickerStyle(SegmentedPickerStyle())
 
             Spacer()
         }
