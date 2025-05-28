@@ -21,6 +21,9 @@
     "Are you sure you want to leave the match?" : {
 
     },
+    "Avanti" : {
+
+    },
     "Bot – Player 2" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -166,6 +169,9 @@
           }
         }
       }
+    },
+    "Inizia a giocare" : {
+
     },
     "Leave" : {
 

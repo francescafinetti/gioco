@@ -13,13 +13,19 @@ struct rakoApp: App {
     init() {
         authenticateGameCenterUser()
     }
+    
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
+
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack{
-                HomeView()
-            }
-
+            NavigationStack {
+                            if hasSeenOnboarding {
+                                HomeView()
+                            } else {
+                                OnboardingView()
+                            }
+                        }
         }
     }
 
