@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PlayerDeckView: View {
+struct PlayerDeckViewR: View {
     @ObservedObject var viewModel: GameViewModel
     @Binding var dragOffset: CGSize
     @Binding var isDragging: Bool

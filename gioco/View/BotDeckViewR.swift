@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct BotDeckView: View {
+struct BotDeckViewR: View {
     @ObservedObject var viewModel: GameViewModel
     @Binding var showBotCard: Bool
     @Binding var botOffset: CGSize

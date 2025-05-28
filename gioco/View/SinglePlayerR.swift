@@ -35,7 +35,7 @@ struct SinglePlayerR: View {
 
             VStack {
                 // Bot deck animato posizionato sopra al mazzo centrale
-                BotDeckView(
+                BotDeckViewR(
                     viewModel: viewModel,
                     showBotCard: $showBotCard,
                     botOffset: $botOffset
@@ -53,7 +53,7 @@ struct SinglePlayerR: View {
                 .zIndex(0)
 
                 // Deck giocatore
-                PlayerDeckView(
+                PlayerDeckViewR(
                     viewModel: viewModel,
                     dragOffset: $dragOffset,
                     isDragging: $isDragging
