@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "card_singlePlayer.png",
+      "filename" : "single_player.png",
       "idiom" : "universal",
       "scale" : "1x"
     },

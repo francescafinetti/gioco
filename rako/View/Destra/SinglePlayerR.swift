@@ -30,7 +30,7 @@ struct SinglePlayerR: View {
 
     var body: some View {
         ZStack {
-            Image("sfondo")
+            Image("pic")
                 .ignoresSafeArea()
 
             VStack {

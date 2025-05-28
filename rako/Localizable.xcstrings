@@ -21,9 +21,6 @@
     "Are you sure you want to leave the match?" : {
 
     },
-    "Avanti" : {
-
-    },
     "Bot – Player 2" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -170,9 +167,6 @@
         }
       }
     },
-    "Inizia a giocare" : {
-
-    },
     "Leave" : {
 
     },
@@ -266,6 +260,9 @@
       }
     },
     "New Game" : {
+
+    },
+    "Next" : {
 
     },
     "No peer found yet..." : {
@@ -429,6 +426,9 @@
           }
         }
       }
+    },
+    "Start Playing" : {
+
     },
     "Tap for double" : {
       "extractionState" : "stale",

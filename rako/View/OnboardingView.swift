@@ -15,31 +15,31 @@ struct OnboardingView: View {
     let onboardingData = [
         OnboardingPage(
             title: "Rapid Knock Out!",
-            description: "Discover RAKO, Il mazzo è diviso in due. Ogni giocatore gioca una carta a turno.",
+            description: "Discover RAKO. The deck is split in two. Each player takes turns playing a card.",
             imageName: "onboarding1"
         ),
         OnboardingPage(
-            title: "Carte Speciali",
-            description: "Se esce un 1, 2 o 3, l'avversario deve giocare il numero corrispondente di carte.",
+            title: "Special Cards",
+            description: "If a 1, 2, or 3 appears, the opponent must play the corresponding number of cards.",
             imageName: "onboarding2"
         ),
         OnboardingPage(
-            title: "Doppie Carte",
-            description: "Se escono due carte uguali di fila, puoi trascinarla verso di te per guadagnare punti!",
+            title: "Double Cards",
+            description: "If two identical cards appear in a row, drag it towards you to score points!",
             imageName: "onboarding3"
         ),
         OnboardingPage(
-            title: "Attento al Tempo!",
-            description: "Hai solo 5 secondi per giocare! Se aspetti troppo, perdi delle carte.",
+            title: "Watch the Time!",
+            description: "You have only 5 seconds to play! If you wait too long, you lose cards.",
             imageName: "onboarding4"
         ),
         OnboardingPage(
-            title: "Vittoria!",
-            description: "Il gioco finisce quando un giocatore conquista tutte le carte. Buona fortuna!",
+            title: "Victory!",
+            description: "The game ends when one player conquers all the cards. Good luck!",
             imageName: "onboarding5"
         )
     ]
-
+    
     var body: some View {
         VStack {
             TabView(selection: $currentPage) {
@@ -64,7 +64,7 @@ struct OnboardingView: View {
                                 hasSeenOnboarding = true
                             }
                         }) {
-                            Text(currentPage < onboardingData.count - 1 ? "Avanti" : "Inizia a giocare")
+                            Text(currentPage < onboardingData.count - 1 ? "Next" : "Start Playing")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
