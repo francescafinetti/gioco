@@ -1,11 +1,3 @@
-//
-//  SinglePlayerView.swift
-//  rako
-//
-//  Created by Serena Pia Capasso on 29/05/25.
-//
-
-
 import SwiftUI
 
 struct SinglePlayerView: View {
@@ -23,6 +15,7 @@ struct SinglePlayerView: View {
     @State private var showExitConfirmation: Bool = false
     @State private var centralDragOffset: CGSize = .zero
     @State private var isDraggingCentral = false
+
     // MARK: – Stato per navigazione EndGameView
     @State private var showEndGame = false
 
@@ -31,11 +24,11 @@ struct SinglePlayerView: View {
 
     var body: some View {
         ZStack {
-            Image( "pic" )
+            Image("pic")
                 .ignoresSafeArea()
 
             VStack {
-                // Bot deck
+                // Bot deck animato sopra al mazzo centrale
                 BotDeckView(
                     viewModel: viewModel,
                     showBotCard: $showBotCard,
@@ -76,13 +69,15 @@ struct SinglePlayerView: View {
                 }
             }
         }
-        // Quando è il turno del giocatore, parte il timer
-        .onChange(of: viewModel.currentPlayer) { newValue in
-            if newValue == 0 {
-                startTimer()
-            }
+        // Avvia il timer appena la view appare (per la prima carta)
+        .onAppear {
+            startTimer()
         }
-        // Animazione del bot ogni volta che gioca una carta
+        // Riparti il timer ad ogni carta giocata (giocatore o bot)
+        .onReceive(viewModel.$cardPlayCount) { _ in
+            startTimer()
+        }
+        // Animazione del bot solo quando realmente gioca una carta
         .onReceive(viewModel.$botPlayCount) { count in
             guard count > 0 else { return }
             showBotCard = true
