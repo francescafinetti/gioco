@@ -126,8 +126,7 @@ struct HomeView: View {
                 
                 // Navigation links
                 
-                NavigationLink(
-                    destination: isLeftHanded ? AnyView(SinglePlayerL()) : AnyView(SinglePlayerR()),
+                NavigationLink(destination: SinglePlayerView(),
                     isActive: $showSinglePlayer
                 ) {
                     

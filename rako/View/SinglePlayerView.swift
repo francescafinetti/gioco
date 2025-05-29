@@ -1,15 +1,17 @@
+//
+//  SinglePlayerView.swift
+//  rako
+//
+//  Created by Serena Pia Capasso on 29/05/25.
+//
 
-//
-//  ContentView.swift
-//  gioco
-//
-//  Created by Francesca Finetti on 08/05/25.
-//
+
 import SwiftUI
 
-struct SinglePlayerL: View {
+struct SinglePlayerView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel = GameViewModel(playerCount: 2)
+    @AppStorage("isLeftHanded") private var isLeftHanded = false
 
     // MARK: – Stati di UI
     @State private var dragOffset: CGSize = .zero
@@ -19,10 +21,8 @@ struct SinglePlayerL: View {
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
     @State private var showExitConfirmation: Bool = false
-
     @State private var centralDragOffset: CGSize = .zero
     @State private var isDraggingCentral = false
-
     // MARK: – Stato per navigazione EndGameView
     @State private var showEndGame = false
 
@@ -31,14 +31,12 @@ struct SinglePlayerL: View {
 
     var body: some View {
         ZStack {
-
-            Image("sfondo")
-
+            Image( "pic" )
                 .ignoresSafeArea()
 
             VStack {
-                // Bot deck animato posizionato sopra al mazzo centrale
-                BotDeckViewL(
+                // Bot deck
+                BotDeckView(
                     viewModel: viewModel,
                     showBotCard: $showBotCard,
                     botOffset: $botOffset
@@ -56,7 +54,7 @@ struct SinglePlayerL: View {
                 .zIndex(0)
 
                 // Deck giocatore
-                PlayerDeckViewL(
+                PlayerDeckView(
                     viewModel: viewModel,
                     dragOffset: $dragOffset,
                     isDragging: $isDragging
@@ -69,7 +67,7 @@ struct SinglePlayerL: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: isLeftHanded ? .navigationBarLeading : .navigationBarTrailing) {
                 Button {
                     showExitConfirmation = true
                 } label: {
@@ -78,24 +76,21 @@ struct SinglePlayerL: View {
                 }
             }
         }
-        // Animazione bot: tempi mantenuti
+        // Quando è il turno del giocatore, parte il timer
         .onChange(of: viewModel.currentPlayer) { newValue in
-            if newValue == 1 {
-                showBotCard = true
-                botOffset = .zero
-
-                // Animazione immediata
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                    withAnimation(.easeOut(duration: 0.5)) {
-                        botOffset = CGSize(width: 0, height: -200)
-                    }
-                    // Sparisce dopo 0.5 secondi
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        showBotCard = false
-                    }
-                }
-            } else {
+            if newValue == 0 {
                 startTimer()
+            }
+        }
+        // Animazione del bot ogni volta che gioca una carta
+        .onReceive(viewModel.$botPlayCount) { _ in
+            showBotCard = true
+            botOffset = .zero
+            withAnimation(.easeOut(duration: 0.5)) {
+                botOffset = CGSize(width: 0, height: -200)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                showBotCard = false
             }
         }
         .onReceive(viewModel.$isGameOver) { over in
@@ -135,6 +130,6 @@ struct SinglePlayerL: View {
 
 #Preview {
     NavigationStack {
-        SinglePlayerL()
+        SinglePlayerView()
     }
 }
