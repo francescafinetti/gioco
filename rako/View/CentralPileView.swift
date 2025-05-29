@@ -95,6 +95,6 @@ struct CentralPileView: View {
 
 #Preview {
     NavigationStack {
-        SinglePlayerR()
+        SinglePlayerView()
     }
 }
