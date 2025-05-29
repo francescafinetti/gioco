@@ -59,12 +59,21 @@ class GameViewModel: ObservableObject {
             return
         }
 
-      
         let isBot = currentPlayer == 1
         let card = players[currentPlayer].removeFirst()
+
         if isBot {
             botPlayCount += 1
+            /* ritardo il metter la carta per vedere prima l'animazione */
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.appendCardToCentralPile(card)
+            }
+        } else {
+            appendCardToCentralPile(card)
         }
+    }
+
+    private func appendCardToCentralPile(_ card: Card) {
         centralPile.append(card)
         doppiaContesa = false
 
@@ -76,7 +85,6 @@ class GameViewModel: ObservableObject {
                 autoPlayIfNeeded()
                 return
             }
-
             if forcedPlaysRemaining == 0 {
                 let winnerPlayer = (currentPlayer + 1) % players.count
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -116,10 +124,8 @@ class GameViewModel: ObservableObject {
 
     func tapForDoppia(by playerIndex: Int) {
         guard centralPile.count >= 2 else { return }
-
         let last = centralPile[centralPile.count - 1]
         let secondLast = centralPile[centralPile.count - 2]
-
         if last.value == secondLast.value && !doppiaContesa {
             doppiaContesa = true
             players[playerIndex].append(contentsOf: centralPile)
@@ -141,10 +147,8 @@ class GameViewModel: ObservableObject {
 
     private func checkForBotDoppia() {
         guard isCPUEnabled, centralPile.count >= 2 else { return }
-
         let last = centralPile[centralPile.count - 1]
         let secondLast = centralPile[centralPile.count - 2]
-
         if last.value == secondLast.value {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                 guard self.isCPUEnabled else { return }
