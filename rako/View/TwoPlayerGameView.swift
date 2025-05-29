@@ -6,6 +6,7 @@
 //
 
 
+
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -13,86 +14,102 @@ struct TwoPlayerGameView: View {
     @StateObject var viewModel = GameViewModel(playerCount: 2, isCPUEnabled: false)
     @Namespace private var animation
     @Environment(\.dismiss) private var dismiss
-
+    
     // Drag states for central card
     @State private var centralDragOffset: CGSize = .zero
     @State private var isDraggingCentral = false
-
+    
     // Drag states for player decks
     @State private var player1DragOffset: CGSize = .zero
     @State private var isPlayer1Dragging = false
     @State private var player2DragOffset: CGSize = .zero
     @State private var isPlayer2Dragging = false
-
+    
     // Victory banner
     @State private var showVictoryBanner = false
-
+    
     // Timer for central pile
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
     let duration: TimeInterval = 7.0
-
+    
     var body: some View {
         ZStack {
-            Image("es")
+            Image( "pic" )
                 .ignoresSafeArea()
-
-            VStack(spacing: 50) {
-                Spacer()
-
+            
+            VStack {
                 // PLAYER 2 DECK (top)
-                VStack(spacing: 8) {
-                    Text("Player 2")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-
-                    Image("back")
-                        .resizable()
-                        .frame(width: 80, height: 110)
-                        .cornerRadius(10)
-                        .shadow(radius: 2)
-                        .offset(player2DragOffset)
-                        .gesture(
-                            DragGesture()
-                                .onChanged { g in
-                                    guard viewModel.currentPlayer == 1 else { return }
-                                    player2DragOffset = g.translation
-                                    isPlayer2Dragging = true
-                                }
-                                .onEnded { g in
-                                    guard viewModel.currentPlayer == 1 else {
-                                        withAnimation { resetPlayer2Drag() }
-                                        return
-                                    }
-                                    if g.translation.height > 120 {
-                                        viewModel.playCard()
-                                    }
-                                    withAnimation { resetPlayer2Drag() }
-                                }
-                        )
-
-                    Text("Cards: \(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
-                // CENTRAL PILE
-                VStack(spacing: 10) {
+                VStack {
+                    HStack {
+                        GeometryReader { geometry in
+                            let width = geometry.size.width
+                            let height = geometry.size.height
+                            let screenWidth = geometry.size.width
+                            let screenHeight = geometry.size.height
+                            
+                            Image("back_chiaro")
+                                .resizable()
+                                .frame(width: 200, height: 300)
+                                .cornerRadius(10)
+                                .shadow(radius: 2)
+                                .offset(player2DragOffset)
+                                .gesture(
+                                    DragGesture()
+                                        .onChanged { g in
+                                            guard viewModel.currentPlayer == 1 else { return }
+                                            player2DragOffset = g.translation
+                                            isPlayer2Dragging = true
+                                        }
+                                        .onEnded { g in
+                                            guard viewModel.currentPlayer == 1 else {
+                                                withAnimation { resetPlayer2Drag() }
+                                                return
+                                            }
+                                            if g.translation.height > 120 {
+                                                viewModel.playCard()
+                                            }
+                                            withAnimation { resetPlayer2Drag() }
+                                        }
+                                )
+                                .rotationEffect(.degrees(-25))
+                                .position(x: width * 0.30, y: height * 0.30)
+                            
+                            
+                            VStack {
+                                Text("Player 2")
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundColor(.black)
+                                Text("\(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
+                                    .font(.title3)
+                                    .foregroundColor(.black)
+                                    .bold()
+                            }  .padding(12)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
+                                .frame(width: 140)
+                                .position(x: screenWidth - 290, y: screenHeight - 45)
+                            
+                        }
+                    }
+                    .padding(.top, 50)
+                    
+                    // CENTRAL PILE
                     ZStack {
                         if let lastCard = viewModel.centralPile.last {
-
+                            
                             // TIMER AROUND THE CARD
                             RoundedRectangle(cornerRadius: 16)
                                 .trim(from: 0.0, to: progress / CGFloat(duration))
                                 .stroke(Color.black, style: StrokeStyle(lineWidth: 4, lineCap: .round))
                                 .frame(width: 170, height: 263)
                                 .animation(.linear(duration: 0.01), value: progress)
-
+                            
                             // CENTRAL CARD DRAGGABLE
                             Image(lastCard.imageName)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 200, height: 250)
+                                .frame(width: 280, height: 400)
                                 .cornerRadius(14)
                                 .shadow(radius: 6)
                                 .offset(centralDragOffset)
@@ -109,12 +126,12 @@ struct TwoPlayerGameView: View {
                                                     isDraggingCentral = false
                                                 }
                                             }
-
+                                            
                                             guard viewModel.centralPile.count >= 2 else { return }
                                             let topVal = viewModel.centralPile.last!.value
                                             let secVal = viewModel.centralPile[viewModel.centralPile.count - 2].value
                                             guard topVal == secVal else { return }
-
+                                            
                                             let threshold: CGFloat = 100
                                             if g.translation.height > threshold {
                                                 print("Giocatore 1 ha trascinato coppia")
@@ -126,122 +143,87 @@ struct TwoPlayerGameView: View {
                                         }
                                 )
                                 .transition(.scale)
-
+                            
                         } else {
                             RoundedRectangle(cornerRadius: 14)
                                 .fill(Color.gray.opacity(0.15))
-                                .frame(width: 200, height: 250)
+                                .frame(width: 260, height: 410)
                                 .overlay(Text("Empty").font(.caption).foregroundColor(.gray))
                         }
                     }
-                }
-
-                // PLAYER 1 DECK (bottom)
-                VStack(spacing: 8) {
-                    Text("Player 1")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-
-                    Image("back")
-                        .resizable()
-                        .frame(width: 80, height: 110)
-                        .cornerRadius(10)
-                        .shadow(radius: 2)
-                        .offset(player1DragOffset)
-                        .gesture(
-                            DragGesture()
-                                .onChanged { g in
-                                    guard viewModel.currentPlayer == 0 else { return }
-                                    player1DragOffset = g.translation
-                                    isPlayer1Dragging = true
-                                }
-                                .onEnded { g in
-                                    guard viewModel.currentPlayer == 0 else {
-                                        withAnimation { resetPlayer1Drag() }
-                                        return
-                                    }
-                                    if g.translation.height < -120 {
-                                        viewModel.playCard()
-                                    }
-                                    withAnimation { resetPlayer1Drag() }
-                                }
-                        )
-
-                    Text("Cards: \(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
-                // GAME OVER
-                if let winner = viewModel.winner {
-                    VStack(spacing: 12) {
-                        Text("Player \(winner + 1) won!")
-                            .font(.title2)
-                            .foregroundColor(.green)
-                            .bold()
-
-                        Button("New Game") {
-                            viewModel.startGame(playerCount: 2)
-                        }
-                        .font(.headline)
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 10)
-                        .background(Color.green)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
-                        .shadow(radius: 2)
-                    }
-                    .onAppear {
-                        if !showVictoryBanner {
-                            showVictoryBanner = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                showVictoryBanner = false
-                            }
+                    
+                    
+                    
+                    // PLAYER 1 DECK (bottom)
+                    HStack {
+                        GeometryReader { geometry in
+                            let width = geometry.size.width
+                            let height = geometry.size.height
+                            let screenWidth = geometry.size.width
+                            let screenHeight = geometry.size.height
+                            
+                            VStack {
+                                
+                                Text("Player 1")
+                                    .font(.subheadline)
+                                    .bold()
+                                    .foregroundColor(.black)
+                                Text("\(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
+                                    .font(.title3)
+                                    .foregroundColor(.black)
+                                    .bold()
+                            }  .padding(12)
+                                .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
+                                .frame(width: 140)
+                                .position(x: screenWidth - 480, y: screenHeight - 250)
+                            
+                            
+                            
+                            Image("back_chiaro")
+                                .resizable()
+                                .frame(width: 200, height: 300)
+                                .cornerRadius(10)
+                                .shadow(radius: 2)
+                                .offset(player1DragOffset)
+                                .gesture(
+                                    DragGesture()
+                                        .onChanged { g in
+                                            guard viewModel.currentPlayer == 0 else { return }
+                                            player1DragOffset = g.translation
+                                            isPlayer1Dragging = true
+                                        }
+                                        .onEnded { g in
+                                            guard viewModel.currentPlayer == 0 else {
+                                                withAnimation { resetPlayer1Drag() }
+                                                return
+                                            }
+                                            if g.translation.height > 120 {
+                                                viewModel.playCard()
+                                            }
+                                            withAnimation { resetPlayer1Drag() }
+                                        }
+                                    
+                                )
+                                .rotationEffect(.degrees(-210))
+                                .position(x: width * 0.70, y: height * 0.60)
+                            
                         }
                     }
-                }
-
-                Spacer()
-            }
-            
-            
-
-            // VICTORY BANNER OVERLAY
-            if showVictoryBanner, let winner = viewModel.winner {
-                VStack {
-                    Spacer()
-                    Text("🏆 Player \(winner + 1) won the game!")
-                        .font(.system(size: 22, weight: .semibold))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(.black.opacity(0.85))
-                        .cornerRadius(16)
-                        .shadow(radius: 10)
-                        .transition(.opacity)
-                    Spacer()
-                }
-                .zIndex(2)
-            }
-        }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "house.fill")
-                        .foregroundColor(.black)
+                    .onChange(of: viewModel.currentPlayer) { _ in
+                        startTimer()
+                        
+                        
+                    }
                 }
             }
         }
-        .onChange(of: viewModel.currentPlayer) { _ in
-            startTimer()
-            
-        
-        }
-        
     }
-
+    
+    
+    
+    
+    
+    
     func startTimer() {
         progress = CGFloat(duration)
         timer?.invalidate()
@@ -249,7 +231,7 @@ struct TwoPlayerGameView: View {
             if progress > 0 { progress -= 0.01 } else { progress = 0; t.invalidate() }
         }
     }
-
+    
     private func resetPlayer1Drag() {
         player1DragOffset = .zero
         isPlayer1Dragging = false
