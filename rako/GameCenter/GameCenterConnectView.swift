@@ -16,6 +16,9 @@ struct GameCenterConnectView: View {
                 Text("Game Center Multiplayer")
                     .font(.largeTitle)
                     .bold()
+                
+                Text("just to check if the matching works!")
+                    .bold()
 
                 Button("Matchmaking Online") {
                     gameCenterManager.presentMatchmaker()
@@ -42,4 +45,8 @@ struct GameCenterConnectView: View {
             .padding()
         }
     }
+}
+
+#Preview {
+    GameCenterConnectView()
 }

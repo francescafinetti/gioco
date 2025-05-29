@@ -15,10 +15,16 @@
     "%lld" : {
 
     },
-    "🏆 Player %lld won the game!" : {
+    "🏆 Player %lld ha vinto!" : {
+
+    },
+    "😢 Player %lld ha perso." : {
 
     },
     "Are you sure you want to leave the match?" : {
+
+    },
+    "Back to Home" : {
 
     },
     "Bot – Player 2" : {
@@ -36,6 +42,7 @@
 
     },
     "Cards: %lld" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -153,6 +160,12 @@
     "Game Over" : {
 
     },
+    "Gioca di nuovo" : {
+
+    },
+    "Good! If you're here it means matching works!" : {
+
+    },
     "Hand" : {
 
     },
@@ -166,6 +179,9 @@
           }
         }
       }
+    },
+    "just to check if the matching works!" : {
+
     },
     "Leave" : {
 
@@ -239,6 +255,7 @@
       }
     },
     "messages are controlled here" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -259,9 +276,6 @@
         }
       }
     },
-    "New Game" : {
-
-    },
     "Next" : {
 
     },
@@ -277,6 +291,7 @@
       }
     },
     "Online Game View" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -312,6 +327,7 @@
       }
     },
     "Player %lld won!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -396,6 +412,7 @@
       }
     },
     "Send message" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -499,6 +516,9 @@
           }
         }
       }
+    },
+    "You can leave a feedback saying that the matching works if you want, thanks!" : {
+
     },
     "You lost" : {
       "localizations" : {
