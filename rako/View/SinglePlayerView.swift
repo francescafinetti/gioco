@@ -83,7 +83,8 @@ struct SinglePlayerView: View {
             }
         }
         // Animazione del bot ogni volta che gioca una carta
-        .onReceive(viewModel.$botPlayCount) { _ in
+        .onReceive(viewModel.$botPlayCount) { count in
+            guard count > 0 else { return }
             showBotCard = true
             botOffset = .zero
             withAnimation(.easeOut(duration: 0.5)) {
