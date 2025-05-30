@@ -50,28 +50,34 @@ class GameViewModel: ObservableObject {
         winner = nil
         forcedPlaysRemaining = 0
         doppiaContesa = false
+        print("Game started with \(playerCount) players")
     }
 
     func playCard() {
-        guard winner == nil else { return }
+        print("Player \(currentPlayer + 1) is about to play a card.")
+        guard winner == nil else {
+            print("Game already finished. Ignoring play.")
+            return
+        }
         guard !players[currentPlayer].isEmpty else {
+            print("Player \(currentPlayer + 1) has no cards left.")
             checkWinner()
             return
         }
 
-      
-        let isBot = currentPlayer == 1
         let card = players[currentPlayer].removeFirst()
-        if isBot {
-            botPlayCount += 1
-        }
+        print("Player \(currentPlayer + 1) played card: \(card.value)")
         centralPile.append(card)
+        print("Central pile now has \(centralPile.count) cards.")
         doppiaContesa = false
 
         if forcedPlaysRemaining > 0 {
             forcedPlaysRemaining -= 1
+            print("Forced plays remaining: \(forcedPlaysRemaining)")
+
             if card.isWinningCard {
                 forcedPlaysRemaining = card.rankNumber
+                print("Forced plays reset to \(forcedPlaysRemaining) due to winning card")
                 currentPlayer = (currentPlayer + 1) % players.count
                 autoPlayIfNeeded()
                 return
@@ -79,19 +85,38 @@ class GameViewModel: ObservableObject {
 
             if forcedPlaysRemaining == 0 {
                 let winnerPlayer = (currentPlayer + 1) % players.count
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                        self.players[winnerPlayer].append(contentsOf: self.centralPile)
-                        self.centralPile.removeAll()
-                        self.checkWinner()
-                        self.currentPlayer = winnerPlayer
-                        self.autoPlayIfNeeded()
-                    }
+                print("Forced play phase ended, player \(winnerPlayer + 1) collects central pile of \(centralPile.count) cards.")
+                players[winnerPlayer].append(contentsOf: centralPile)
+                centralPile.removeAll()
+
+                if players[currentPlayer].isEmpty {
+                    winner = winnerPlayer
+                    isGameOver = true
+                    message = "🎉 Player \(winnerPlayer + 1) won!"
+                    print(message)
+                    return
                 }
+
+                currentPlayer = winnerPlayer
+                autoPlayIfNeeded()
                 return
             }
+
+            if players[currentPlayer].isEmpty {
+                let otherPlayer = (currentPlayer + 1) % players.count
+                print("Player \(currentPlayer + 1) finished cards early, player \(otherPlayer + 1) collects central pile")
+                players[otherPlayer].append(contentsOf: centralPile)
+                centralPile.removeAll()
+                winner = otherPlayer
+                isGameOver = true
+                message = "🎉 Player \(otherPlayer + 1) won!"
+                print(message)
+                return
+            }
+
         } else if card.isWinningCard {
             forcedPlaysRemaining = card.rankNumber
+            print("New forced play phase started with \(forcedPlaysRemaining) forced plays.")
             currentPlayer = (currentPlayer + 1) % players.count
             autoPlayIfNeeded()
             return
@@ -100,27 +125,32 @@ class GameViewModel: ObservableObject {
         }
 
         if players[currentPlayer].isEmpty {
-            checkWinner()
-        } else {
-            autoPlayIfNeeded()
+            let other = (currentPlayer + 1) % players.count
+            print("Player \(currentPlayer + 1) has no cards left. Player \(other + 1) wins!")
+            if !centralPile.isEmpty {
+                print("Player \(other + 1) collects central pile of \(centralPile.count) cards.")
+                players[other].append(contentsOf: centralPile)
+                centralPile.removeAll()
+            }
+            winner = other
+            isGameOver = true
+            message = "🎉 Player \(other + 1) won!"
+            print(message)
+            return
         }
 
-        // Controlla la "doppia" solo se la CPU è abilitata
-        if isCPUEnabled {
-            checkForBotDoppia()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.checkWinner()
-        }
+        autoPlayIfNeeded()
     }
 
     func tapForDoppia(by playerIndex: Int) {
+        print("Player \(playerIndex + 1) tapped for doppia")
         guard centralPile.count >= 2 else { return }
 
         let last = centralPile[centralPile.count - 1]
         let secondLast = centralPile[centralPile.count - 2]
 
         if last.value == secondLast.value && !doppiaContesa {
+            print("Doppia detected by player \(playerIndex + 1), collecting central pile")
             doppiaContesa = true
             players[playerIndex].append(contentsOf: centralPile)
             centralPile.removeAll()
@@ -139,37 +169,19 @@ class GameViewModel: ObservableObject {
         }
     }
 
-    private func checkForBotDoppia() {
-        guard isCPUEnabled, centralPile.count >= 2 else { return }
-
-        let last = centralPile[centralPile.count - 1]
-        let secondLast = centralPile[centralPile.count - 2]
-
-        if last.value == secondLast.value {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-                guard self.isCPUEnabled else { return }
-                if !self.doppiaContesa &&
-                   self.centralPile[self.centralPile.count - 1].value ==
-                   self.centralPile[self.centralPile.count - 2].value {
-                    self.doppiaContesa = true
-                    self.players[1].append(contentsOf: self.centralPile)
-                    self.centralPile.removeAll()
-                    self.currentPlayer = 1
-                    self.forcedPlaysRemaining = 0
-                    self.checkWinner()
-                    self.autoPlayIfNeeded()
-                }
-            }
-        }
-    }
-
     func checkWinner() {
         for (index, player) in players.enumerated() {
             if player.isEmpty {
                 let other = (index + 1) % players.count
+                if !centralPile.isEmpty {
+                    print("Game over detected in checkWinner. Player \(other + 1) collects central pile of \(centralPile.count) cards.")
+                    players[other].append(contentsOf: centralPile)
+                    centralPile.removeAll()
+                }
                 winner = other
                 message = "🎉 Player \(other + 1) won!"
                 isGameOver = true
+                print(message)
                 return
             }
         }
