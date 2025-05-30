@@ -3,9 +3,7 @@
 
 
 // è da capire che succ perchè ad un certo punto spariscono le carte, che fine fanno? boh non si sa
-
 import SwiftUI
-import UniformTypeIdentifiers
 
 struct TwoPlayerGameView: View {
     @StateObject var viewModel = GameViewModel(playerCount: 2, isCPUEnabled: false)
@@ -24,6 +22,9 @@ struct TwoPlayerGameView: View {
     @State private var timer: Timer?
     let duration: TimeInterval = 7.0
 
+
+    @State private var showEndGame = false
+
     // Mazzetto animato
     @State private var showPileAnimation = false
     @State private var pileOffset: CGSize = .zero
@@ -32,6 +33,7 @@ struct TwoPlayerGameView: View {
     enum Direction {
         case up, down
     }
+
 
     var body: some View {
         ZStack {
@@ -66,8 +68,9 @@ struct TwoPlayerGameView: View {
                                                 return
                                             }
                                             if g.translation.height > 120 {
+                                                print("Player 2 played a card")
                                                 viewModel.playCard()
-                                                checkForWinner()
+                                                viewModel.checkWinner()
                                             }
                                             withAnimation { resetPlayer2Drag() }
                                         }
@@ -128,11 +131,13 @@ struct TwoPlayerGameView: View {
 
                                             let threshold: CGFloat = 100
                                             if g.translation.height > threshold {
+                                                print("Player 0 tapped doppia (down)")
                                                 viewModel.tapForDoppia(by: 0)
                                             } else if g.translation.height < -threshold {
+                                                print("Player 1 tapped doppia (up)")
                                                 viewModel.tapForDoppia(by: 1)
                                             }
-                                            checkForWinner()
+                                            viewModel.checkWinner()
                                         }
                                 )
                                 .transition(.scale)
@@ -186,8 +191,9 @@ struct TwoPlayerGameView: View {
                                                 return
                                             }
                                             if g.translation.height > 120 {
+                                                print("Player 1 played a card")
                                                 viewModel.playCard()
-                                                checkForWinner()
+                                                viewModel.checkWinner()
                                             }
                                             withAnimation { resetPlayer1Drag() }
                                         }
@@ -201,6 +207,7 @@ struct TwoPlayerGameView: View {
                     }
                 }
             }
+
 
             // ANIMAZIONE MAZZETTINO
             ZStack {
@@ -231,14 +238,18 @@ struct TwoPlayerGameView: View {
                 }
             }
 
+
             NavigationLink(
-                destination: GameResultView(winner: viewModel.winner ?? 0, onRestart: {
-                    viewModel.startGame(playerCount: 2)
-                    showResultScreen = false
-                }),
-                isActive: $showResultScreen,
+                destination: EndGameView(winner: viewModel.winner ?? 0),
+                isActive: $showEndGame,
                 label: { EmptyView() }
             )
+        }
+        .onChange(of: viewModel.winner) { newWinner in
+            if let w = newWinner {
+                print("Winner detected: Player \(w + 1)")
+                showEndGame = true
+            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -281,19 +292,11 @@ struct TwoPlayerGameView: View {
         player2DragOffset = .zero
         isPlayer2Dragging = false
     }
-
-    private func checkForWinner() {
-        let totalCards = viewModel.players.reduce(0) { $0 + $1.count } + viewModel.centralPile.count
-        if viewModel.players[0].count == totalCards {
-            viewModel.winner = 0
-            showResultScreen = true
-        } else if viewModel.players[1].count == totalCards {
-            viewModel.winner = 1
-            showResultScreen = true
-        }
-    }
 }
 
 #Preview {
-    TwoPlayerGameView()
+    NavigationView {
+        TwoPlayerGameView()
+    }
 }
+
