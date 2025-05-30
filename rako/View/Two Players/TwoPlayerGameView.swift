@@ -19,6 +19,7 @@ struct TwoPlayerGameView: View {
     @State private var isPlayer2Dragging = false
     @State private var showResultScreen = false
     @State private var showExitConfirmation = false
+    @State private var showEndGame = false
 
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
@@ -232,9 +233,15 @@ struct TwoPlayerGameView: View {
 
             NavigationLink(
                 destination: EndGameView(winner: viewModel.winner ?? 0),
-                isActive: $showResultScreen,
+                isActive: $showEndGame,
                 label: { EmptyView() }
             )
+        }
+        .onChange(of: viewModel.winner) { newWinner in
+            if let w = newWinner {
+                showEndGame = true
+            }
+            
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {

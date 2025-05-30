@@ -72,18 +72,14 @@ class GameViewModel: ObservableObject {
 
         if isCPUEnabled && currentPlayer == 1 {
             botPlayCount += 1
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.appendCardToCentralPile(card)
+            
             }
-        } else {
-            appendCardToCentralPile(card)
-        }
+        
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.centralPile.append(card)
+                self.doppiaContesa = false
+        
     }
-
-    private func appendCardToCentralPile(_ card: Card) {
-        cardPlayCount += 1
-        centralPile.append(card)
-        doppiaContesa = false
 
         if forcedPlaysRemaining > 0 {
             forcedPlaysRemaining -= 1
