@@ -79,6 +79,7 @@ class GameViewModel: ObservableObject {
         }
 
 
+
         let card = players[currentPlayer].removeFirst()
         print("Player \(currentPlayer + 1) played card: \(card.value)")
 
@@ -223,7 +224,6 @@ class GameViewModel: ObservableObject {
             }
         }
     }
-
   
 
        func checkWinner() {
@@ -231,6 +231,7 @@ class GameViewModel: ObservableObject {
             if player.isEmpty {
                 let other = (index + 1) % players.count
                 if !centralPile.isEmpty {
+
                     print("Game over detected in checkWinner. Player \(other + 1) collects central pile of \(centralPile.count) cards.")
                     players[other].append(contentsOf: centralPile)
                     centralPile.removeAll()
@@ -238,6 +239,7 @@ class GameViewModel: ObservableObject {
                 winner = other
                 message = "🎉 Player \(other + 1) won!"
                 isGameOver = true
+
                 print(message)
                 return
             }

@@ -146,7 +146,6 @@ struct TwoPlayerGameView: View {
                                 .fill(Color.accent2.opacity(0.5))
                                 .shadow(radius: 10)
                                 .frame(width: 260, height: 410)
-                                .overlay(Text("Empty").font(.caption).foregroundColor(.gray))
                         }
                     }
 
@@ -241,6 +240,7 @@ struct TwoPlayerGameView: View {
 
             NavigationLink(
                 destination: EndGameView(winner: viewModel.winner ?? 0),
+
                 isActive: $showEndGame,
                 label: { EmptyView() }
             )
@@ -292,6 +292,7 @@ struct TwoPlayerGameView: View {
         player2DragOffset = .zero
         isPlayer2Dragging = false
     }
+
 }
 
 #Preview {
