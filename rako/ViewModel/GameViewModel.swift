@@ -68,10 +68,9 @@ class GameViewModel: ObservableObject {
             return
         }
 
-        let isBot = (currentPlayer == 1)
         let card = players[currentPlayer].removeFirst()
 
-        if isBot {
+        if isCPUEnabled && currentPlayer == 1 {
             botPlayCount += 1
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.appendCardToCentralPile(card)
@@ -188,13 +187,19 @@ class GameViewModel: ObservableObject {
         }
     }
 
-    private func checkWinner() {
+    func checkWinner() {
         for (index, player) in players.enumerated() {
             if player.isEmpty {
                 let other = (index + 1) % players.count
+                if !centralPile.isEmpty {
+                    print("Player \(other + 1) collects central . game over")
+                    players[other].append(contentsOf: centralPile)
+                    centralPile.removeAll()
+                }
                 winner = other
                 message = "🎉 Player \(other + 1) won!"
                 isGameOver = true
+                print("Game over")
                 return
             }
         }

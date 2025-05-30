@@ -67,7 +67,7 @@ struct TwoPlayerGameView: View {
                                             }
                                             if g.translation.height > 120 {
                                                 viewModel.playCard()
-                                                checkForWinner()
+                                                viewModel.checkWinner()
                                             }
                                             withAnimation { resetPlayer2Drag() }
                                         }
@@ -132,7 +132,7 @@ struct TwoPlayerGameView: View {
                                             } else if g.translation.height < -threshold {
                                                 viewModel.tapForDoppia(by: 1)
                                             }
-                                            checkForWinner()
+                                            viewModel.checkWinner()
                                         }
                                 )
                                 .transition(.scale)
@@ -141,7 +141,6 @@ struct TwoPlayerGameView: View {
                                 .fill(Color.accent2.opacity(0.5))
                                 .shadow(radius: 10)
                                 .frame(width: 260, height: 410)
-                                .overlay(Text("Empty").font(.caption).foregroundColor(.gray))
                         }
                     }
 
@@ -187,7 +186,7 @@ struct TwoPlayerGameView: View {
                                             }
                                             if g.translation.height > 120 {
                                                 viewModel.playCard()
-                                                checkForWinner()
+                                                viewModel.checkWinner()
                                             }
                                             withAnimation { resetPlayer1Drag() }
                                         }
@@ -232,10 +231,7 @@ struct TwoPlayerGameView: View {
             }
 
             NavigationLink(
-                destination: GameResultView(winner: viewModel.winner ?? 0, onRestart: {
-                    viewModel.startGame(playerCount: 2)
-                    showResultScreen = false
-                }),
+                destination: EndGameView(winner: viewModel.winner ?? 0),
                 isActive: $showResultScreen,
                 label: { EmptyView() }
             )
@@ -282,18 +278,10 @@ struct TwoPlayerGameView: View {
         isPlayer2Dragging = false
     }
 
-    private func checkForWinner() {
-        let totalCards = viewModel.players.reduce(0) { $0 + $1.count } + viewModel.centralPile.count
-        if viewModel.players[0].count == totalCards {
-            viewModel.winner = 0
-            showResultScreen = true
-        } else if viewModel.players[1].count == totalCards {
-            viewModel.winner = 1
-            showResultScreen = true
-        }
-    }
 }
 
 #Preview {
-    TwoPlayerGameView()
+    NavigationView{
+        TwoPlayerGameView()
+    }
 }
