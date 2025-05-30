@@ -22,6 +22,7 @@ struct rakoApp: App {
             NavigationStack {
                             if hasSeenOnboarding {
                                 HomeView()
+                                
                             } else {
                                 OnboardingView()
                             }

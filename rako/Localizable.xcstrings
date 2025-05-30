@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "%@" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -15,10 +18,10 @@
     "%lld" : {
 
     },
-    "🏆 Player %lld ha vinto!" : {
+    "🏆 Player %lld won!" : {
 
     },
-    "😢 Player %lld ha perso." : {
+    "😢 Player %lld lose." : {
 
     },
     "Are you sure you want to leave the match?" : {
@@ -95,7 +98,11 @@
         }
       }
     },
+    "Credits" : {
+
+    },
     "Difficulty" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -160,13 +167,7 @@
     "Game Over" : {
 
     },
-    "Gioca di nuovo" : {
-
-    },
     "Good! If you're here it means matching works!" : {
-
-    },
-    "Hand" : {
 
     },
     "Hard" : {
@@ -290,6 +291,12 @@
         }
       }
     },
+    "OFF" : {
+
+    },
+    "ON" : {
+
+    },
     "Online Game View" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -313,6 +320,9 @@
       }
     },
     "Play Again" : {
+
+    },
+    "Play Again!" : {
 
     },
     "Play Card" : {
@@ -348,7 +358,7 @@
         }
       }
     },
-    "Player 1" : {
+    "PLAYER 1" : {
 
     },
     "Player 1 cards: %lld" : {
@@ -362,7 +372,7 @@
         }
       }
     },
-    "Player 2" : {
+    "PLAYER 2" : {
 
     },
     "Player 2 cards: %lld" : {
@@ -469,10 +479,10 @@
         }
       }
     },
-    "Vai alla Home" : {
+    "Tutorial" : {
 
     },
-    "Vibration" : {
+    "Vai alla Home" : {
 
     },
     "Vibrations" : {
@@ -487,6 +497,7 @@
       }
     },
     "Volume" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {

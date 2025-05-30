@@ -28,13 +28,6 @@ struct HomeView: View {
                     .ignoresSafeArea()
 
                 VStack {
-
-                    Image("prova")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 320)
-                    
-                    
                     GeometryReader { geometry in
                         let totalWidth = geometry.size.width
                         let itemWidth = cardWidth + spacing
@@ -116,7 +109,7 @@ struct HomeView: View {
                     
                     
                     Text(tapInstructionText)
-                        .font(.custom("FuturaPT", size: 32))
+                        .font(.custom("Futura-Bold", size: 30))
                         .foregroundColor(.white)
                         .shadow(radius: 6)
                         .padding(.bottom, 60)

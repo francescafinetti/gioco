@@ -23,13 +23,13 @@ struct PlayerDeckView: View {
 
             HStack {
                 VStack(alignment: .center, spacing: 4) {
-                    Text("Player 1")
-                        .font(.subheadline)
+                    Text("PLAYER 1")
+                        .font(.custom("Futura-Bold", size: 22))
                         .bold()
                         .foregroundColor(.black)
 
                     Text("\(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
-                        .font(.title3)
+                        .font(.custom("FuturaPT", size: 18))
                         .foregroundColor(.black)
                         .bold()
                 }
