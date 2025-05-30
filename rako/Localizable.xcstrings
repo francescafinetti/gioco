@@ -18,6 +18,9 @@
     "%lld" : {
 
     },
+    "🎉 Complimenti!" : {
+
+    },
     "🏆 Player %lld won!" : {
 
     },
@@ -135,6 +138,7 @@
       }
     },
     "Empty" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -170,6 +174,9 @@
     "Good! If you're here it means matching works!" : {
 
     },
+    "Hai completato il tutorial.\nOra sei pronto per iniziare a giocare!" : {
+
+    },
     "Hard" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -180,6 +187,9 @@
           }
         }
       }
+    },
+    "Inizia a giocare" : {
+
     },
     "just to check if the matching works!" : {
 
@@ -318,6 +328,9 @@
           }
         }
       }
+    },
+    "Pila centrale" : {
+
     },
     "Play Again" : {
 

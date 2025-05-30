@@ -1,41 +1,70 @@
-//
-//  SettingsView.swift
-//  gioco
-//
-//  Created by Francesca Finetti on 21/05/25.
-//
-
 import SwiftUI
 
 struct SettingsCardView: View {
     @AppStorage("musicVolume") private var musicVolume: Double = 0.5
     @AppStorage("soundVolume") private var soundVolume: Double = 1.0
+    @AppStorage("volumeEnabled") private var volumeEnabled: Bool = true
+    @AppStorage("soundEnabled") private var soundEnabled: Bool = true
     @AppStorage("vibrationEnabled") private var vibrationEnabled = true
     @AppStorage("isLeftHanded") private var isLeftHanded = false
 
     var body: some View {
         VStack(spacing: 24) {
-            // Music
+
+            // Musica (on/off + slider)
             HStack {
-                Circle()
-                    .fill(Color.yellow)
-                    .frame(width: 50, height: 50)
-                    .overlay(Image(systemName: "music.note").foregroundColor(.white))
-                Slider(value: $musicVolume)
+                Button {
+                    volumeEnabled.toggle()
+                    if volumeEnabled {
+                        AudioManager.shared.startBackgroundMusic()
+                        AudioManager.shared.setCurrentVolume(to: Float(musicVolume))
+                    } else {
+                        AudioManager.shared.stopMusic()
+                    }
+                } label: {
+                    Circle()
+                        .fill(volumeEnabled ? Color.green : Color.gray)
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Image(systemName: volumeEnabled ? "speaker.wave.2.fill" : "speaker.slash.fill")
+                                .foregroundColor(.white)
+                        )
+                }
+
+                Slider(value: $musicVolume, in: 0...1)
                     .accentColor(.accent1)
+                    .disabled(!volumeEnabled)
+                    .onChange(of: musicVolume) { newVolume in
+                        if volumeEnabled {
+                            AudioManager.shared.setCurrentVolume(to: Float(newVolume))
+                        }
+                    }
             }
 
-            // Sound
+            // Suoni (on/off + slider)
             HStack {
-                Circle()
-                    .fill(Color.orange)
-                    .frame(width: 50, height: 50)
-                    .overlay(Image(systemName: "speaker.wave.2.fill").foregroundColor(.white))
-                Slider(value: $soundVolume)
+                Button {
+                    soundEnabled.toggle()
+                    // In futuro: attiva/disattiva effetti sonori
+                } label: {
+                    Circle()
+                        .fill(soundEnabled ? Color.orange : Color.gray)
+                        .frame(width: 50, height: 50)
+                        .overlay(
+                            Image(systemName: soundEnabled ? "bell.fill" : "bell.slash.fill")
+                                .foregroundColor(.white)
+                        )
+                }
+
+                Slider(value: $soundVolume, in: 0...1)
                     .accentColor(.accent1)
+                    .disabled(!soundEnabled)
+                    .onChange(of: soundVolume) { newVolume in
+                        // In futuro: aggiorna volume effetti sonori
+                    }
             }
 
-            // Vibration
+            // Vibrazione
             HStack {
                 Circle()
                     .fill(Color.purple)
@@ -50,7 +79,7 @@ struct SettingsCardView: View {
                 .frame(width: 140)
             }
 
-            // Hand preference
+            // Mano preferita
             HStack {
                 Circle()
                     .fill(Color.blue)
@@ -66,10 +95,13 @@ struct SettingsCardView: View {
             }
 
             // Tutorial & Credits
+            // Tutorial & Credits
             VStack(spacing: 8) {
-                Text("Tutorial")
-                    .font(.title)
-                    .bold()
+                NavigationLink(destination: TutorialIntroView()) {
+                    Text("Tutorial")
+                        .font(.title)
+                        .bold()
+                }
                 Text("Credits")
                     .font(.body)
             }

@@ -4,6 +4,7 @@ struct SinglePlayerView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject var viewModel = GameViewModel(playerCount: 2)
     @AppStorage("isLeftHanded") private var isLeftHanded = false
+    @AppStorage("volumeEnabled") private var volumeEnabled = true
 
     // MARK: – Stati di UI
     @State private var dragOffset: CGSize = .zero
@@ -37,7 +38,6 @@ struct SinglePlayerView: View {
                 .ignoresSafeArea()
 
             VStack {
-                // Bot deck animato sopra al mazzo centrale
                 BotDeckView(
                     viewModel: viewModel,
                     showBotCard: $showBotCard,
@@ -45,7 +45,6 @@ struct SinglePlayerView: View {
                 )
                 .zIndex(showBotCard ? 1 : 0)
 
-                // Mazzo centrale
                 CentralPileView(
                     viewModel: viewModel,
                     progress: $progress,
@@ -55,7 +54,6 @@ struct SinglePlayerView: View {
                 )
                 .zIndex(0)
 
-                // Deck giocatore
                 PlayerDeckView(
                     viewModel: viewModel,
                     dragOffset: $dragOffset,
@@ -67,7 +65,6 @@ struct SinglePlayerView: View {
             }
             .padding(.bottom, 250)
 
-            // ANIMAZIONE MAZZETTO RACCOLTO
             ZStack {
                 if showPileAnimation {
                     ForEach(0..<3, id: \.self) { i in
@@ -109,6 +106,14 @@ struct SinglePlayerView: View {
         }
         .onAppear {
             startTimer()
+            if UserDefaults.standard.bool(forKey: "volumeEnabled") {
+                    AudioManager.shared.fadeToMusic(named: "gameview", volume: Float(UserDefaults.standard.double(forKey: "musicVolume")))
+                }
+        }
+        .onDisappear {
+            if volumeEnabled {
+                AudioManager.shared.fadeToMusic(named: "homeview", volume: 0.5, delay: 0.2)
+            }
         }
         .onReceive(viewModel.$cardPlayCount) { _ in
             startTimer()

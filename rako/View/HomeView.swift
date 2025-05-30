@@ -8,17 +8,17 @@ struct HomeView: View {
     @State private var showSinglePlayer = false
     @State private var showTwoPlayer = false
     @State private var showMultiplayer = false
-    
+
     @AppStorage("volumeEnabled") private var volumeEnabled = true
     @AppStorage("isLeftHanded") private var isLeftHanded = false
     @StateObject var gameCenterManager = GameCenterManager()
-    
+
     let gameModes = ["Settings", "Single Player", "Two Players", "Multiplayer"]
     let cardImages = ["card_settings", "single_player", "two_players", "multiplayer"]
     let cardWidth: CGFloat = 250
     let spacing: CGFloat = 10
     let dragThreshold: CGFloat = 80
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -32,7 +32,7 @@ struct HomeView: View {
                         let totalWidth = geometry.size.width
                         let itemWidth = cardWidth + spacing
                         let offsetX = -CGFloat(selectedMode) * itemWidth + dragOffset + (totalWidth - cardWidth) / 2
-                        
+
                         HStack(spacing: spacing) {
                             ForEach(gameModes.indices, id: \.self) { index in
                                 let isSelected = index == selectedMode
@@ -40,7 +40,7 @@ struct HomeView: View {
                                 let scale: CGFloat = isSelected ? 1.0 : 0.85
                                 let opacity: Double = isSelected ? 1.0 : 0.6
                                 let shadow: CGFloat = isSelected ? 10 : 0
-                                
+
                                 Group {
                                     if gameModes[index] == "Settings" {
                                         FlipView(isFlipped: isSettingsFlipped) {
@@ -65,7 +65,7 @@ struct HomeView: View {
                                 .animation(.easeInOut(duration: 0.25), value: selectedMode)
                                 .onTapGesture {
                                     guard isSelected else { return }
-                                    
+
                                     switch gameModes[index] {
                                     case "Single Player":
                                         showSinglePlayer = true
@@ -105,24 +105,18 @@ struct HomeView: View {
                         )
                     }
                     .frame(height: 520)
-                    
-                    
-                    
+
                     Text(tapInstructionText)
                         .font(.custom("Futura-Bold", size: 30))
                         .foregroundColor(.white)
                         .shadow(radius: 6)
                         .padding(.bottom, 60)
-                    
-                    
                 }
-                
+
                 // Navigation links
-                
                 NavigationLink(destination: SinglePlayerView(),
                     isActive: $showSinglePlayer
                 ) {
-                    
                     EmptyView()
                 }
                 NavigationLink(destination: TwoPlayerGameView(), isActive: $showTwoPlayer) {
@@ -133,11 +127,9 @@ struct HomeView: View {
                 }
             }
             .onAppear {
-                // 🎮 Access Point Game Center solo qui
                 GKAccessPoint.shared.location = .topTrailing
                 GKAccessPoint.shared.isActive = true
-                
-                // 🎵 é solo se volume abilitato
+
                 if volumeEnabled {
                     AudioManager.shared.startBackgroundMusic()
                 }
@@ -155,7 +147,7 @@ struct HomeView: View {
             }
         }
     }
-    
+
     private var tapInstructionText: String {
         if gameModes[selectedMode] == "Settings" {
             return isSettingsFlipped ? "Tap to Close" : "Tap to Open"
@@ -169,13 +161,13 @@ struct FlipView<Front: View, Back: View>: View {
     var isFlipped: Bool
     var front: () -> Front
     var back: () -> Back
-    
+
     var body: some View {
         ZStack {
             front()
                 .opacity(isFlipped ? 0.0 : 1.0)
                 .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
-            
+
             back()
                 .opacity(isFlipped ? 1.0 : 0.0)
                 .rotation3DEffect(.degrees(isFlipped ? 0 : -180), axis: (x: 0, y: 1, z: 0))

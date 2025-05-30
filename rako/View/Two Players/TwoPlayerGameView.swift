@@ -1,9 +1,6 @@
 //  TwoPlayerGameView.swift
 //  gioco
 
-
-// è da capire che succ perchè ad un certo punto spariscono le carte, che fine fanno? boh non si sa
-
 import SwiftUI
 import UniformTypeIdentifiers
 
@@ -20,12 +17,12 @@ struct TwoPlayerGameView: View {
     @State private var showResultScreen = false
     @State private var showExitConfirmation = false
     @State private var showEndGame = false
+    @AppStorage("volumeEnabled") private var volumeEnabled = true
 
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
     let duration: TimeInterval = 7.0
 
-    // Mazzetto animato
     @State private var showPileAnimation = false
     @State private var pileOffset: CGSize = .zero
     @State private var pileDirection: Direction = .down
@@ -202,7 +199,6 @@ struct TwoPlayerGameView: View {
                 }
             }
 
-            // ANIMAZIONE MAZZETTINO
             ZStack {
                 if showPileAnimation {
                     ForEach(0..<3, id: \.self) { i in
@@ -241,7 +237,6 @@ struct TwoPlayerGameView: View {
             if let w = newWinner {
                 showEndGame = true
             }
-            
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -265,6 +260,16 @@ struct TwoPlayerGameView: View {
             pileDirection = winner == 0 ? .down : .up
             showPileAnimation = true
         }
+        .onAppear {
+            if UserDefaults.standard.bool(forKey: "volumeEnabled") {
+                AudioManager.shared.fadeToMusic(named: "gameview", volume: Float(UserDefaults.standard.double(forKey: "musicVolume")))
+            }
+        }
+        .onDisappear {
+            if volumeEnabled {
+                AudioManager.shared.fadeToMusic(named: "homeview", volume: 0.5)
+            }
+        }
     }
 
     func startTimer() {
@@ -284,11 +289,10 @@ struct TwoPlayerGameView: View {
         player2DragOffset = .zero
         isPlayer2Dragging = false
     }
-
 }
 
 #Preview {
-    NavigationView{
+    NavigationView {
         TwoPlayerGameView()
     }
 }
