@@ -116,7 +116,7 @@ struct HomeView: View {
                     
                     
                     Text(tapInstructionText)
-                        .font(.custom("FuturaPT", size: 32))
+                        .font(.custom("Futura-Bold", size: 32))
                         .foregroundColor(.white)
                         .shadow(radius: 6)
                         .padding(.bottom, 60)

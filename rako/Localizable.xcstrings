@@ -15,10 +15,10 @@
     "%lld" : {
 
     },
-    "🏆 Player %lld ha vinto!" : {
+    "🏆 Player %lld won!" : {
 
     },
-    "😢 Player %lld ha perso." : {
+    "😢 Player %lld lose." : {
 
     },
     "Are you sure you want to leave the match?" : {
@@ -158,9 +158,6 @@
       }
     },
     "Game Over" : {
-
-    },
-    "Gioca di nuovo" : {
 
     },
     "Good! If you're here it means matching works!" : {
@@ -313,6 +310,9 @@
       }
     },
     "Play Again" : {
+
+    },
+    "Play Again!" : {
 
     },
     "Play Card" : {
