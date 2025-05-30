@@ -1,11 +1,3 @@
-//
-//  SinglePlayerView.swift
-//  rako
-//
-//  Created by Serena Pia Capasso on 29/05/25.
-//
-
-
 import SwiftUI
 
 struct SinglePlayerView: View {
@@ -23,19 +15,29 @@ struct SinglePlayerView: View {
     @State private var showExitConfirmation: Bool = false
     @State private var centralDragOffset: CGSize = .zero
     @State private var isDraggingCentral = false
+
     // MARK: – Stato per navigazione EndGameView
     @State private var showEndGame = false
+
+    // MARK: – Stati per animazione mazzetto
+    @State private var showPileAnimation = false
+    @State private var pileOffset: CGSize = .zero
+    @State private var pileDirection: Direction = .down
+
+    enum Direction {
+        case up, down
+    }
 
     // MARK: – Costanti
     private let duration: TimeInterval = 7.0
 
     var body: some View {
         ZStack {
-            Image( "pic" )
+            Image("pic")
                 .ignoresSafeArea()
 
             VStack {
-                // Bot deck
+                // Bot deck animato sopra al mazzo centrale
                 BotDeckView(
                     viewModel: viewModel,
                     showBotCard: $showBotCard,
@@ -64,6 +66,35 @@ struct SinglePlayerView: View {
                 Spacer()
             }
             .padding(.bottom, 250)
+
+            // ANIMAZIONE MAZZETTO RACCOLTO
+            ZStack {
+                if showPileAnimation {
+                    ForEach(0..<3, id: \.self) { i in
+                        Image("back_chiaro")
+                            .resizable()
+                            .frame(width: 150, height: 200)
+                            .cornerRadius(10)
+                            .shadow(radius: 3)
+                            .offset(x: CGFloat(i) * 3, y: CGFloat(i) * 3)
+                    }
+                }
+            }
+            .offset(pileOffset)
+            .opacity(showPileAnimation ? 1 : 0)
+            .zIndex(999)
+            .onChange(of: showPileAnimation) { visible in
+                if visible {
+                    pileOffset = .zero
+                    withAnimation(.easeInOut(duration: 0.6)) {
+                        pileOffset = pileDirection == .up ? CGSize(width: 0, height: -320) : CGSize(width: 0, height: 320)
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                        showPileAnimation = false
+                        pileOffset = .zero
+                    }
+                }
+            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
@@ -76,14 +107,14 @@ struct SinglePlayerView: View {
                 }
             }
         }
-        // Quando è il turno del giocatore, parte il timer
-        .onChange(of: viewModel.currentPlayer) { newValue in
-            if newValue == 0 {
-                startTimer()
-            }
+        .onAppear {
+            startTimer()
         }
-        // Animazione del bot ogni volta che gioca una carta
-        .onReceive(viewModel.$botPlayCount) { _ in
+        .onReceive(viewModel.$cardPlayCount) { _ in
+            startTimer()
+        }
+        .onReceive(viewModel.$botPlayCount) { count in
+            guard count > 0 else { return }
             showBotCard = true
             botOffset = .zero
             withAnimation(.easeOut(duration: 0.5)) {
@@ -97,6 +128,11 @@ struct SinglePlayerView: View {
             if over {
                 showEndGame = true
             }
+        }
+        .onReceive(viewModel.$lastCollector) { winner in
+            guard let winner = winner else { return }
+            pileDirection = winner == 0 ? .down : .up
+            showPileAnimation = true
         }
         .background(
             NavigationLink(

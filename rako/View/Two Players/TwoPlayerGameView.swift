@@ -22,7 +22,18 @@ struct TwoPlayerGameView: View {
     @State private var timer: Timer?
     let duration: TimeInterval = 7.0
 
+
     @State private var showEndGame = false
+
+    // Mazzetto animato
+    @State private var showPileAnimation = false
+    @State private var pileOffset: CGSize = .zero
+    @State private var pileDirection: Direction = .down
+
+    enum Direction {
+        case up, down
+    }
+
 
     var body: some View {
         ZStack {
@@ -68,12 +79,12 @@ struct TwoPlayerGameView: View {
                                 .position(x: width * 0.30, y: height * 0.30)
 
                             VStack {
-                                Text("Player 2")
-                                    .font(.subheadline)
+                                Text("PLAYER 2")
+                                    .font(.custom("Futura-Bold", size: 22))
                                     .bold()
                                     .foregroundColor(.black)
                                 Text("\(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
-                                    .font(.title3)
+                                    .font(.custom("FuturaPT", size: 18))
                                     .foregroundColor(.black)
                                     .bold()
                             }
@@ -90,7 +101,7 @@ struct TwoPlayerGameView: View {
                             RoundedRectangle(cornerRadius: 16)
                                 .trim(from: 0.0, to: progress / CGFloat(duration))
                                 .stroke(Color.black, style: StrokeStyle(lineWidth: 4, lineCap: .round))
-                                .frame(width: 170, height: 263)
+                                .frame(width: 260, height: 410)
                                 .animation(.linear(duration: 0.01), value: progress)
 
                             Image(lastCard.imageName)
@@ -132,7 +143,8 @@ struct TwoPlayerGameView: View {
                                 .transition(.scale)
                         } else {
                             RoundedRectangle(cornerRadius: 14)
-                                .fill(Color.gray.opacity(0.15))
+                                .fill(Color.accent2.opacity(0.5))
+                                .shadow(radius: 10)
                                 .frame(width: 260, height: 410)
                                 .overlay(Text("Empty").font(.caption).foregroundColor(.gray))
                         }
@@ -146,12 +158,12 @@ struct TwoPlayerGameView: View {
                             let screenHeight = geometry.size.height
 
                             VStack {
-                                Text("Player 1")
-                                    .font(.subheadline)
+                                Text("PLAYER 1")
+                                    .font(.custom("Futura-Bold", size: 22))
                                     .bold()
                                     .foregroundColor(.black)
                                 Text("\(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
-                                    .font(.title3)
+                                    .font(.custom("FuturaPT", size: 18))
                                     .foregroundColor(.black)
                                     .bold()
                             }
@@ -196,6 +208,37 @@ struct TwoPlayerGameView: View {
                 }
             }
 
+
+            // ANIMAZIONE MAZZETTINO
+            ZStack {
+                if showPileAnimation {
+                    ForEach(0..<3, id: \.self) { i in
+                        Image("back_chiaro")
+                            .resizable()
+                            .frame(width: 150, height: 200)
+                            .cornerRadius(10)
+                            .shadow(radius: 3)
+                            .offset(x: CGFloat(i) * 3, y: CGFloat(i) * 3)
+                    }
+                }
+            }
+            .offset(pileOffset)
+            .opacity(showPileAnimation ? 1 : 0)
+            .zIndex(999)
+            .onChange(of: showPileAnimation) { visible in
+                if visible {
+                    pileOffset = .zero
+                    withAnimation(.easeInOut(duration: 0.6)) {
+                        pileOffset = pileDirection == .up ? CGSize(width: 0, height: -320) : CGSize(width: 0, height: 320)
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                        showPileAnimation = false
+                        pileOffset = .zero
+                    }
+                }
+            }
+
+
             NavigationLink(
                 destination: EndGameView(winner: viewModel.winner ?? 0),
                 isActive: $showEndGame,
@@ -224,6 +267,11 @@ struct TwoPlayerGameView: View {
             Button("Leave", role: .destructive) {
                 dismiss()
             }
+        }
+        .onReceive(viewModel.$lastCollector) { winner in
+            guard let winner = winner else { return }
+            pileDirection = winner == 0 ? .down : .up
+            showPileAnimation = true
         }
     }
 

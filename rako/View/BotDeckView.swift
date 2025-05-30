@@ -56,12 +56,12 @@ struct BotDeckView: View {
      
                 // Punti Giocatore
                 VStack(alignment: .center, spacing: 4) {
-                    Text("Player 2")
-                        .font(.subheadline)
+                    Text("PLAYER 2")
+                        .font(.custom("Futura-Bold", size: 22))
                         .bold()
                         .foregroundColor(.black)
                     Text("\(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
-                        .font(.title3)
+                        .font(.custom("FuturaPT", size: 18))
                         .foregroundColor(.black)
                         .bold()
                 }
@@ -83,4 +83,8 @@ struct BotDeckView: View {
         // Inserire un ViewModel fittizio per preview
         BotDeckView(viewModel: GameViewModel(), showBotCard: .constant(true), botOffset: .constant(.zero))
     }
+}
+
+#Preview {
+    SinglePlayerView()
 }
