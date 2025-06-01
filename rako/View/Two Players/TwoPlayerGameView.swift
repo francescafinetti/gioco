@@ -18,24 +18,24 @@ struct TwoPlayerGameView: View {
     @State private var showExitConfirmation = false
     @State private var showEndGame = false
     @AppStorage("volumeEnabled") private var volumeEnabled = true
-
+    
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
     let duration: TimeInterval = 7.0
-
+    
     @State private var showPileAnimation = false
     @State private var pileOffset: CGSize = .zero
     @State private var pileDirection: Direction = .down
-
+    
     enum Direction {
         case up, down
     }
-
+    
     var body: some View {
         ZStack {
             Image("pic")
                 .ignoresSafeArea()
-
+            
             VStack {
                 VStack {
                     HStack {
@@ -44,7 +44,7 @@ struct TwoPlayerGameView: View {
                             let height = geometry.size.height
                             let screenWidth = geometry.size.width
                             let screenHeight = geometry.size.height
-
+                            
                             Image("back_chiaro")
                                 .resizable()
                                 .frame(width: 200, height: 300)
@@ -72,7 +72,9 @@ struct TwoPlayerGameView: View {
                                 )
                                 .rotationEffect(.degrees(-25))
                                 .position(x: width * 0.30, y: height * 0.30)
-
+                            
+                            
+                            
                             VStack {
                                 Text("PLAYER 2")
                                     .font(.custom("Futura-Bold", size: 22))
@@ -84,13 +86,29 @@ struct TwoPlayerGameView: View {
                                     .bold()
                             }
                             .padding(12)
-                            .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(
+                                        viewModel.currentPlayer == 1 ?
+                                        AnyShapeStyle(
+                                            LinearGradient(
+                                                colors: [Color.blue.opacity(0.3), Color.blue.opacity(0.1)],
+                                                startPoint: .top,
+                                                endPoint: .bottom
+                                            )
+                                        )
+                                        :
+                                            AnyShapeStyle(Color.gray.opacity(0.04))
+                                    )
+                                    .shadow(color: viewModel.currentPlayer == 0 ? Color.blue.opacity(0.4) : .clear, radius: 6, x: 0, y: 0)
+                            )
                             .frame(width: 140)
+                            
                             .position(x: screenWidth - 290, y: screenHeight - 45)
                         }
                     }
                     .padding(.top, 50)
-
+                    
                     ZStack {
                         if let lastCard = viewModel.centralPile.last {
                             RoundedRectangle(cornerRadius: 16)
@@ -98,7 +116,7 @@ struct TwoPlayerGameView: View {
                                 .stroke(Color.black, style: StrokeStyle(lineWidth: 4, lineCap: .round))
                                 .frame(width: 260, height: 410)
                                 .animation(.linear(duration: 0.01), value: progress)
-
+                            
                             Image(lastCard.imageName)
                                 .resizable()
                                 .scaledToFit()
@@ -123,7 +141,7 @@ struct TwoPlayerGameView: View {
                                             let topVal = viewModel.centralPile.last!.value
                                             let secVal = viewModel.centralPile[viewModel.centralPile.count - 2].value
                                             guard topVal == secVal else { return }
-
+                                            
                                             let threshold: CGFloat = 100
                                             if g.translation.height > threshold {
                                                 viewModel.tapForDoppia(by: 0)
@@ -141,29 +159,46 @@ struct TwoPlayerGameView: View {
                                 .frame(width: 260, height: 410)
                         }
                     }
-
+                    
                     HStack {
                         GeometryReader { geometry in
                             let width = geometry.size.width
                             let height = geometry.size.height
                             let screenWidth = geometry.size.width
                             let screenHeight = geometry.size.height
-
-                            VStack {
-                                Text("PLAYER 1")
-                                    .font(.custom("Futura-Bold", size: 22))
-                                    .bold()
-                                    .foregroundColor(.black)
-                                Text("\(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
-                                    .font(.custom("FuturaPT", size: 18))
-                                    .foregroundColor(.black)
-                                    .bold()
-                            }
-                            .padding(12)
-                            .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
-                            .frame(width: 140)
+                            
+                           
+                                
+                                VStack {
+                                    Text("PLAYER 1")
+                                        .font(.custom("Futura-Bold", size: 22))
+                                        .bold()
+                                        .foregroundColor(.black)
+                                    Text("\(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
+                                        .font(.custom("FuturaPT", size: 18))
+                                        .foregroundColor(.black)
+                                        .bold()
+                                }
+                                .padding(12)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(
+                                            viewModel.currentPlayer == 0 ?
+                                                AnyShapeStyle(
+                                                    LinearGradient(
+                                                        colors: [Color.blue.opacity(0.3), Color.blue.opacity(0.1)],
+                                                        startPoint: .top,
+                                                        endPoint: .bottom
+                                                    )
+                                                )
+                                                :
+                                                AnyShapeStyle(Color.gray.opacity(0.04))
+                                        )
+                                        .shadow(color: viewModel.currentPlayer == 0 ? Color.blue.opacity(0.4) : .clear, radius: 6, x: 0, y: 0)
+                                )                                .frame(width: 140)
+                            
                             .position(x: screenWidth - 480, y: screenHeight - 250)
-
+                            
                             Image("back_chiaro")
                                 .resizable()
                                 .frame(width: 200, height: 300)
@@ -198,7 +233,7 @@ struct TwoPlayerGameView: View {
                     }
                 }
             }
-
+            
             ZStack {
                 if showPileAnimation {
                     ForEach(0..<3, id: \.self) { i in
@@ -226,7 +261,7 @@ struct TwoPlayerGameView: View {
                     }
                 }
             }
-
+            
             NavigationLink(
                 destination: EndGameView(winner: viewModel.winner ?? 0),
                 isActive: $showEndGame,
@@ -271,7 +306,7 @@ struct TwoPlayerGameView: View {
             }
         }
     }
-
+    
     func startTimer() {
         progress = CGFloat(duration)
         timer?.invalidate()
@@ -279,12 +314,12 @@ struct TwoPlayerGameView: View {
             if progress > 0 { progress -= 0.01 } else { progress = 0; t.invalidate() }
         }
     }
-
+    
     private func resetPlayer1Drag() {
         player1DragOffset = .zero
         isPlayer1Dragging = false
     }
-
+    
     private func resetPlayer2Drag() {
         player2DragOffset = .zero
         isPlayer2Dragging = false

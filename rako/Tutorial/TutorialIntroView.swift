@@ -45,6 +45,8 @@ struct TutorialIntroView: View {
                     .cornerRadius(12)
                     .shadow(radius: 5)
                 
+                
+                
                 Spacer()
                 
                 // Pila centrale
@@ -105,9 +107,9 @@ struct TutorialIntroView: View {
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(Color.black.opacity(0.2), style: StrokeStyle(lineWidth: 3, dash: [6]))
                             .frame(width: 160, height: 240)
-                            .overlay(Text("Pila centrale").font(.caption).foregroundColor(.gray))
-                    } 
-                } 
+                            .overlay(Text("Central Pile").font(.caption).foregroundColor(.gray))
+                    }
+                }
                 
                 Spacer()
                 
@@ -136,7 +138,7 @@ struct TutorialIntroView: View {
                                                 cardPlayed = true
                                                 tutorialStep = 3
                                             }
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                                 withAnimation {
                                                     showBotCardInCenter = true
                                                     tutorialStep = 4
@@ -219,26 +221,29 @@ struct TutorialIntroView: View {
             
             // Messaggi del tutorial
             if tutorialStep == 0 {
-                Bubble(text: "Questo è il tuo mazzo", position: .bottom) {
+                Bubble(text: "This is your deck", position: .bottom) {
                     tutorialStep = 1
                 }
             } else if tutorialStep == 1 {
-                Bubble(text: "Questo è il mazzo del bot", position: .top) {
+                Bubble(text: "This is the bot's deck", position: .top) {
                     tutorialStep = 2
                 }
             } else if tutorialStep == 2 {
-                Bubble(text: "Trascina la tua carta verso la pila centrale", position: .bottom, allowTapToAdvance: false)
+                Bubble(text: "Drag your card to the central pile", position: .bottom, allowTapToAdvance: false)
+                
             } else if tutorialStep == 3 {
-                Bubble(text: "Perfetto! Hai giocato la tua carta.", position: .center) {
+                Bubble(text: "Great! You've played your card.", position: .center)
+                {
                     withAnimation {
-                        showBotCardInCenter = true
                         tutorialStep = 4
+                        showBotCardInCenter = true
                     }
                 }
+                
             } else if tutorialStep == 4 {
-                Bubble(text: "Il bot ha giocato un 2! \nOra devi giocare due carte.", position: .center, allowTapToAdvance: false)
+                Bubble(text: "The bot played a 2! \nNow you must play two cards.", position: .center, allowTapToAdvance: false)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                             withAnimation {
                                 isForcingPlays = true
                                 forcedPlaysDone = 0
@@ -247,13 +252,14 @@ struct TutorialIntroView: View {
                             }
                         }
                     }
+                
             } else if tutorialStep == 5 {
-                Bubble(text: "Non sono 1-2-3. \nIl bot prende il mazzetto!", position: .center)
+                Bubble(text: "Not 1-2-3. \nThe bot takes the pile!", position: .center)
                     .onAppear {
                         withAnimation(.easeInOut(duration: 0.8)) {
                             centralPileOffset = CGSize(width: 0, height: -400)
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                             withAnimation {
                                 showBotCardInCenter = false
                                 showForcingInCenter = false
@@ -263,10 +269,11 @@ struct TutorialIntroView: View {
                             }
                         }
                     }
+                
             } else if tutorialStep == 6 {
-                Bubble(text: "Ora gioca il bot, dal momento che \nha preso il mazzetto", position: .center)
+                Bubble(text: "Now the bot plays, since \nit took the pile", position: .center)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                             withAnimation {
                                 tutorialStep = 7
                                 showBotFive = true
@@ -275,9 +282,9 @@ struct TutorialIntroView: View {
                     }
                 
             } else if tutorialStep == 7 {
-                Bubble(text: "Il bot ha giocato un 5! Ora tira una carta tu.", position: .center)
+                Bubble(text: "The bot played a 5! Now you play a card.", position: .center)
                     .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                             withAnimation {
                                 allowPlayerDrag = true
                                 isSinglePlayActive = true
@@ -286,28 +293,28 @@ struct TutorialIntroView: View {
                     }
                 
             } else if tutorialStep == 8 {
-                Bubble(text: "Due carte uguali! Trascina il mazzetto \nverso di te per prenderlo!", position: .center)
+                Bubble(text: "Two identical cards! Drag the pile \ntowards you to take it!", position: .center)
                     .onAppear {
                         withAnimation {
                             allowPileDrag = true
                         }
                     }
-            }
-            else if tutorialStep == 9 {
+                
+            } else if tutorialStep == 9 {
                 VStack(spacing: 30) {
-                    Text("🎉 Complimenti!")
+                    Text("🎉 Congratulations!")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
-                    Text("Hai completato il tutorial.\nOra sei pronto per iniziare a giocare!")
+                    Text("You’ve completed the tutorial.\nNow you’re ready to start playing!")
                         .multilineTextAlignment(.center)
                         .font(.title3)
                         .padding(.horizontal)
-
+                    
                     Button(action: {
-                               dismiss()
-                           }) {
-                        Text("Inizia a giocare")
+                        dismiss()
+                    }) {
+                        Text("Start Playing")
                             .font(.headline)
                             .padding(.horizontal, 40)
                             .padding(.vertical, 15)
@@ -319,6 +326,7 @@ struct TutorialIntroView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.white.opacity(0.9))
+                
             }
         } .navigationBarBackButtonHidden(true)
     }

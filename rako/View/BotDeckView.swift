@@ -37,12 +37,6 @@ struct BotDeckView: View {
                             .frame(width: 200, height: 300)
                             .cornerRadius(10)
                             .shadow(radius: 4)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(viewModel.currentPlayer == 1 ? Color.green.opacity(0.8) : Color.clear, lineWidth: 4)
-                                    .blur(radius: 1)
-                                    .opacity(viewModel.currentPlayer == 1 ? 1 : 0)
-                            )
                             .offset(botOffset)
                             .zIndex(1)
                             .animation(.easeInOut(duration: 0.4), value: botOffset)
@@ -55,19 +49,37 @@ struct BotDeckView: View {
                 )
      
                 // Punti Giocatore
-                VStack(alignment: .center, spacing: 4) {
-                    Text("PLAYER 2")
-                        .font(.custom("Futura-Bold", size: 22))
-                        .bold()
-                        .foregroundColor(.black)
-                    Text("\(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
-                        .font(.custom("FuturaPT", size: 18))
-                        .foregroundColor(.black)
-                        .bold()
-                }
-                .padding(12)
-                .background(RoundedRectangle(cornerRadius: 12).fill(Color.gray.opacity(0.04)))
-                .frame(width: 140)
+                
+
+                    VStack(alignment: .center, spacing: 4) {
+                        Text("PLAYER 2")
+                            .font(.custom("Futura-Bold", size: 22))
+                            .bold()
+                            .foregroundColor(.black)
+                        Text("\(viewModel.players.indices.contains(1) ? viewModel.players[1].count : 0)")
+                            .font(.custom("FuturaPT", size: 18))
+                            .foregroundColor(.black)
+                            .bold()
+                    }
+                    .padding(12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(
+                                viewModel.currentPlayer == 1 ?
+                                    AnyShapeStyle(
+                                        LinearGradient(
+                                            colors: [Color.blue.opacity(0.3), Color.blue.opacity(0.1)],
+                                            startPoint: .top,
+                                            endPoint: .bottom
+                                        )
+                                    )
+                                    :
+                                    AnyShapeStyle(Color.gray.opacity(0.04))
+                            )
+                            .shadow(color: viewModel.currentPlayer == 0 ? Color.blue.opacity(0.4) : .clear, radius: 6, x: 0, y: 0)
+                    )
+                    .frame(width: 140)
+                
                 .position(
                     x: isLeftHanded ? screenWidth - 895 : screenWidth - 695,
                     y: screenHeight - 50
