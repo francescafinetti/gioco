@@ -7,6 +7,12 @@
     "%@" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16,20 +22,74 @@
       }
     },
     "%lld" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
-    "🎉 Congratulations!" : {
-
+    "🎉 Complimenti!" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🎉 Bravo !"
+          }
+        }
+      }
+    },
+    "🏆 Player %lld won!" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏆 Joueur %lld a gagné !"
+          }
+        }
+      }
+    },
+    "😢 Player %lld lose." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🏆 Jpueur %lld a perdu !"
+          }
+        }
+      }
     },
     "Are you sure you want to leave the match?" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Êtes-vous sûr de vouloir quitter le match ?"
+          }
+        }
+      }
     },
     "Back to Home" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour au menu principal"
+          }
+        }
+      }
     },
     "Bot – Player 2" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bot - Joueur 2"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39,11 +99,24 @@
       }
     },
     "Cancel" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
     },
     "Cards: %lld" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartes: %lld"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -52,12 +125,15 @@
         }
       }
     },
-    "Central Pile" : {
-
-    },
     "Connected Peers: %lld" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peers Connecté: %lld"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69,6 +145,12 @@
     "Connected with: %@" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecté avec: %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79,6 +161,12 @@
     },
     "Connected, Loading the Game..." : {
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecté, Chargement du jeu…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -90,6 +178,12 @@
     "Connected! Starting the game..." : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecté, Démarrage du jeu…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -99,14 +193,24 @@
       }
     },
     "Credits" : {
-
-    },
-    "DEFEAT" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Credits"
+          }
+        }
+      }
     },
     "Difficulty" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Difficultée"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -118,6 +222,12 @@
     "Dominant Hand" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Main Dominante"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -129,6 +239,12 @@
     "Easy" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Easy"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -140,6 +256,12 @@
     "Empty" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vide"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -150,6 +272,12 @@
     },
     "Game Center Multiplayer" : {
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Center Multijoueur"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -160,6 +288,12 @@
     },
     "Game Center Online" : {
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Center En Ligne"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -168,18 +302,45 @@
         }
       }
     },
-    "GAME OVER" : {
-
-    },
-    "Go Home" : {
-
+    "Game Over" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game Over"
+          }
+        }
+      }
     },
     "Good! If you're here it means matching works!" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parfait ! Si vous êtes ici, cela signifie que le matchmaking fonctionne ! "
+          }
+        }
+      }
+    },
+    "Hai completato il tutorial.\nOra sei pronto per iniziare a giocare!" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez terminé le tutoriel.\nMaintenant, vous êtes prêt à commencer à jouer !"
+          }
+        }
+      }
     },
     "Hard" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hard"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -188,21 +349,55 @@
         }
       }
     },
-    "just to check if the matching works!" : {
-
+    "Inizia a giocare" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commence à joueur"
+          }
+        }
+      }
     },
-    "KO!" : {
-
+    "just to check if the matching works!" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "just to check if the matching works!"
+          }
+        }
+      }
     },
     "Leave" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter"
+          }
+        }
+      }
     },
     "Left" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gauche"
+          }
+        }
+      }
     },
     "Left hand" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Main Gauche"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -214,6 +409,12 @@
     "Local Game (Bluetooth - Wi-Fi)" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joueu Local (Bluetooth - Wi-Fi)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -225,6 +426,12 @@
     "Look for nearby players" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher des joueurs à proximité"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -236,6 +443,12 @@
     "Looking for nearby players..." : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche des joueurs à proximité…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -246,6 +459,12 @@
     },
     "Matchmaking Online" : {
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Matchmaking En Ligne"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -257,6 +476,12 @@
     "Medium" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medium"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -268,6 +493,12 @@
     "messages are controlled here" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "messages are controlled here"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -279,6 +510,12 @@
     "Multiplayer Match" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Match Multijoueur"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -288,11 +525,24 @@
       }
     },
     "Next" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivant"
+          }
+        }
+      }
     },
     "No peer found yet..." : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun peer trouvé pour l’istant…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -302,14 +552,34 @@
       }
     },
     "OFF" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OFF"
+          }
+        }
+      }
     },
     "ON" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ON"
+          }
+        }
+      }
     },
     "Online Game View" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vue Jeu En Ligne"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -321,6 +591,12 @@
     "Peers found:" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Peers trouvé:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -329,12 +605,45 @@
         }
       }
     },
-    "Play again" : {
-
+    "Pila centrale" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paquet central"
+          }
+        }
+      }
+    },
+    "Play Again" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rejouer"
+          }
+        }
+      }
+    },
+    "Play Again!" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rejouer !"
+          }
+        }
+      }
     },
     "Play Card" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jouer la Carte"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -343,12 +652,15 @@
         }
       }
     },
-    "Player %lld is " : {
-
-    },
     "Player %lld won!" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joueur %lld a gagné !"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -360,6 +672,12 @@
     "Player %lld's Turn" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Player %lld's Turn"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -369,11 +687,24 @@
       }
     },
     "PLAYER 1" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOUEUR 1"
+          }
+        }
+      }
     },
     "Player 1 cards: %lld" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartes Joueur 1 %lld"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -383,11 +714,24 @@
       }
     },
     "PLAYER 2" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JOUEUR 2"
+          }
+        }
+      }
     },
     "Player 2 cards: %lld" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartes Joueur 2: %lld"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -399,6 +743,12 @@
     "Preferences" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préférences"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -407,18 +757,25 @@
         }
       }
     },
-    "RA-pido\n" : {
-
-    },
-    "RA-pido!" : {
-
-    },
     "Right" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Droite"
+          }
+        }
+      }
     },
     "Right Hand" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Main Droite"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -429,6 +786,12 @@
     },
     "Select Game Mode" : {
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélectionner le mode de jeu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -440,6 +803,12 @@
     "Send message" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyer message"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -451,6 +820,12 @@
     "Settings" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -462,6 +837,12 @@
     "Sound & Feedback" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son et retour haptique"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -471,11 +852,24 @@
       }
     },
     "Start Playing" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer à jouer"
+          }
+        }
+      }
     },
     "Tap for double" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuyez pour une paire"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -485,8 +879,15 @@
       }
     },
     "Tap to Start" : {
-      "extractionState" : "stale",
+      "comment" : "No comment",
+      "extractionState" : "manual",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuye pour commencer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -496,11 +897,34 @@
       }
     },
     "Tutorial" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutoriel"
+          }
+        }
+      }
+    },
+    "Vai alla Home" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aller à l’accueil"
+          }
+        }
+      }
     },
     "Vibrations" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vibrations"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -509,12 +933,15 @@
         }
       }
     },
-    "VICTORY" : {
-
-    },
     "Volume" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volume"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -525,6 +952,12 @@
     },
     "Waiting for Connection..." : {
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En attente de connexion…"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -536,6 +969,12 @@
     "You – Player 1" : {
       "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toi - Joueur 1"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -544,15 +983,24 @@
         }
       }
     },
-    "You are " : {
-
-    },
     "You can leave a feedback saying that the matching works if you want, thanks!" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous pouvez laisser un commentaire en disant que le matchmaking fonctionne si vous le souhaitez, merci !"
+          }
+        }
+      }
     },
     "You lost" : {
-      "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez perdu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -562,8 +1010,13 @@
       }
     },
     "You win" : {
-      "extractionState" : "stale",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez gagné"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -571,9 +1024,6 @@
           }
         }
       }
-    },
-    "You’ve completed the tutorial.\nNow you’re ready to start playing!" : {
-
     }
   },
   "version" : "1.0"
