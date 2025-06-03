@@ -18,13 +18,7 @@
     "%lld" : {
 
     },
-    "🎉 Complimenti!" : {
-
-    },
-    "🏆 Player %lld won!" : {
-
-    },
-    "😢 Player %lld lose." : {
+    "🎉 Congratulations!" : {
 
     },
     "Are you sure you want to leave the match?" : {
@@ -57,6 +51,9 @@
           }
         }
       }
+    },
+    "Central Pile" : {
+
     },
     "Connected Peers: %lld" : {
       "extractionState" : "stale",
@@ -102,6 +99,9 @@
       }
     },
     "Credits" : {
+
+    },
+    "DEFEAT" : {
 
     },
     "Difficulty" : {
@@ -168,13 +168,13 @@
         }
       }
     },
-    "Game Over" : {
+    "GAME OVER" : {
+
+    },
+    "Go Home" : {
 
     },
     "Good! If you're here it means matching works!" : {
-
-    },
-    "Hai completato il tutorial.\nOra sei pronto per iniziare a giocare!" : {
 
     },
     "Hard" : {
@@ -188,10 +188,10 @@
         }
       }
     },
-    "Inizia a giocare" : {
+    "just to check if the matching works!" : {
 
     },
-    "just to check if the matching works!" : {
+    "KO!" : {
 
     },
     "Leave" : {
@@ -329,13 +329,7 @@
         }
       }
     },
-    "Pila centrale" : {
-
-    },
-    "Play Again" : {
-
-    },
-    "Play Again!" : {
+    "Play again" : {
 
     },
     "Play Card" : {
@@ -348,6 +342,9 @@
           }
         }
       }
+    },
+    "Player %lld is " : {
+
     },
     "Player %lld won!" : {
       "extractionState" : "stale",
@@ -409,6 +406,12 @@
           }
         }
       }
+    },
+    "RA-pido\n" : {
+
+    },
+    "RA-pido!" : {
+
     },
     "Right" : {
 
@@ -495,9 +498,6 @@
     "Tutorial" : {
 
     },
-    "Vai alla Home" : {
-
-    },
     "Vibrations" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -508,6 +508,9 @@
           }
         }
       }
+    },
+    "VICTORY" : {
+
     },
     "Volume" : {
       "extractionState" : "stale",
@@ -541,10 +544,14 @@
         }
       }
     },
+    "You are " : {
+
+    },
     "You can leave a feedback saying that the matching works if you want, thanks!" : {
 
     },
     "You lost" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -555,6 +562,7 @@
       }
     },
     "You win" : {
+      "extractionState" : "stale",
       "localizations" : {
         "it" : {
           "stringUnit" : {
@@ -563,6 +571,9 @@
           }
         }
       }
+    },
+    "You’ve completed the tutorial.\nNow you’re ready to start playing!" : {
+
     }
   },
   "version" : "1.0"

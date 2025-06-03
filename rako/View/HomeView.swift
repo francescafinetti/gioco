@@ -2,7 +2,7 @@ import SwiftUI
 import GameKit
 
 struct HomeView: View {
-    @State private var selectedMode = 1
+    @State private var selectedMode = 0
     @State private var dragOffset: CGFloat = 0.0
     @State private var isSettingsFlipped = false
     @State private var showSinglePlayer = false
@@ -13,8 +13,8 @@ struct HomeView: View {
     @AppStorage("isLeftHanded") private var isLeftHanded = false
     @StateObject var gameCenterManager = GameCenterManager()
 
-    let gameModes = ["Settings", "Single Player", "Two Players", "Multiplayer"]
-    let cardImages = ["card_settings", "single_player", "two_players", "multiplayer"]
+    let gameModes = ["Single Player", "Two Players", "Multiplayer", "Settings"]
+    let cardImages = ["single_player", "two_players", "multiplayer", "card_settings"]
     let cardWidth: CGFloat = 250
     let spacing: CGFloat = 10
     let dragThreshold: CGFloat = 80
@@ -26,6 +26,17 @@ struct HomeView: View {
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
+
+                if isSettingsFlipped {
+                    Color.clear
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            withAnimation(.easeInOut(duration: 0.6)) {
+                                isSettingsFlipped = false
+                            }
+                        }
+                        .ignoresSafeArea()
+                }
 
                 VStack {
                     GeometryReader { geometry in
@@ -114,9 +125,7 @@ struct HomeView: View {
                 }
 
                 // Navigation links
-                NavigationLink(destination: SinglePlayerView(),
-                    isActive: $showSinglePlayer
-                ) {
+                NavigationLink(destination: SinglePlayerView(), isActive: $showSinglePlayer) {
                     EmptyView()
                 }
                 NavigationLink(destination: TwoPlayerGameView(), isActive: $showTwoPlayer) {
