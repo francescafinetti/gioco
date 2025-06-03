@@ -117,11 +117,12 @@ struct EndGameView: View {
                             .foregroundColor(.black)
                     }
                     
+                    
                     NavigationLink(destination: HomeView()) {
                         Text("Go Home")
                             .font(.custom("FuturaPT", size: 20))
                             .foregroundColor(.gray)
-                    }
+                    } .padding(.top)
                 }
                 
                 Spacer()

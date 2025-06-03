@@ -1,11 +1,3 @@
-//
-//  OnboardingView.swift
-//  rako
-//
-//  Created by Serena Pia Capasso on 28/05/25.
-//
-
-
 import SwiftUI
 
 struct OnboardingView: View {
@@ -14,66 +6,75 @@ struct OnboardingView: View {
 
     let onboardingData = [
         OnboardingPage(
-            title: "Rapid Knock Out!",
-            description: "Discover RAKO. The deck is split in two. Each player takes turns playing a card.",
+            title: "Welcome to RA.KO",
+            description: "Be rapido — or you’re KO.",
             imageName: "onboarding1"
         ),
         OnboardingPage(
-            title: "Special Cards",
-            description: "If a 1, 2, or 3 appears, the opponent must play the corresponding number of cards.",
+            title: "Train Your Reflexes",
+            description: "Every move sharpens your focus. Quick hands. Sharp mind.",
             imageName: "onboarding2"
         ),
         OnboardingPage(
-            title: "Double Cards",
-            description: "If two identical cards appear in a row, drag it towards you to score points!",
+            title: "You’re Ready.",
+            description: "Get in. Play fast. Knock them all out.",
             imageName: "onboarding3"
-        ),
-        OnboardingPage(
-            title: "Watch the Time!",
-            description: "You have only 5 seconds to play! If you wait too long, you lose cards.",
-            imageName: "onboarding4"
-        ),
-        OnboardingPage(
-            title: "Victory!",
-            description: "The game ends when one player conquers all the cards. Good luck!",
-            imageName: "onboarding5"
         )
     ]
-    
+
     var body: some View {
-        VStack {
+        ZStack {
+            LinearGradient(colors: [Color.black, Color.blue.opacity(0.8)],
+                           startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+
             TabView(selection: $currentPage) {
                 ForEach(onboardingData.indices, id: \.self) { index in
-                    VStack(spacing: 20) {
+                    VStack(spacing: 30) {
                         Spacer()
 
-                        Text(onboardingData[index].title)
-                            .font(.largeTitle)
-                            .bold()
+                        Image(onboardingData[index].imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: 280)
+                            .cornerRadius(25)
+                            .shadow(radius: 10)
 
-                        Text(onboardingData[index].description)
-                            .font(.title2)
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal)
+                        VStack(spacing: 12) {
+                            Text(onboardingData[index].title)
+                                .font(.system(size: 36, weight: .bold, design: .rounded))
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+
+                            Text(onboardingData[index].description)
+                                .font(.title3)
+                                .foregroundColor(.white.opacity(0.85))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 30)
+                        }
 
                         Spacer()
+
                         Button(action: {
                             if currentPage < onboardingData.count - 1 {
-                                currentPage += 1
+                                withAnimation {
+                                    currentPage += 1
+                                }
                             } else {
                                 hasSeenOnboarding = true
                             }
                         }) {
                             Text(currentPage < onboardingData.count - 1 ? "Next" : "Start Playing")
                                 .font(.headline)
-                                .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                                .padding(.horizontal)
+                                .frame(maxWidth: .infinity)
+                                .background(Color.white)
+                                .foregroundColor(.blue)
+                                .cornerRadius(16)
+                                .padding(.horizontal, 40)
+                                .shadow(radius: 5)
                         }
-                        
+
                         Spacer()
                     }
                     .tag(index)
