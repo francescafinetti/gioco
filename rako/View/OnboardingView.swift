@@ -6,81 +6,98 @@ struct OnboardingView: View {
 
     let onboardingData = [
         OnboardingPage(
-            title: "Welcome to RA.KO",
+            title: "WELCOME TO \nra.ko",
             description: "Be rapido — or you’re KO.",
-            imageName: "onboarding1"
+            imageName: "icona"
         ),
         OnboardingPage(
             title: "Train Your Reflexes",
             description: "Every move sharpens your focus. Quick hands. Sharp mind.",
-            imageName: "onboarding2"
+            imageName: "icona"
         ),
         OnboardingPage(
             title: "You’re Ready.",
             description: "Get in. Play fast. Knock them all out.",
-            imageName: "onboarding3"
+            imageName: "icona"
         )
     ]
 
     var body: some View {
         ZStack {
-            LinearGradient(colors: [Color.black, Color.blue.opacity(0.8)],
-                           startPoint: .top, endPoint: .bottom)
+            Image("pic")
+                .resizable()
                 .ignoresSafeArea()
 
-            TabView(selection: $currentPage) {
-                ForEach(onboardingData.indices, id: \.self) { index in
-                    VStack(spacing: 30) {
-                        Spacer()
+            VStack {
+                TabView(selection: $currentPage) {
+                    ForEach(onboardingData.indices, id: \.self) { index in
+                        VStack(spacing: 24) {
+                            Spacer()
 
-                        Image(onboardingData[index].imageName)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxHeight: 280)
-                            .cornerRadius(25)
-                            .shadow(radius: 10)
-
-                        VStack(spacing: 12) {
-                            Text(onboardingData[index].title)
-                                .font(.system(size: 36, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                                .multilineTextAlignment(.center)
-
-                            Text(onboardingData[index].description)
-                                .font(.title3)
-                                .foregroundColor(.white.opacity(0.85))
-                                .multilineTextAlignment(.center)
+                            Image(onboardingData[index].imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 200)
+                                .cornerRadius(30)
+                                .shadow(radius: 15)
                                 .padding(.horizontal, 30)
-                        }
+                                .padding(.bottom, 30)
 
-                        Spacer()
 
-                        Button(action: {
-                            if currentPage < onboardingData.count - 1 {
-                                withAnimation {
-                                    currentPage += 1
-                                }
-                            } else {
-                                hasSeenOnboarding = true
+                            VStack(spacing: 10) {
+                                Text(onboardingData[index].title)
+                                    .font(.custom("Futura-Bold", size: 34))
+                                    .foregroundColor(.black)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.bottom)
+
+                                Text(onboardingData[index].description)
+                                    .font(.custom("FuturaPT", size: 18))
+                                    .foregroundColor(.gray)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 40)
                             }
-                        }) {
-                            Text(currentPage < onboardingData.count - 1 ? "Next" : "Start Playing")
-                                .font(.headline)
-                                .padding()
-                                .frame(maxWidth: .infinity)
-                                .background(Color.white)
-                                .foregroundColor(.blue)
-                                .cornerRadius(16)
-                                .padding(.horizontal, 40)
-                                .shadow(radius: 5)
-                        }
 
-                        Spacer()
+                            Spacer()
+                        }
+                        .tag(index)
                     }
-                    .tag(index)
                 }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .animation(.easeInOut, value: currentPage)
+
+                // 🔵 Page indicators
+                HStack(spacing: 8) {
+                    ForEach(onboardingData.indices, id: \.self) { index in
+                        Circle()
+                            .fill(index == currentPage ? Color.white : Color.white.opacity(0.3))
+                            .frame(width: 8, height: 8)
+                            .scaleEffect(index == currentPage ? 1.2 : 1.0)
+                            .animation(.spring(), value: currentPage)
+                    }
+                }
+                .padding(.bottom, 20)
+
+                // 🎮 Action button
+                Button(action: {
+                    if currentPage < onboardingData.count - 1 {
+                        withAnimation { currentPage += 1 }
+                    } else {
+                        hasSeenOnboarding = true
+                    }
+                }) {
+                    Text(currentPage < onboardingData.count - 1 ? "Next" : "Start Playing")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.white.opacity(0.9))
+                        .foregroundColor(.black)
+                        .cornerRadius(20)
+                        .padding(.horizontal, 50)
+                        .shadow(radius: 8)
+                }
+                .padding(.bottom, 40)
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
         }
     }
 }
