@@ -5,6 +5,7 @@ struct EndGameView: View {
     let winner: Int // 0 = ha vinto il player 1 / l’utente, 1 = ha vinto il player 2 / il bot
     var isTwoPlayer: Bool = false
     var winningPlayerIndex: Int? = nil
+    @Environment(\.dismiss) var dismiss
     
     @State private var bounceLeft = false
     @State private var bounceRight = false
@@ -109,7 +110,9 @@ struct EndGameView: View {
                 Spacer()
                 
                 // Pulsanti
+                
                 VStack(spacing: 12) {
+                    
                     NavigationLink(destination: SinglePlayerView()) {
                         Text("Play again")
                             .font(.custom("Futura-Bold", size: 26))
@@ -117,12 +120,20 @@ struct EndGameView: View {
                             .foregroundColor(.black)
                     }
                     
-                    
-                    NavigationLink(destination: HomeView()) {
+                    Button(action: {
+                        // Cambia la root view eliminando lo stack di navigazione
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let window = windowScene.windows.first {
+                            window.rootViewController = UIHostingController(rootView: HomeView())
+                            window.makeKeyAndVisible()
+                        }
+                    }) {
                         Text("Go Home")
                             .font(.custom("FuturaPT", size: 20))
                             .foregroundColor(.gray)
-                    } .padding(.top)
+                    }
+                    .padding(.top)
+
                 }
                 
                 Spacer()

@@ -194,6 +194,26 @@ struct SinglePlayerView: View {
             pileDirection = winner == 0 ? .down : .up
             showPileAnimation = true
         }
+
+        .background(
+            NavigationLink(
+                destination: EndGameView(winner: viewModel.winner ?? 0),
+                isActive: $showEndGame
+            ) {
+                EmptyView()
+            }
+        )
+        .alert("Are you sure you want to leave the match?", isPresented: $showExitConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Leave", role: .destructive) {
+                   if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let window = windowScene.windows.first {
+                       window.rootViewController = UIHostingController(rootView: HomeView())
+                       window.makeKeyAndVisible()
+                   }
+               }
+        }
+
     }
 
     private func startTimer() {
