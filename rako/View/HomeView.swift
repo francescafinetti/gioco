@@ -8,6 +8,8 @@ struct HomeView: View {
     @State private var showSinglePlayer = false
     @State private var showTwoPlayer = false
     @State private var showMultiplayer = false
+    @State private var showTutorial = false
+    @AppStorage("hasSeenTutorial") private var hasSeenTutorial = false
 
     @AppStorage("volumeEnabled") private var volumeEnabled = true
     @AppStorage("isLeftHanded") private var isLeftHanded = false
@@ -79,7 +81,11 @@ struct HomeView: View {
 
                                     switch gameModes[index] {
                                     case "Single Player":
-                                        showSinglePlayer = true
+                                        if !hasSeenTutorial {
+                                            showTutorial = true
+                                        } else {
+                                            showSinglePlayer = true
+                                        }
                                     case "Two Players":
                                         showTwoPlayer = true
                                     case "Multiplayer":
@@ -125,12 +131,24 @@ struct HomeView: View {
                 }
 
                 // Navigation links
+                NavigationLink(destination: TutorialIntroView()
+                    .onDisappear {
+                        // Quando chiudo tutorial, segno visto e apro SinglePlayerView
+                        hasSeenTutorial = true
+                        showTutorial = false
+                        showSinglePlayer = true
+                    }, isActive: $showTutorial) {
+                    EmptyView()
+                }
+
                 NavigationLink(destination: SinglePlayerView(), isActive: $showSinglePlayer) {
                     EmptyView()
                 }
+
                 NavigationLink(destination: TwoPlayerGameView(), isActive: $showTwoPlayer) {
                     EmptyView()
                 }
+
                 NavigationLink(destination: GameCenterConnectView(), isActive: $showMultiplayer) {
                     EmptyView()
                 }
