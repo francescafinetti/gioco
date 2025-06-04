@@ -159,9 +159,11 @@ struct HomeView: View {
 
     private var tapInstructionText: String {
         if gameModes[selectedMode] == "Settings" {
-            return isSettingsFlipped ? "Tap to Close" : "Tap to Open"
+            return isSettingsFlipped
+                ? NSLocalizedString("Tap to Close", comment: "Close settings")
+                : NSLocalizedString("Tap to Open", comment: "Open settings")
         } else {
-            return "Tap to Start"
+            return NSLocalizedString("Tap to Start", comment: "Start game")
         }
     }
 }
