@@ -1,5 +1,9 @@
+//
 //  TwoPlayerGameView.swift
-//  gioco
+//  rako
+//
+//  Created by Giovanni Fioretto on 29/05/25.
+
 
 import SwiftUI
 import UniformTypeIdentifiers
@@ -18,33 +22,34 @@ struct TwoPlayerGameView: View {
     @State private var showExitConfirmation = false
     @State private var showEndGame = false
     @AppStorage("volumeEnabled") private var volumeEnabled = true
-    
+
     @State private var progress: CGFloat = 0.0
     @State private var timer: Timer?
     let duration: TimeInterval = 7.0
-    
+
     @State private var showPileAnimation = false
     @State private var pileOffset: CGSize = .zero
     @State private var pileDirection: Direction = .down
-    
+
     enum Direction {
         case up, down
     }
-    
+
     var body: some View {
         ZStack {
             Image("pic")
                 .ignoresSafeArea()
-            
+
             VStack {
                 VStack {
+                    // Player 2 area
                     HStack {
                         GeometryReader { geometry in
                             let width = geometry.size.width
                             let height = geometry.size.height
                             let screenWidth = geometry.size.width
                             let screenHeight = geometry.size.height
-                            
+
                             Image("back_chiaro")
                                 .resizable()
                                 .frame(width: 200, height: 300)
@@ -55,6 +60,8 @@ struct TwoPlayerGameView: View {
                                     DragGesture()
                                         .onChanged { g in
                                             guard viewModel.currentPlayer == 1 else { return }
+                                            // L’utente inizia a “slappare”
+                                            viewModel.isUserSlapping = true
                                             player2DragOffset = g.translation
                                             isPlayer2Dragging = true
                                         }
@@ -67,14 +74,15 @@ struct TwoPlayerGameView: View {
                                                 viewModel.playCard()
                                                 viewModel.checkWinner()
                                             }
+                                            // L’utente ha finito di slappare
+                                            viewModel.isUserSlapping = false
                                             withAnimation { resetPlayer2Drag() }
                                         }
                                 )
                                 .rotationEffect(.degrees(-25))
                                 .position(x: width * 0.30, y: height * 0.30)
-                            
-                            
-                            
+
+                            // Player 2 score
                             VStack {
                                 Text("PLAYER 2")
                                     .font(.custom("Futura-Bold", size: 22))
@@ -90,25 +98,25 @@ struct TwoPlayerGameView: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(
                                         viewModel.currentPlayer == 1 ?
-                                        AnyShapeStyle(
-                                            LinearGradient(
-                                                colors: [Color.blue.opacity(0.3), Color.blue.opacity(0.1)],
-                                                startPoint: .top,
-                                                endPoint: .bottom
+                                            AnyShapeStyle(
+                                                LinearGradient(
+                                                    colors: [Color.blue.opacity(0.3), Color.blue.opacity(0.1)],
+                                                    startPoint: .top,
+                                                    endPoint: .bottom
+                                                )
                                             )
-                                        )
-                                        :
-                                            AnyShapeStyle(Color.gray.opacity(0.04))
+                                            : AnyShapeStyle(Color.gray.opacity(0.04))
                                     )
-                                    .shadow(color: viewModel.currentPlayer == 0 ? Color.blue.opacity(0.4) : .clear, radius: 6, x: 0, y: 0)
+                                    .shadow(color: viewModel.currentPlayer == 0 ? Color.blue.opacity(0.4) : .clear,
+                                            radius: 6, x: 0, y: 0)
                             )
                             .frame(width: 140)
-                            
                             .position(x: screenWidth - 290, y: screenHeight - 45)
                         }
                     }
                     .padding(.top, 50)
-                    
+
+                    // Central pile
                     ZStack {
                         if let lastCard = viewModel.centralPile.last {
                             RoundedRectangle(cornerRadius: 16)
@@ -116,7 +124,7 @@ struct TwoPlayerGameView: View {
                                 .stroke(Color.black, style: StrokeStyle(lineWidth: 4, lineCap: .round))
                                 .frame(width: 260, height: 410)
                                 .animation(.linear(duration: 0.01), value: progress)
-                            
+
                             Image(lastCard.imageName)
                                 .resizable()
                                 .scaledToFit()
@@ -127,6 +135,8 @@ struct TwoPlayerGameView: View {
                                 .gesture(
                                     DragGesture()
                                         .onChanged { g in
+                                            // L’utente inizia a “slappare” il mazzo centrale
+                                            viewModel.isUserSlapping = true
                                             centralDragOffset = CGSize(width: 0, height: g.translation.height)
                                             isDraggingCentral = true
                                         }
@@ -137,11 +147,18 @@ struct TwoPlayerGameView: View {
                                                     isDraggingCentral = false
                                                 }
                                             }
-                                            guard viewModel.centralPile.count >= 2 else { return }
+                                            guard viewModel.centralPile.count >= 2 else {
+                                                // Ripristino lo stato di slappo comunque
+                                                viewModel.isUserSlapping = false
+                                                return
+                                            }
                                             let topVal = viewModel.centralPile.last!.value
                                             let secVal = viewModel.centralPile[viewModel.centralPile.count - 2].value
-                                            guard topVal == secVal else { return }
-                                            
+                                            guard topVal == secVal else {
+                                                viewModel.isUserSlapping = false
+                                                return
+                                            }
+
                                             let threshold: CGFloat = 100
                                             if g.translation.height > threshold {
                                                 viewModel.tapForDoppia(by: 0)
@@ -149,6 +166,8 @@ struct TwoPlayerGameView: View {
                                                 viewModel.tapForDoppia(by: 1)
                                             }
                                             viewModel.checkWinner()
+                                            // Fine della gesture: rilasciato lo slappo
+                                            viewModel.isUserSlapping = false
                                         }
                                 )
                                 .transition(.scale)
@@ -159,46 +178,45 @@ struct TwoPlayerGameView: View {
                                 .frame(width: 260, height: 410)
                         }
                     }
-                    
+
+                    // Player 1 area
                     HStack {
                         GeometryReader { geometry in
                             let width = geometry.size.width
                             let height = geometry.size.height
                             let screenWidth = geometry.size.width
                             let screenHeight = geometry.size.height
-                            
-                           
-                                
-                                VStack {
-                                    Text("PLAYER 1")
-                                        .font(.custom("Futura-Bold", size: 22))
-                                        .bold()
-                                        .foregroundColor(.black)
-                                    Text("\(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
-                                        .font(.custom("FuturaPT", size: 18))
-                                        .foregroundColor(.black)
-                                        .bold()
-                                }
-                                .padding(12)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(
-                                            viewModel.currentPlayer == 0 ?
-                                                AnyShapeStyle(
-                                                    LinearGradient(
-                                                        colors: [Color.blue.opacity(0.3), Color.blue.opacity(0.1)],
-                                                        startPoint: .top,
-                                                        endPoint: .bottom
-                                                    )
+
+                            VStack {
+                                Text("PLAYER 1")
+                                    .font(.custom("Futura-Bold", size: 22))
+                                    .bold()
+                                    .foregroundColor(.black)
+                                Text("\(viewModel.players.indices.contains(0) ? viewModel.players[0].count : 0)")
+                                    .font(.custom("FuturaPT", size: 18))
+                                    .foregroundColor(.black)
+                                    .bold()
+                            }
+                            .padding(12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(
+                                        viewModel.currentPlayer == 0 ?
+                                            AnyShapeStyle(
+                                                LinearGradient(
+                                                    colors: [Color.blue.opacity(0.3), Color.blue.opacity(0.1)],
+                                                    startPoint: .top,
+                                                    endPoint: .bottom
                                                 )
-                                                :
-                                                AnyShapeStyle(Color.gray.opacity(0.04))
-                                        )
-                                        .shadow(color: viewModel.currentPlayer == 0 ? Color.blue.opacity(0.4) : .clear, radius: 6, x: 0, y: 0)
-                                )                                .frame(width: 140)
-                            
+                                            )
+                                            : AnyShapeStyle(Color.gray.opacity(0.04))
+                                    )
+                                    .shadow(color: viewModel.currentPlayer == 0 ? Color.blue.opacity(0.4) : .clear,
+                                            radius: 6, x: 0, y: 0)
+                            )
+                            .frame(width: 140)
                             .position(x: screenWidth - 480, y: screenHeight - 250)
-                            
+
                             Image("back_chiaro")
                                 .resizable()
                                 .frame(width: 200, height: 300)
@@ -209,11 +227,13 @@ struct TwoPlayerGameView: View {
                                     DragGesture()
                                         .onChanged { g in
                                             guard viewModel.currentPlayer == 0 else { return }
+                                            viewModel.isUserSlapping = true
                                             player1DragOffset = g.translation
                                             isPlayer1Dragging = true
                                         }
                                         .onEnded { g in
                                             guard viewModel.currentPlayer == 0 else {
+                                                viewModel.isUserSlapping = false
                                                 withAnimation { resetPlayer1Drag() }
                                                 return
                                             }
@@ -221,6 +241,7 @@ struct TwoPlayerGameView: View {
                                                 viewModel.playCard()
                                                 viewModel.checkWinner()
                                             }
+                                            viewModel.isUserSlapping = false
                                             withAnimation { resetPlayer1Drag() }
                                         }
                                 )
@@ -233,7 +254,8 @@ struct TwoPlayerGameView: View {
                     }
                 }
             }
-            
+
+            // Animazione “pile” quando lastCollector cambia
             ZStack {
                 if showPileAnimation {
                     ForEach(0..<3, id: \.self) { i in
@@ -253,7 +275,9 @@ struct TwoPlayerGameView: View {
                 if visible {
                     pileOffset = .zero
                     withAnimation(.easeInOut(duration: 0.6)) {
-                        pileOffset = pileDirection == .up ? CGSize(width: 0, height: -320) : CGSize(width: 0, height: 320)
+                        pileOffset = pileDirection == .up
+                            ? CGSize(width: 0, height: -320)
+                            : CGSize(width: 0, height: 320)
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                         showPileAnimation = false
@@ -261,15 +285,16 @@ struct TwoPlayerGameView: View {
                     }
                 }
             }
-            
+
             NavigationLink(
                 destination: EndGameView(winner: viewModel.winner ?? 0),
-                isActive: $showEndGame,
-                label: { EmptyView() }
-            )
+                isActive: $showEndGame
+            ) {
+                EmptyView()
+            }
         }
         .onChange(of: viewModel.winner) { newWinner in
-            if let w = newWinner {
+            if let _ = newWinner {
                 showEndGame = true
             }
         }
@@ -284,11 +309,12 @@ struct TwoPlayerGameView: View {
                 }
             }
         }
-        .alert("Are you sure you want to leave the match?", isPresented: $showExitConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Leave", role: .destructive) {
-                dismiss()
-            }
+        .alert(
+            "Are you sure you want to leave the match?",
+            isPresented: $showExitConfirmation
+        ) {
+            Button("Cancel", role: .cancel) {}
+            Button("Leave", role: .destructive) { dismiss() }
         }
         .onReceive(viewModel.$lastCollector) { winner in
             guard let winner = winner else { return }
@@ -296,8 +322,11 @@ struct TwoPlayerGameView: View {
             showPileAnimation = true
         }
         .onAppear {
-            if UserDefaults.standard.bool(forKey: "volumeEnabled") {
-                AudioManager.shared.fadeToMusic(named: "gameview", volume: Float(UserDefaults.standard.double(forKey: "musicVolume")))
+            if volumeEnabled {
+                AudioManager.shared.fadeToMusic(
+                    named: "gameview",
+                    volume: Float(UserDefaults.standard.double(forKey: "musicVolume"))
+                )
             }
         }
         .onDisappear {
@@ -306,20 +335,25 @@ struct TwoPlayerGameView: View {
             }
         }
     }
-    
+
     func startTimer() {
         progress = CGFloat(duration)
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { t in
-            if progress > 0 { progress -= 0.01 } else { progress = 0; t.invalidate() }
+            if progress > 0 {
+                progress -= 0.01
+            } else {
+                progress = 0
+                t.invalidate()
+            }
         }
     }
-    
+
     private func resetPlayer1Drag() {
         player1DragOffset = .zero
         isPlayer1Dragging = false
     }
-    
+
     private func resetPlayer2Drag() {
         player2DragOffset = .zero
         isPlayer2Dragging = false
