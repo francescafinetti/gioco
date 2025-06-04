@@ -76,4 +76,4 @@ Play is the vehicle — any mental benefit is a natural side effect of how the g
 ---
 
 ## 📄 License
-
+🔗 [Visit the Privacy & Policy](https://sites.google.com/view/rakogame/home-page)
