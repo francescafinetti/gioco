@@ -1,3 +1,10 @@
+//
+//  SinglePlayerView.swift
+//  rako
+//
+//  Created by Serena Pia Capasso on 29/05/25.
+//
+
 import SwiftUI
 
 struct SinglePlayerView: View {
@@ -45,6 +52,7 @@ struct SinglePlayerView: View {
                 )
                 .zIndex(showBotCard ? 1 : 0)
 
+                // Cattura la “doppia” nel mazzo centrale
                 CentralPileView(
                     viewModel: viewModel,
                     progress: $progress,
@@ -53,6 +61,37 @@ struct SinglePlayerView: View {
                     isDraggingCentral: $isDraggingCentral
                 )
                 .zIndex(0)
+                .gesture(
+                    DragGesture()
+                        .onChanged { g in
+                            // L’utente inizia lo slappo
+                            viewModel.isUserSlapping = true
+                            centralDragOffset = CGSize(width: 0, height: g.translation.height)
+                            isDraggingCentral = true
+                        }
+                        .onEnded { g in
+                            defer {
+                                withAnimation(.easeOut) {
+                                    centralDragOffset = .zero
+                                    isDraggingCentral = false
+                                }
+                                // L’utente ha finito lo slappo
+                                viewModel.isUserSlapping = false
+                            }
+                            guard viewModel.centralPile.count >= 2 else { return }
+                            let topVal = viewModel.centralPile.last!.value
+                            let secVal = viewModel.centralPile[viewModel.centralPile.count - 2].value
+                            guard topVal == secVal else { return }
+
+                            let threshold: CGFloat = 100
+                            if g.translation.height > threshold {
+                                viewModel.tapForDoppia(by: 0)
+                            } else if g.translation.height < -threshold {
+                                viewModel.tapForDoppia(by: 1)
+                            }
+                            viewModel.checkWinner()
+                        }
+                )
 
                 PlayerDeckView(
                     viewModel: viewModel,
@@ -65,6 +104,7 @@ struct SinglePlayerView: View {
             }
             .padding(.bottom, 250)
 
+            // Animazione “pile” quando lastCollector cambia
             ZStack {
                 if showPileAnimation {
                     ForEach(0..<3, id: \.self) { i in
@@ -84,7 +124,9 @@ struct SinglePlayerView: View {
                 if visible {
                     pileOffset = .zero
                     withAnimation(.easeInOut(duration: 0.6)) {
-                        pileOffset = pileDirection == .up ? CGSize(width: 0, height: -320) : CGSize(width: 0, height: 320)
+                        pileOffset = pileDirection == .up
+                            ? CGSize(width: 0, height: -320)
+                            : CGSize(width: 0, height: 320)
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                         showPileAnimation = false
@@ -92,10 +134,20 @@ struct SinglePlayerView: View {
                     }
                 }
             }
+
+            // Navigazione a EndGameView
+            NavigationLink(
+                destination: EndGameView(winner: viewModel.winner ?? 0),
+                isActive: $showEndGame
+            ) {
+                EmptyView()
+            }
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: isLeftHanded ? .navigationBarLeading : .navigationBarTrailing) {
+            ToolbarItem(
+                placement: isLeftHanded ? .navigationBarLeading : .navigationBarTrailing
+            ) {
                 Button {
                     showExitConfirmation = true
                 } label: {
@@ -106,13 +158,16 @@ struct SinglePlayerView: View {
         }
         .onAppear {
             startTimer()
-            if UserDefaults.standard.bool(forKey: "volumeEnabled") {
-                    AudioManager.shared.fadeToMusic(named: "gameview", volume: Float(UserDefaults.standard.double(forKey: "musicVolume")))
-                }
+            if volumeEnabled {
+                AudioManager.shared.fadeToMusic(
+                    named: "gameview",
+                    volume: Float(UserDefaults.standard.double(forKey: "musicVolume"))
+                )
+            }
         }
         .onDisappear {
             if volumeEnabled {
-                AudioManager.shared.fadeToMusic(named: "homeview", volume: 0.5, delay: 0.2)
+                AudioManager.shared.fadeToMusic(named: "homeview", volume: 0.5)
             }
         }
         .onReceive(viewModel.$cardPlayCount) { _ in
@@ -139,6 +194,7 @@ struct SinglePlayerView: View {
             pileDirection = winner == 0 ? .down : .up
             showPileAnimation = true
         }
+
         .background(
             NavigationLink(
                 destination: EndGameView(winner: viewModel.winner ?? 0),
@@ -157,12 +213,16 @@ struct SinglePlayerView: View {
                    }
                }
         }
+
     }
 
     private func startTimer() {
         progress = CGFloat(duration)
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { t in
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 0.01,
+            repeats: true
+        ) { t in
             if progress > 0 {
                 progress -= 0.01
             } else {
