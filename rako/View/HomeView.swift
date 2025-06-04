@@ -65,10 +65,22 @@ struct HomeView: View {
                                                 .frame(width: cardWidth, height: 400)
                                         }
                                     } else {
-                                        Image(cardImages[index])
-                                            .resizable()
-                                            .scaledToFit()
-                                    }
+                                        ZStack {
+                                            Image(cardImages[index])
+                                                .resizable()
+                                                .scaledToFit()
+
+                                            if gameModes[index] == "Multiplayer" {
+                                                Image(systemName: "lock.fill")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 60, height: 60)
+                                                    .foregroundColor(.black)
+                                                    
+                                                    .offset( y: -100) // posizione sopra la carta
+                                            }
+                                        }
+                                                                           }
                                 }
                                 .frame(width: cardWidth, height: isSelected ? 600 : 500)
                                 .scaleEffect(scale)
@@ -90,6 +102,7 @@ struct HomeView: View {
                                         showTwoPlayer = true
                                     case "Multiplayer":
                                         showMultiplayer = true
+                                        
                                     case "Settings":
                                         withAnimation(.easeInOut(duration: 0.6)) {
                                             isSettingsFlipped.toggle()
@@ -148,10 +161,10 @@ struct HomeView: View {
                 NavigationLink(destination: TwoPlayerGameView(), isActive: $showTwoPlayer) {
                     EmptyView()
                 }
-
-                NavigationLink(destination: GameCenterConnectView(), isActive: $showMultiplayer) {
+// per multiplayer
+                /*NavigationLink(destination: GameCenterConnectView(), isActive: $showMultiplayer) {
                     EmptyView()
-                }
+                }*/
             }
             .onAppear {
                 GKAccessPoint.shared.location = .topTrailing

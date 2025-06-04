@@ -72,7 +72,7 @@ struct SettingsCardView: View {
             }
 
             // Vibrazione
-            HStack {
+            /*HStack {
                 Circle()
                     .fill(Color.purple)
                     .frame(width: 50, height: 50)
@@ -84,7 +84,7 @@ struct SettingsCardView: View {
                 }
                 .pickerStyle(.segmented)
                 .frame(width: 140)
-            }
+            }*/
 
             // Mano preferita
             HStack {
