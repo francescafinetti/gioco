@@ -1,3 +1,10 @@
+//
+//  SettingsCardView.swift
+//  rako
+//
+//  Created by Francesca Fientti on 29/05/25.
+//
+
 import SwiftUI
 
 struct SettingsCardView: View {

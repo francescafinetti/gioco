@@ -4,6 +4,10 @@
 //
 //  Created by Francesca Finetti on 08/05/25.
 //
+//
+//  GameViewModel.swift
+//  gioco
+//
 
 import Foundation
 import SwiftUI
@@ -16,8 +20,9 @@ class GameViewModel: ObservableObject {
     @Published var message: String = ""
     @Published var isGameOver: Bool = false
     @Published var botPlayCount = 0
-    @Published var cardPlayCount = 0  // Conta tutte le carte giocate (bot e giocatore)
-    @Published var lastCollector: Int? = nil  // 0 = player, 1 = bot
+    @Published var cardPlayCount = 0          // Conta tutte le carte giocate
+    @Published var lastCollector: Int? = nil   // 0 = player, 1 = bot
+    @Published var isUserSlapping = false      // Blocca il bot mentre l’utente slappa
 
     private let values = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
     private let suits = ["arancione", "viola", "blu", "giallo"]
@@ -34,6 +39,8 @@ class GameViewModel: ObservableObject {
     func startGame(playerCount: Int) {
         botPlayCount = 0
         cardPlayCount = 0
+        lastCollector = nil
+        isUserSlapping = false
 
         var deck: [Card] = []
         for suit in suits {
@@ -58,7 +65,6 @@ class GameViewModel: ObservableObject {
         forcedPlaysRemaining = 0
         doppiaContesa = false
         isGameOver = false
-        lastCollector = nil
     }
 
     func playCard() {
@@ -72,19 +78,25 @@ class GameViewModel: ObservableObject {
 
         if isCPUEnabled && currentPlayer == 1 {
             botPlayCount += 1
-            
-            }
-        
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.centralPile.append(card)
                 self.doppiaContesa = false
-        
+                self.cardPlayCount += 1
+                self.postCardPlacement()
+            }
+        } else {
+            centralPile.append(card)
+            doppiaContesa = false
+            cardPlayCount += 1
+            postCardPlacement()
+        }
     }
 
+    private func postCardPlacement() {
         if forcedPlaysRemaining > 0 {
             forcedPlaysRemaining -= 1
-            if card.isWinningCard {
-                forcedPlaysRemaining = card.rankNumber
+            if centralPile.last!.isWinningCard {
+                forcedPlaysRemaining = centralPile.last!.rankNumber
                 currentPlayer = (currentPlayer + 1) % players.count
                 autoPlayIfNeeded()
                 return
@@ -93,21 +105,26 @@ class GameViewModel: ObservableObject {
                 let winnerPlayer = (currentPlayer + 1) % players.count
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                        self.lastCollector = winnerPlayer
+                        // Qui l’avversario ha già buttato tutte le carte obbligate:
                         self.players[winnerPlayer].append(contentsOf: self.centralPile)
                         self.centralPile.removeAll()
                         self.checkWinner()
                         self.currentPlayer = winnerPlayer
                         self.autoPlayIfNeeded()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            self.lastCollector = nil
+                        // Ritardo di 0.25s per far completare la transizione .scale dell’ultima carta
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                            self.lastCollector = winnerPlayer
+                            // Pulisco subito dopo un brevissimo flash (per evitare ripetizioni)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                self.lastCollector = nil
+                            }
                         }
                     }
                 }
                 return
             }
-        } else if card.isWinningCard {
-            forcedPlaysRemaining = card.rankNumber
+        } else if centralPile.last!.isWinningCard {
+            forcedPlaysRemaining = centralPile.last!.rankNumber
             currentPlayer = (currentPlayer + 1) % players.count
             autoPlayIfNeeded()
             return
@@ -158,26 +175,29 @@ class GameViewModel: ObservableObject {
     }
 
     private func checkForBotDoppia() {
-        guard isCPUEnabled, centralPile.count >= 2 else { return }
+        guard isCPUEnabled, !isUserSlapping, centralPile.count >= 2 else { return }
         let last = centralPile[centralPile.count - 1]
         let secondLast = centralPile[centralPile.count - 2]
         if last.value == secondLast.value && !doppiaContesa {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
-                guard self.isCPUEnabled else { return }
-                if !self.doppiaContesa &&
-                   self.centralPile[self.centralPile.count - 1].value ==
-                   self.centralPile[self.centralPile.count - 2].value {
-                    self.doppiaContesa = true
-                    self.lastCollector = 1
-                    self.players[1].append(contentsOf: self.centralPile)
-                    self.centralPile.removeAll()
-                    self.currentPlayer = 1
-                    self.forcedPlaysRemaining = 0
-                    self.checkWinner()
-                    self.autoPlayIfNeeded()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        self.lastCollector = nil
-                    }
+                guard self.isCPUEnabled,
+                      !self.isUserSlapping,
+                      self.centralPile.count >= 2 else { return }
+
+                let topVal = self.centralPile[self.centralPile.count - 1].value
+                let secVal = self.centralPile[self.centralPile.count - 2].value
+                guard topVal == secVal && !self.doppiaContesa else { return }
+
+                self.doppiaContesa = true
+                self.lastCollector = 1
+                self.players[1].append(contentsOf: self.centralPile)
+                self.centralPile.removeAll()
+                self.currentPlayer = 1
+                self.forcedPlaysRemaining = 0
+                self.checkWinner()
+                self.autoPlayIfNeeded()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.lastCollector = nil
                 }
             }
         }
@@ -188,14 +208,12 @@ class GameViewModel: ObservableObject {
             if player.isEmpty {
                 let other = (index + 1) % players.count
                 if !centralPile.isEmpty {
-                    print("Player \(other + 1) collects central . game over")
                     players[other].append(contentsOf: centralPile)
                     centralPile.removeAll()
                 }
                 winner = other
                 message = "🎉 Player \(other + 1) won!"
                 isGameOver = true
-                print("Game over")
                 return
             }
         }

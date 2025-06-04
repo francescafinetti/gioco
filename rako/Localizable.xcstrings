@@ -32,6 +32,7 @@
       }
     },
     "🎉 Complimenti!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -41,7 +42,11 @@
         }
       }
     },
+    "🎉 Congratulations!" : {
+
+    },
     "🏆 Player %lld won!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -52,6 +57,7 @@
       }
     },
     "😢 Player %lld lose." : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -70,6 +76,9 @@
           }
         }
       }
+    },
+    "Are you sure you want to skip the tutorial?" : {
+
     },
     "Back to Home" : {
       "localizations" : {
@@ -124,6 +133,9 @@
           }
         }
       }
+    },
+    "Central Pile" : {
+
     },
     "Connected Peers: %lld" : {
       "extractionState" : "stale",
@@ -201,6 +213,9 @@
           }
         }
       }
+    },
+    "DEFEAT" : {
+
     },
     "Difficulty" : {
       "extractionState" : "stale",
@@ -303,6 +318,7 @@
       }
     },
     "Game Over" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -311,6 +327,12 @@
           }
         }
       }
+    },
+    "GAME OVER" : {
+
+    },
+    "Go Home" : {
+
     },
     "Good! If you're here it means matching works!" : {
       "localizations" : {
@@ -323,6 +345,7 @@
       }
     },
     "Hai completato il tutorial.\nOra sei pronto per iniziare a giocare!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -350,6 +373,7 @@
       }
     },
     "Inizia a giocare" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -368,6 +392,9 @@
           }
         }
       }
+    },
+    "KO!" : {
+
     },
     "Leave" : {
       "localizations" : {
@@ -606,6 +633,7 @@
       }
     },
     "Pila centrale" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -615,7 +643,11 @@
         }
       }
     },
+    "Play again" : {
+
+    },
     "Play Again" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -626,6 +658,7 @@
       }
     },
     "Play Again!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -651,6 +684,9 @@
           }
         }
       }
+    },
+    "Player %lld is " : {
+
     },
     "Player %lld won!" : {
       "extractionState" : "stale",
@@ -757,6 +793,12 @@
         }
       }
     },
+    "RA-pido\n" : {
+
+    },
+    "RA-pido!" : {
+
+    },
     "Right" : {
       "localizations" : {
         "fr" : {
@@ -834,6 +876,9 @@
         }
       }
     },
+    "Skip" : {
+
+    },
     "Sound & Feedback" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -907,6 +952,7 @@
       }
     },
     "Vai alla Home" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -932,6 +978,9 @@
           }
         }
       }
+    },
+    "VICTORY" : {
+
     },
     "Volume" : {
       "extractionState" : "stale",
@@ -983,6 +1032,9 @@
         }
       }
     },
+    "You are " : {
+
+    },
     "You can leave a feedback saying that the matching works if you want, thanks!" : {
       "localizations" : {
         "fr" : {
@@ -994,6 +1046,7 @@
       }
     },
     "You lost" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1010,6 +1063,7 @@
       }
     },
     "You win" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -1024,6 +1078,9 @@
           }
         }
       }
+    },
+    "You’ve completed the tutorial.\nNow you’re ready to start playing!" : {
+
     }
   },
   "version" : "1.0"
