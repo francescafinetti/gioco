@@ -328,7 +328,7 @@ struct TutorialIntroView: View {
                     
                 } else if tutorialStep == 9 {
                     VStack(spacing: 30) {
-                        Text("🎉 Congratulations!")
+                        Text("Congratulations!")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         
@@ -349,9 +349,10 @@ struct TutorialIntroView: View {
                                 .cornerRadius(12)
                                 .shadow(radius: 4)
                         }
-                    }
+                    }.padding(.trailing, 190)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.white.opacity(0.9))
+                    
                     
                 }
                 

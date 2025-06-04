@@ -94,7 +94,6 @@
 				it,
 				fr,
 				es,
-				de,
 			);
 			mainGroup = F92661C52DCCF97500597D7D;
 			minimizedProjectReferenceProxies = 1;
@@ -258,7 +257,7 @@
 				CODE_SIGN_ENTITLEMENTS = rako/rako.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 79DJA69MKY;
+				DEVELOPMENT_TEAM = E73CXZ7E4M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -291,7 +290,7 @@
 				CODE_SIGN_ENTITLEMENTS = rako/rako.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 79DJA69MKY;
+				DEVELOPMENT_TEAM = E73CXZ7E4M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
