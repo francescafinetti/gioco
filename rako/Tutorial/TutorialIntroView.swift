@@ -349,9 +349,10 @@ struct TutorialIntroView: View {
                                 .cornerRadius(12)
                                 .shadow(radius: 4)
                         }
-                    }
+                    }.padding(.trailing, 190)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.white.opacity(0.9))
+                    
                     
                 }
                 
