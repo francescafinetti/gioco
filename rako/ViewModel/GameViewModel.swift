@@ -112,7 +112,7 @@ class GameViewModel: ObservableObject {
                         self.currentPlayer = winnerPlayer
                         self.autoPlayIfNeeded()
                         // Ritardo di 0.25s per far completare la transizione .scale dell’ultima carta
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                             self.lastCollector = winnerPlayer
                             // Pulisco subito dopo un brevissimo flash (per evitare ripetizioni)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
