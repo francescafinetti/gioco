@@ -263,7 +263,7 @@ struct TwoPlayerGameView: View {
             }
             
             NavigationLink(
-                destination: EndGameView(winner: viewModel.winner ?? 0),
+                destination: EndGameView(winner: 0, isTwoPlayer: true, winningPlayerIndex:  viewModel.winner ?? 0),
                 isActive: $showEndGame,
                 label: { EmptyView() }
             )

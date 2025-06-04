@@ -150,8 +150,12 @@ struct SinglePlayerView: View {
         .alert("Are you sure you want to leave the match?", isPresented: $showExitConfirmation) {
             Button("Cancel", role: .cancel) { }
             Button("Leave", role: .destructive) {
-                dismiss()
-            }
+                   if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                      let window = windowScene.windows.first {
+                       window.rootViewController = UIHostingController(rootView: HomeView())
+                       window.makeKeyAndVisible()
+                   }
+               }
         }
     }
 
