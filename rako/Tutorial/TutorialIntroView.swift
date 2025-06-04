@@ -328,7 +328,7 @@ struct TutorialIntroView: View {
                     
                 } else if tutorialStep == 9 {
                     VStack(spacing: 30) {
-                        Text("🎉 Congratulations!")
+                        Text("Congratulations!")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         
