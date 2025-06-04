@@ -6,8 +6,12 @@ Built entirely with **SwiftUI**, the app uses simple rules and quick interaction
 ---
 
 ## 🖼️ App Preview
-
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c5b05992-97df-422b-a6b2-c3b1ae7ca7a4" width="200"/>
+  <img src="https://github.com/user-attachments/assets/c79d7478-b5a1-455f-ada7-3d4416638131" width="200"/>
+  <img src="https://github.com/user-attachments/assets/b58bd887-88b7-4f66-b44e-2ca5b7c9dd90" width="200"/>
+  <img src="https://github.com/user-attachments/assets/e73f6808-1d3d-4913-a3da-251313b90721" width="200"/>
+</p>
 ---
 
 ## 🎮 Features
