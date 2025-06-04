@@ -6,6 +6,12 @@
     },
     "%lld" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22,6 +28,12 @@
     },
     "Are you sure you want to leave the match?" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Estás seguro de que quieres dejar el partido?"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38,6 +50,18 @@
     },
     "Are you sure you want to skip the tutorial?" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Estás seguro de que quieres saltarte el tutorial?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Êtes-vous sûr de vouloir sauter le tutoriel ?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -48,6 +72,12 @@
     },
     "Back to Home" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver al inicio"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -64,6 +94,12 @@
     },
     "Cancel" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -80,6 +116,18 @@
     },
     "Central Pile" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pila Central"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pile centrale"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -90,6 +138,18 @@
     },
     "Congratulations!" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felicidades!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Félicitations!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -112,10 +172,17 @@
             "value" : "Connesso, Caricando il Gioco…"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Credits" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créditos"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -132,6 +199,18 @@
     },
     "DEFEAT" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DERROTA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DÉFAIT"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -154,7 +233,8 @@
             "value" : "Game Center Multiplayer"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Game Center Online" : {
       "localizations" : {
@@ -170,21 +250,45 @@
             "value" : "Game Center Online"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "GAME OVER" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GAME OVER"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JEU TERMINÉ"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "GAME OVER"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "Go Home" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Volver al Inicio"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour à l’accueil"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -220,6 +324,12 @@
     },
     "Leave" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abandonar"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -236,6 +346,12 @@
     },
     "Left" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izquierda"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -264,10 +380,17 @@
             "value" : "Matchmaking Online"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Next" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -318,6 +441,18 @@
     },
     "Play again" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jugar de Nuevo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rejouer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -328,6 +463,18 @@
     },
     "Player %lld is " : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Player %lld es"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joueur %lld est"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -366,6 +513,12 @@
     },
     "Right" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Derecha"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -382,6 +535,12 @@
     },
     "Select Game Mode" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona el Modo de Juego"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -398,6 +557,18 @@
     },
     "Skip" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saltar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -408,6 +579,12 @@
     },
     "Start Playing" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empieza a jugar"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -425,6 +602,18 @@
     "Tap to Close" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca para cerrar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuye pour fermer"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -436,6 +625,18 @@
     "Tap to Open" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca para abrir"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appuye pour ouvrir"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -447,6 +648,12 @@
     "Tap to Start" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca para Empezar"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -463,6 +670,12 @@
     },
     "Tutorial" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tutorial"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -474,6 +687,18 @@
     },
     "VICTORY" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VICTORIA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VICTOIRE"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -496,10 +721,23 @@
             "value" : "In attesa di Connessione…"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "You are " : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu eres "
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tu es "
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -510,6 +748,12 @@
     },
     "You can leave a feedback saying that the matching works if you want, thanks!" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si quieres, puedes dejar un comentario diciendo que el emparejamiento funciona. ¡Gracias!"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -521,6 +765,18 @@
     },
     "You’ve completed the tutorial.\nNow you’re ready to start playing!" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Has completado el tutorial. ¡Ahora estás listo para empezar a jugar!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vous avez terminé le tutoriel. Maintenant, vous êtes prêt à commencer à jouer !"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
