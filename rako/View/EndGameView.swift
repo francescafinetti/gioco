@@ -121,10 +121,11 @@ struct EndGameView: View {
                     }
                     
                     Button(action: {
-                        // Cambia la root view eliminando lo stack di navigazione
                         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                            let window = windowScene.windows.first {
-                            window.rootViewController = UIHostingController(rootView: HomeView())
+                            let hostingController = UIHostingController(rootView: HomeView())
+                            hostingController.overrideUserInterfaceStyle = .light
+                            window.rootViewController = hostingController
                             window.makeKeyAndVisible()
                         }
                     }) {
@@ -133,6 +134,7 @@ struct EndGameView: View {
                             .foregroundColor(.gray)
                     }
                     .padding(.top)
+
 
                 }
                 
