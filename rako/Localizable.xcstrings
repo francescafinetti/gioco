@@ -200,6 +200,18 @@
     "Customize your game" : {
       "comment" : "Settings description",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personaliza tu juego"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personnalisez ton jeu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -232,6 +244,18 @@
     },
     "Drag your card to the central pile" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrastra tu tarjeta a la pila central"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser votre carte vers la pile centrale"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -331,10 +355,44 @@
     },
     "Great! You've played your card." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Genial! Has jugado tu carta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Super ! Tu as joué ta carte."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Perfetto! Hai giocato la tua carta."
+          }
+        }
+      }
+    },
+    "If another 1, 2 or 3 appears, \nthe rule repeats, and the chain continues \nuntil a normal card ends it. \nSo, now you must play two cards" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si aparece otro 1, 2 o 3, la regla se repite y la cadena continúa hasta que una carta normal la termina. Entonces, ahora debes jugar dos cartas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si un autre 1, 2 ou 3 apparaît, la règle se répète et la chaîne se poursuit jusqu'à ce qu'une carte normale la termine. Donc, maintenant, tu dois jouer deux cartes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se appare un’altra carta 1,2 o 3, la regola si ripetere e la catena continua fino a che una carta normale non la completa. Quindi, ora devi giocare due carte."
           }
         }
       }
@@ -438,6 +496,18 @@
     },
     "Not 1-2-3. \nThe bot takes the pile!" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No 1-2-3. ¡El bot se lleva la pila!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas 1-2-3. Le bot prend la pile !"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -448,6 +518,18 @@
     },
     "Now the bot plays, since \nit took the pile" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ahora el bot juega, ya que tomó la pila"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maintenant, le bot joue, puisqu'il a pris la pile"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -456,16 +538,45 @@
         }
       }
     },
+    "Now you’re ready to start playing!\nWin the game by collecting all 40 cards!" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Ahora estás listo para empezar a jugar! ¡Gana el juego recogiendo las 40 cartas!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maintenant, tu es prêt à commencer à jouer ! Gagnez la partie en collectant les 40 cartes !"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ora puoi iniziare a giocare! Vinci il gioco collezionando tutte le 40 carte!"
+          }
+        }
+      }
+    },
     "Online" : {
       "comment" : "Multiplayer description",
       "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Online"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Online"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Play again" : {
       "localizations" : {
@@ -614,7 +725,8 @@
             "value" : "Split Screen"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Start Playing" : {
       "localizations" : {
@@ -707,18 +819,42 @@
         }
       }
     },
-    "The bot played a 2! \nNow you must play two cards." : {
+    "The bot played a 2! \n — \nspecial cards are 1, 2, and 3: \nwhen one of them appears, \nthe opponent must throw exactly \nthe number of cards shown." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡El bot jugó un 2! - las cartas especiales son 1, 2 y 3: cuando aparece una de ellas, el oponente debe lanzar exactamente el número de cartas que se muestra."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le bot a joué un 2 ! - les cartes spéciales sont 1, 2 et 3 : lorsque l'une d'entre elles apparaît, l'adversaire doit lancer exactement le nombre de cartes affichées."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il Bot ha giocato un 2! Ora devi buttare due carte."
+            "value" : "Il Bot ha giocato un 2! - le carte speciali sono 1,2 e 3: quando una di loro appare, l’altro giocatore deve buttare esattamente il numero di carte mostrato."
           }
         }
       }
     },
     "The bot played a 5! Now you play a card." : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡El bot jugó un 5! Ahora juegas una carta."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le bot a joué un 5 ! Maintenant, Tu joues une carte."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -729,6 +865,18 @@
     },
     "This is the bot's deck" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta es el jeugo del bot"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C'est le jeu du bot"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -739,6 +887,18 @@
     },
     "This is your deck" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esta es tu juego"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C'est ton jeu"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -766,6 +926,18 @@
     },
     "Two identical cards! Drag the pile \ntowards you to take it!" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡Dos tarjetas idénticas! ¡Arrastre la pila hacia ti para tomarla!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deux cartes identiques ! Faites glisser la pile vers vous pour la prendre !"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -855,28 +1027,6 @@
         }
       },
       "shouldTranslate" : false
-    },
-    "You’ve completed the tutorial.\nNow you’re ready to start playing!" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Has completado el tutorial. ¡Ahora estás listo para empezar a jugar!"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vous avez terminé le tutoriel. Maintenant, vous êtes prêt à commencer à jouer !"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hai completato il Tutorial. Ora sei pronto a giocare!"
-          }
-        }
-      }
     }
   },
   "version" : "1.0"

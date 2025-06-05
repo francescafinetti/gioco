@@ -23,39 +23,24 @@ struct TutorialIntroView: View {
     @State private var allowPileDrag = false
     @State private var pileDragOffset: CGSize = .zero
     @State private var showFinalScreen = false
-    
-    // Stato per mostrare l'avviso di skip
     @State private var showSkipAlert = false
-
     
     @Environment(\.dismiss) private var dismiss
     
     let forcingCards = ["6_di_giallo", "10_di_arancione"]
     
     var body: some View {
-        
         GeometryReader { geometry in
             let width = geometry.size.width
             let height = geometry.size.height
-            let screenWidth = geometry.size.width
-            let screenHeight = geometry.size.height
             
             ZStack {
-                
-                
-                   
-                    
-
-                
                 Image("pic")
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
                 
-                VStack{
-                 
-                    
-                    // Mazzo bot (alto)
+                VStack {
                     Image("back_chiaro")
                         .resizable()
                         .frame(width: 200, height: 300)
@@ -64,11 +49,6 @@ struct TutorialIntroView: View {
                         .rotationEffect(.degrees(-210))
                         .position(x: width * 0.04, y: height * 0.02)
                     
-                    
-                    
-                 
-                    
-                    // Pila centrale
                     ZStack {
                         if playerPlayedFive {
                             Image("5_di_viola")
@@ -86,16 +66,14 @@ struct TutorialIntroView: View {
                                                     allowPileDrag = false
                                                     playerPlayedFive = false
                                                     pileDragOffset = .zero
-                                                    tutorialStep = 9
+                                                    tutorialStep = 10
                                                 }
                                             } else {
-                                                withAnimation {
-                                                    pileDragOffset = .zero
-                                                }
+                                                withAnimation { pileDragOffset = .zero }
                                             }
                                         }
                                 )
-                        } else if tutorialStep == 7 {
+                        } else if tutorialStep == 8 {
                             Image("5_di_viola")
                                 .resizable()
                                 .frame(width: 260, height: 410)
@@ -129,19 +107,15 @@ struct TutorialIntroView: View {
                                 .frame(width: 260, height: 410)
                                 .overlay(Text("Central Pile").font(.caption).foregroundColor(.gray))
                         }
-                    }.position(x: width * 0.50, y: height * 0.27)
+                    }
+                    .position(x: width * 0.50, y: height * 0.27)
                     
-               
-                    
-                    // Mazzo player (basso)
                     ZStack {
                         Image("back_chiaro")
                             .resizable()
                             .frame(width: 200, height: 300)
                             .cornerRadius(12)
                             .shadow(radius: 5)
-                           
-                            
                         
                         if !cardPlayed && !isForcingPlays && tutorialStep < 6 {
                             Image("back_chiaro")
@@ -149,7 +123,6 @@ struct TutorialIntroView: View {
                                 .frame(width: 200, height: 300)
                                 .cornerRadius(12)
                                 .shadow(radius: 5)
-                                
                                 .offset(playerCardOffset)
                                 .gesture(
                                     tutorialStep >= 2 ?
@@ -198,7 +171,7 @@ struct TutorialIntroView: View {
                                                     if forcedPlaysDone == forcingCards.count {
                                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                                             withAnimation {
-                                                                tutorialStep = 5
+                                                                tutorialStep = 6
                                                                 isForcingPlays = false
                                                             }
                                                         }
@@ -226,7 +199,7 @@ struct TutorialIntroView: View {
                                                 withAnimation {
                                                     playerPlayedFive = true
                                                     isSinglePlayActive = false
-                                                    tutorialStep = 8
+                                                    tutorialStep = 9
                                                 }
                                             } else {
                                                 withAnimation { singlePlayOffset = .zero }
@@ -234,130 +207,134 @@ struct TutorialIntroView: View {
                                         }
                                 )
                         }
-                    } .rotationEffect(.degrees(-35))
-                        .position(
-                        x: width * 0.97,
-                        y: height * 0.55)
+                    }
+                    .rotationEffect(.degrees(-35))
+                    .position(x: width * 0.97, y: height * 0.55)
                     
                     Spacer()
-                } .padding(.bottom, 250)
+                }
+                .padding(.bottom, 250)
                 
-                
-                
-                
-                // Messaggi del tutorial
-                if tutorialStep == 0 {
-                    Bubble(text: NSLocalizedString("This is your deck", comment: ""), position: .bottom) {
-                        tutorialStep = 1
-                    }
-                } else if tutorialStep == 1 {
-                    Bubble(text: NSLocalizedString("This is the bot's deck", comment: ""), position: .top) {
-                        tutorialStep = 2
-                    }
-                } else if tutorialStep == 2 {
-                    Bubble(text: NSLocalizedString("Drag your card to the central pile", comment: ""), position: .bottom, allowTapToAdvance: false)
-
-                } else if tutorialStep == 3 {
-                    Bubble(text: NSLocalizedString("Great! You've played your card.", comment: ""), position: .center) {
-                        withAnimation {
-                            tutorialStep = 4
-                            showBotCardInCenter = true
+                Group {
+                    if tutorialStep == 0 {
+                        Bubble(text: NSLocalizedString("This is your deck", comment: ""), position: .bottom) {
+                            withAnimation { tutorialStep = 1 }
                         }
-                    }
-
-                } else if tutorialStep == 4 {
-                    Bubble(text: NSLocalizedString("The bot played a 2! \nNow you must play two cards.", comment: ""), position: .center, allowTapToAdvance: false)
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+                    } else if tutorialStep == 1 {
+                        Bubble(text: NSLocalizedString("This is the bot's deck", comment: ""), position: .top) {
+                            withAnimation { tutorialStep = 2 }
+                        }
+                    } else if tutorialStep == 2 {
+                        Bubble(text: NSLocalizedString("Drag your card to the central pile", comment: ""), position: .bottom, allowTapToAdvance: false)
+                    } else if tutorialStep == 3 {
+                        Bubble(text: NSLocalizedString("Great! You've played your card.", comment: ""), position: .center) {
+                            withAnimation {
+                                tutorialStep = 4
+                                showBotCardInCenter = true
+                            }
+                        }
+                    } else if tutorialStep == 4 {
+                        Bubble(text: NSLocalizedString("The bot played a 2! \n — \nspecial cards are 1, 2, and 3: \nwhen one of them appears, \nthe opponent must throw exactly \nthe number of cards shown.", comment: ""), position: .center) {
+                            withAnimation {
+                                tutorialStep = 5
+                            }
+                        }
+                    } else if tutorialStep == 5 {
+                        Bubble(text: NSLocalizedString("If another 1, 2 or 3 appears, \nthe rule repeats, and the chain continues \nuntil a normal card ends it. \nSo, now you must play two cards", comment: ""), position: .center, allowTapToAdvance: false)
+                            .onAppear {
                                 withAnimation {
                                     isForcingPlays = true
                                     forcedPlaysDone = 0
-                                    tutorialStep = 100
                                     showForcingInCenter = false
                                 }
                             }
-                        }
-
-                } else if tutorialStep == 5 {
-                    Bubble(text: NSLocalizedString("Not 1-2-3. \nThe bot takes the pile!", comment: ""), position: .center)
-                        .onAppear {
-                            withAnimation(.easeInOut(duration: 0.8)) {
-                                centralPileOffset = CGSize(width: 0, height: -400)
-                            }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                                withAnimation {
-                                    showBotCardInCenter = false
-                                    showForcingInCenter = false
-                                    cardPlayed = false
-                                    centralPileOffset = .zero
-                                    tutorialStep = 6
+                    } else if tutorialStep == 6 {
+                        Bubble(text: NSLocalizedString("Not 1-2-3. \nThe bot takes the pile!", comment: ""), position: .center)
+                            .onAppear {
+                                withAnimation(.easeInOut(duration: 0.8)) {
+                                    centralPileOffset = CGSize(width: 0, height: -400)
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                                    withAnimation {
+                                        showBotCardInCenter = false
+                                        showForcingInCenter = false
+                                        cardPlayed = false
+                                        centralPileOffset = .zero
+                                        tutorialStep = 7
+                                    }
                                 }
                             }
-                        }
-
-                } else if tutorialStep == 6 {
-                    Bubble(text: NSLocalizedString("Now the bot plays, since \nit took the pile", comment: ""), position: .center)
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                                withAnimation {
-                                    tutorialStep = 7
-                                    showBotFive = true
-                                }
+                    } else if tutorialStep == 7 {
+                        Bubble(text: NSLocalizedString("Now the bot plays, since \nit took the pile", comment: ""), position: .center) {
+                            withAnimation {
+                                tutorialStep = 8
+                                showBotFive = true
                             }
                         }
-
-                } else if tutorialStep == 7 {
-                    Bubble(text: NSLocalizedString("The bot played a 5! Now you play a card.", comment: ""), position: .center)
-                        .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    } else if tutorialStep == 8 {
+                        Bubble(text: NSLocalizedString("The bot played a 5! Now you play a card.", comment: ""), position: .center)
+                            .onAppear {
                                 withAnimation {
                                     allowPlayerDrag = true
                                     isSinglePlayActive = true
                                 }
                             }
-                        }
-
-                } else if tutorialStep == 8 {
-                    Bubble(text: NSLocalizedString("Two identical cards! Drag the pile \ntowards you to take it!", comment: ""), position: .center)
-                        .onAppear {
-                            withAnimation {
-                                allowPileDrag = true
+                    } else if tutorialStep == 9 {
+                        Bubble(text: NSLocalizedString("Two identical cards! Drag the pile \ntowards you to take it!", comment: ""), position: .center)
+                            .onAppear {
+                                withAnimation {
+                                    allowPileDrag = true
+                                }
+                            }
+                    } else if tutorialStep == 10 {
+                        VStack(spacing: 30) {
+                            Text(NSLocalizedString("Congratulations!", comment: ""))
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                            
+                            Text(NSLocalizedString("Now you’re ready to start playing!\nWin the game by collecting all 40 cards!", comment: ""))
+                                .multilineTextAlignment(.center)
+                                .font(.title3)
+                                .padding(.horizontal)
+                            
+                            Button(action: {
+                                dismiss()
+                            }) {
+                                Text(NSLocalizedString("Start Playing", comment: ""))
+                                    .font(.headline)
+                                    .padding(.horizontal, 40)
+                                    .padding(.vertical, 15)
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(12)
+                                    .shadow(radius: 4)
                             }
                         }
-
-                } else if tutorialStep == 9 {
-                    VStack(spacing: 30) {
-                        Text(NSLocalizedString("Congratulations!", comment: ""))
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-
-                        Text(NSLocalizedString("You’ve completed the tutorial.\nNow you’re ready to start playing!", comment: ""))
-                            .multilineTextAlignment(.center)
-                            .font(.title3)
-                            .padding(.horizontal)
-
-                        Button(action: {
-                            dismiss()
-                        }) {
-                            Text(NSLocalizedString("Start Playing", comment: ""))
-                                .font(.headline)
-                                .padding(.horizontal, 40)
-                                .padding(.vertical, 15)
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
-                                .shadow(radius: 4)
-                        }
+                        .padding(.trailing, 190)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.white.opacity(0.9))
                     }
-                    .padding(.trailing, 190)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white.opacity(0.9))
                 }
-
-                if tutorialStep != 9 {
+                
+                if tutorialStep < 10 && tutorialStep != 2 && tutorialStep != 5 && tutorialStep != 8 && tutorialStep != 9  {
                     Button(action: {
-                        showSkipAlert = true
+                        withAnimation {
+                            tutorialStep += 1
+                        }
                     }) {
+                        Text(NSLocalizedString("Next", comment: ""))
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
+                            .background(Color.blue.opacity(0.8))
+                            .cornerRadius(10)
+                    }
+                    .position(x: 80, y: height - 50)
+                }
+                
+                if tutorialStep < 10 {
+                    Button(action: { showSkipAlert = true }) {
                         Text(NSLocalizedString("Skip", comment: ""))
                             .font(.subheadline)
                             .foregroundColor(.blue)
@@ -365,20 +342,17 @@ struct TutorialIntroView: View {
                     }
                     .position(x: width * 0.8, y: height * 0.05)
                 }
-                
-            } .navigationBarBackButtonHidden(true)
-                .alert("Are you sure you want to skip the tutorial?", isPresented: $showSkipAlert) {
-                    Button("Skip", role: .destructive) {
-                        withAnimation {
-                            tutorialStep = 9
-                        }
-                    }
-                    Button("Cancel", role: .cancel) { }
+            }
+            .navigationBarBackButtonHidden(true)
+            .alert(NSLocalizedString("Are you sure you want to skip the tutorial?", comment: ""), isPresented: $showSkipAlert) {
+                Button(NSLocalizedString("Skip", comment: ""), role: .destructive) {
+                    withAnimation { tutorialStep = 10 }
                 }
-}
+                Button(NSLocalizedString("Cancel", comment: ""), role: .cancel) { }
+            }
+        }
     }
 }
-
 
 #Preview {
     TutorialIntroView()
