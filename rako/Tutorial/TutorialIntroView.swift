@@ -247,27 +247,26 @@ struct TutorialIntroView: View {
                 
                 // Messaggi del tutorial
                 if tutorialStep == 0 {
-                    Bubble(text: "This is your deck", position: .bottom) {
+                    Bubble(text: NSLocalizedString("This is your deck", comment: ""), position: .bottom) {
                         tutorialStep = 1
                     }
                 } else if tutorialStep == 1 {
-                    Bubble(text: "This is the bot's deck", position: .top) {
+                    Bubble(text: NSLocalizedString("This is the bot's deck", comment: ""), position: .top) {
                         tutorialStep = 2
                     }
                 } else if tutorialStep == 2 {
-                    Bubble(text: "Drag your card to the central pile", position: .bottom, allowTapToAdvance: false)
-                    
+                    Bubble(text: NSLocalizedString("Drag your card to the central pile", comment: ""), position: .bottom, allowTapToAdvance: false)
+
                 } else if tutorialStep == 3 {
-                    Bubble(text: "Great! You've played your card.", position: .center)
-                    {
+                    Bubble(text: NSLocalizedString("Great! You've played your card.", comment: ""), position: .center) {
                         withAnimation {
                             tutorialStep = 4
                             showBotCardInCenter = true
                         }
                     }
-                    
+
                 } else if tutorialStep == 4 {
-                    Bubble(text: "The bot played a 2! \nNow you must play two cards.", position: .center, allowTapToAdvance: false)
+                    Bubble(text: NSLocalizedString("The bot played a 2! \nNow you must play two cards.", comment: ""), position: .center, allowTapToAdvance: false)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                                 withAnimation {
@@ -278,9 +277,9 @@ struct TutorialIntroView: View {
                                 }
                             }
                         }
-                    
+
                 } else if tutorialStep == 5 {
-                    Bubble(text: "Not 1-2-3. \nThe bot takes the pile!", position: .center)
+                    Bubble(text: NSLocalizedString("Not 1-2-3. \nThe bot takes the pile!", comment: ""), position: .center)
                         .onAppear {
                             withAnimation(.easeInOut(duration: 0.8)) {
                                 centralPileOffset = CGSize(width: 0, height: -400)
@@ -295,9 +294,9 @@ struct TutorialIntroView: View {
                                 }
                             }
                         }
-                    
+
                 } else if tutorialStep == 6 {
-                    Bubble(text: "Now the bot plays, since \nit took the pile", position: .center)
+                    Bubble(text: NSLocalizedString("Now the bot plays, since \nit took the pile", comment: ""), position: .center)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                                 withAnimation {
@@ -306,9 +305,9 @@ struct TutorialIntroView: View {
                                 }
                             }
                         }
-                    
+
                 } else if tutorialStep == 7 {
-                    Bubble(text: "The bot played a 5! Now you play a card.", position: .center)
+                    Bubble(text: NSLocalizedString("The bot played a 5! Now you play a card.", comment: ""), position: .center)
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                                 withAnimation {
@@ -317,30 +316,30 @@ struct TutorialIntroView: View {
                                 }
                             }
                         }
-                    
+
                 } else if tutorialStep == 8 {
-                    Bubble(text: "Two identical cards! Drag the pile \ntowards you to take it!", position: .center)
+                    Bubble(text: NSLocalizedString("Two identical cards! Drag the pile \ntowards you to take it!", comment: ""), position: .center)
                         .onAppear {
                             withAnimation {
                                 allowPileDrag = true
                             }
                         }
-                    
+
                 } else if tutorialStep == 9 {
                     VStack(spacing: 30) {
-                        Text("Congratulations!")
+                        Text(NSLocalizedString("Congratulations!", comment: ""))
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                        
-                        Text("You’ve completed the tutorial.\nNow you’re ready to start playing!")
+
+                        Text(NSLocalizedString("You’ve completed the tutorial.\nNow you’re ready to start playing!", comment: ""))
                             .multilineTextAlignment(.center)
                             .font(.title3)
                             .padding(.horizontal)
-                        
+
                         Button(action: {
                             dismiss()
                         }) {
-                            Text("Start Playing")
+                            Text(NSLocalizedString("Start Playing", comment: ""))
                                 .font(.headline)
                                 .padding(.horizontal, 40)
                                 .padding(.vertical, 15)
@@ -349,24 +348,22 @@ struct TutorialIntroView: View {
                                 .cornerRadius(12)
                                 .shadow(radius: 4)
                         }
-                    }.padding(.trailing, 190)
+                    }
+                    .padding(.trailing, 190)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.white.opacity(0.9))
-                    
-                    
                 }
-                
+
                 if tutorialStep != 9 {
                     Button(action: {
                         showSkipAlert = true
                     }) {
-                        Text("Skip")
+                        Text(NSLocalizedString("Skip", comment: ""))
                             .font(.subheadline)
                             .foregroundColor(.blue)
                             .padding(10)
-                    } .position(
-                        x: width * 0.8, y: height * 0.05
-                    )
+                    }
+                    .position(x: width * 0.8, y: height * 0.05)
                 }
                 
             } .navigationBarBackButtonHidden(true)
