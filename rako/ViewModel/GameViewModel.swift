@@ -13,6 +13,8 @@ import Foundation
 import SwiftUI
 
 class GameViewModel: ObservableObject {
+    
+    @Published var showStarAnimation = false
     @Published var players: [[Card]] = []
     @Published var centralPile: [Card] = []
     @Published var currentPlayer = 0
@@ -93,6 +95,14 @@ class GameViewModel: ObservableObject {
     }
 
     private func postCardPlacement() {
+        if let last = centralPile.last,
+              ["1", "2", "3"].contains(last.value) {
+               showStarAnimation = true
+               DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                   self.showStarAnimation = false
+               }
+           }
+        
         if forcedPlaysRemaining > 0 {
             forcedPlaysRemaining -= 1
             if centralPile.last!.isWinningCard {
