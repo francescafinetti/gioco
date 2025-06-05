@@ -206,12 +206,14 @@ struct SinglePlayerView: View {
         .alert("Are you sure you want to leave the match?", isPresented: $showExitConfirmation) {
             Button("Cancel", role: .cancel) { }
             Button("Leave", role: .destructive) {
-                   if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                      let window = windowScene.windows.first {
-                       window.rootViewController = UIHostingController(rootView: HomeView())
-                       window.makeKeyAndVisible()
-                   }
-               }
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+                    let hostingController = UIHostingController(rootView: HomeView())
+                    hostingController.overrideUserInterfaceStyle = .light // oppure .unspecified
+                    window.rootViewController = hostingController
+                    window.makeKeyAndVisible()
+                }
+            }
         }
 
     }
