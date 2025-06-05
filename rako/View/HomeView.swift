@@ -17,6 +17,7 @@ struct HomeView: View {
 
     let gameModes = ["Single Player", "Two Players", "Multiplayer", "Settings"]
     let cardImages = ["single_player", "two_players", "multiplayer", "card_settings"]
+    
     let cardWidth: CGFloat = 250
     let spacing: CGFloat = 10
     let dragThreshold: CGFloat = 80
@@ -76,11 +77,10 @@ struct HomeView: View {
                                                     .scaledToFit()
                                                     .frame(width: 60, height: 60)
                                                     .foregroundColor(.black)
-                                                    
-                                                    .offset( y: -100) // posizione sopra la carta
+                                                    .offset(y: -100)
                                             }
                                         }
-                                                                           }
+                                    }
                                 }
                                 .frame(width: cardWidth, height: isSelected ? 600 : 500)
                                 .scaleEffect(scale)
@@ -102,7 +102,6 @@ struct HomeView: View {
                                         showTwoPlayer = true
                                     case "Multiplayer":
                                         showMultiplayer = true
-                                        
                                     case "Settings":
                                         withAnimation(.easeInOut(duration: 0.6)) {
                                             isSettingsFlipped.toggle()
@@ -136,17 +135,22 @@ struct HomeView: View {
                     }
                     .frame(height: 520)
 
-                    Text(tapInstructionText)
-                        .font(.custom("Futura-Bold", size: 30))
-                        .foregroundColor(.white)
-                        .shadow(radius: 6)
-                        .padding(.bottom, 60)
+                    VStack(spacing: 8) {
+                        Text(subtitleText)
+                            .font(.custom("Futura", size: 20))
+                            .foregroundColor(.white)
+                            .shadow(radius: 3)
+
+                        Text(tapInstructionText)
+                            .font(.custom("Futura-Bold", size: 30))
+                            .foregroundColor(.white)
+                            .shadow(radius: 6)
+                    }
+                    .padding(.bottom, 60)
                 }
 
-                // Navigation links
                 NavigationLink(destination: TutorialIntroView()
                     .onDisappear {
-                        // Quando chiudo tutorial, segno visto e apro SinglePlayerView
                         hasSeenTutorial = true
                         showTutorial = false
                         showSinglePlayer = true
@@ -161,7 +165,7 @@ struct HomeView: View {
                 NavigationLink(destination: TwoPlayerGameView(), isActive: $showTwoPlayer) {
                     EmptyView()
                 }
-// per multiplayer
+
                 /*NavigationLink(destination: GameCenterConnectView(), isActive: $showMultiplayer) {
                     EmptyView()
                 }*/
@@ -195,6 +199,21 @@ struct HomeView: View {
                 : NSLocalizedString("Tap to Open", comment: "Open settings")
         } else {
             return NSLocalizedString("Tap to Start", comment: "Start game")
+        }
+    }
+
+    private var subtitleText: String {
+        switch gameModes[selectedMode] {
+        case "Single Player":
+            return NSLocalizedString("vs CPU", comment: "Single player description")
+        case "Two Players":
+            return NSLocalizedString("Split Screen", comment: "Two player description")
+        case "Multiplayer":
+            return NSLocalizedString("Online", comment: "Multiplayer description")
+        case "Settings":
+            return NSLocalizedString("Customize your game", comment: "Settings description")
+        default:
+            return ""
         }
     }
 }
