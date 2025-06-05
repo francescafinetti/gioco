@@ -197,6 +197,17 @@
         }
       }
     },
+    "Customize your game" : {
+      "comment" : "Settings description",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personalizza il gioco"
+          }
+        }
+      }
+    },
     "DEFEAT" : {
       "localizations" : {
         "es" : {
@@ -215,6 +226,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "SCONFITTA"
+          }
+        }
+      }
+    },
+    "Drag your card to the central pile" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Butta la carta nella pila centrale"
           }
         }
       }
@@ -307,6 +328,16 @@
         }
       },
       "shouldTranslate" : false
+    },
+    "Great! You've played your card." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfetto! Hai giocato la tua carta."
+          }
+        }
+      }
     },
     "just to check if the matching works!" : {
       "localizations" : {
@@ -405,41 +436,36 @@
         }
       }
     },
-    "OFF" : {
-      "extractionState" : "stale",
+    "Not 1-2-3. \nThe bot takes the pile!" : {
       "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OFF"
-          }
-        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OFF"
+            "value" : "Nessuna carta 1-2-3. il Bot prende le carte!"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
-    "ON" : {
-      "extractionState" : "stale",
+    "Now the bot plays, since \nit took the pile" : {
       "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ON"
-          }
-        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ON"
+            "value" : "Ora gioca il Bot, dal momento che ha preso le carte"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
+    },
+    "Online" : {
+      "comment" : "Multiplayer description",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Online"
+          }
+        }
+      }
     },
     "Play again" : {
       "localizations" : {
@@ -579,6 +605,17 @@
         }
       }
     },
+    "Split Screen" : {
+      "comment" : "Two player description",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Split Screen"
+          }
+        }
+      }
+    },
     "Start Playing" : {
       "localizations" : {
         "es" : {
@@ -670,6 +707,46 @@
         }
       }
     },
+    "The bot played a 2! \nNow you must play two cards." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Bot ha giocato un 2! Ora devi buttare due carte."
+          }
+        }
+      }
+    },
+    "The bot played a 5! Now you play a card." : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il Bot ha giocato un 5! Ora devi buttare una carta."
+          }
+        }
+      }
+    },
+    "This is the bot's deck" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Queste sono le carte del Bot"
+          }
+        }
+      }
+    },
+    "This is your deck" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Queste sono le tue carte"
+          }
+        }
+      }
+    },
     "Tutorial" : {
       "localizations" : {
         "es" : {
@@ -686,6 +763,16 @@
         }
       },
       "shouldTranslate" : false
+    },
+    "Two identical cards! Drag the pile \ntowards you to take it!" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Una doppia! Trascina le carte verso di te per prenderle!"
+          }
+        }
+      }
     },
     "VICTORY" : {
       "localizations" : {
@@ -708,6 +795,10 @@
           }
         }
       }
+    },
+    "vs CPU" : {
+      "comment" : "Single player description",
+      "shouldTranslate" : false
     },
     "Waiting for Connection..." : {
       "localizations" : {
