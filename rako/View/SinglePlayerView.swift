@@ -44,6 +44,12 @@ struct SinglePlayerView: View {
             Image("pic")
                 .ignoresSafeArea()
 
+            if viewModel.showStarAnimation {
+                ConfettiExplosionView()
+                    .transition(.scale)
+                    .zIndex(1000)
+            }
+            
             VStack {
                 BotDeckView(
                     viewModel: viewModel,

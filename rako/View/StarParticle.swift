@@ -1,60 +1,79 @@
-struct StarParticle: Identifiable {
+import SwiftUI
+
+struct ConfettiParticle: Identifiable {
     let id = UUID()
-    let x: CGFloat
-    let y: CGFloat
-    let size: CGFloat
-    let rotation: Double
-    var opacity: Double
+    var position: CGPoint
+    let color: Color
+    let angle: Double
+    var opacity: Double = 1
+    var scale: CGFloat = 1
 }
 
-struct StarAnimationView: View {
-    @State private var particles: [StarParticle] = []
-    let particleCount = 20
-    let animationDuration: Double = 1.0
-
+struct ConfettiExplosionView: View {
+    @State private var confettis: [ConfettiParticle] = []
+    @State private var animate = false
+    
+    let particleCount = 30
+    let maxDistance: CGFloat = 500
+    let confettiSize: CGFloat = 20
+    
+    let confettiColors: [Color] = [.yellow,.blue, .orange, .pink, .purple]
+    
     var body: some View {
-        ZStack {
-            ForEach(particles) { particle in
-                Image(systemName: "star.fill")
-                    .resizable()
-                    .frame(width: particle.size, height: particle.size)
-                    .position(x: particle.x, y: particle.y)
-                    .rotationEffect(.degrees(particle.rotation))
-                    .opacity(particle.opacity)
-                    .animation(.easeOut(duration: animationDuration), value: particle.opacity)
+        GeometryReader { geo in
+            ZStack {
+                ForEach(confettis) { confetti in
+                    Circle()
+                        .fill(confetti.color)
+                        .frame(width: confettiSize, height: confettiSize)
+                        .position(confetti.position)
+                        .opacity(confetti.opacity)
+                        .scaleEffect(confetti.scale)
+                        .animation(.easeOut(duration: 1.5), value: animate)
+                }
             }
-        }
-        .onAppear {
-            createParticles()
-        }
-    }
-
-    private func createParticles() {
-        particles = []
-        for _ in 0..<particleCount {
-            let particle = StarParticle(
-                x: CGFloat.random(in: 50...350),
-                y: CGFloat.random(in: 50...650),
-                size: CGFloat.random(in: 10...30),
-                rotation: Double.random(in: 0...360),
-                opacity: 1.0
-            )
-            particles.append(particle)
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            withAnimation {
-                particles = particles.map { p in
-                    StarParticle(
-                        id: p.id,
-                        x: p.x,
-                        y: p.y,
-                        size: p.size,
-                        rotation: p.rotation + 180,
-                        opacity: 0
-                    )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onAppear {
+                let center = CGPoint(x: geo.size.width / 2, y: geo.size.height / 2)
+                createConfettis(center: center)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    animateConfettis(center: center)
+                    animate = true
                 }
             }
         }
+    }
+    
+    private func createConfettis(center: CGPoint) {
+        confettis = []
+        let step = 360.0 / Double(particleCount)
+        for i in 0..<particleCount {
+            let angle = step * Double(i)
+            let color = confettiColors.randomElement() ?? .white
+            confettis.append(ConfettiParticle(position: center, color: color, angle: angle))
+        }
+    }
+    
+    private func animateConfettis(center: CGPoint) {
+        for i in 0..<confettis.count {
+            let angle = confettis[i].angle
+            let rad = angle * .pi / 180
+            let finalX = center.x + cos(rad) * maxDistance
+            let finalY = center.y + sin(rad) * maxDistance
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation(.easeOut(duration: 1.5)) {
+                    confettis[i].position = CGPoint(x: finalX, y: finalY)
+                    confettis[i].opacity = 0
+                    confettis[i].scale = 0.3
+                }
+            }
+        }
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+        ConfettiExplosionView()
     }
 }
