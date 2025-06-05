@@ -116,17 +116,27 @@ struct HomeView: View {
                         .gesture(
                             DragGesture()
                                 .onChanged { value in
-                                    if !isSettingsFlipped {
-                                        dragOffset = value.translation.width
-                                    }
+                                    dragOffset = value.translation.width
                                 }
                                 .onEnded { value in
-                                    guard !isSettingsFlipped else { return }
+                                    if isSettingsFlipped {
+                                        withAnimation(.easeInOut(duration: 0.6)) {
+                                            isSettingsFlipped = false
+                                        }
+                                        // Se lo swipe è verso destra e non siamo già alla prima card
+                                        if value.translation.width > dragThreshold && selectedMode > 0 {
+                                            selectedMode -= 1
+                                        }
+                                        dragOffset = 0
+                                        return
+                                    }
+
                                     if value.translation.width < -dragThreshold && selectedMode < gameModes.count - 1 {
                                         selectedMode += 1
                                     } else if value.translation.width > dragThreshold && selectedMode > 0 {
                                         selectedMode -= 1
                                     }
+
                                     withAnimation(.easeOut(duration: 0.25)) {
                                         dragOffset = 0
                                     }
