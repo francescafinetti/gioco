@@ -16,7 +16,7 @@ struct SettingsCardView: View {
     @AppStorage("isLeftHanded") private var isLeftHanded = false
 
     var body: some View {
-        VStack(spacing: 24) {
+        VStack(spacing: 35) {
 
             // Musica (on/off + slider)
             HStack {
@@ -47,7 +47,8 @@ struct SettingsCardView: View {
                         }
                     }
             }
-
+            // Vibrazione
+            /*
             // Suoni (on/off + slider)
             HStack {
                 Button {
@@ -69,7 +70,7 @@ struct SettingsCardView: View {
                     .onChange(of: soundVolume) { newVolume in
                         // In futuro: aggiorna volume effetti sonori
                     }
-            }
+            }*/
 
             // Vibrazione
             /*HStack {
@@ -103,13 +104,13 @@ struct SettingsCardView: View {
 
             // Tutorial & Credits
             // Tutorial & Credits
-            VStack(spacing: 8) {
+            VStack(spacing: 25) {
                 NavigationLink(destination: TutorialIntroView()) {
                     Text("Tutorial")
                         .font(.title)
                         .bold()
                 }
-                Text("Credits")
+                Link("Credits", destination: URL(string: "https://sites.google.com/view/rakogame/home-page")!)
                     .font(.body)
             }
 

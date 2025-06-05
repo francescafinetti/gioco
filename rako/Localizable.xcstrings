@@ -1,5 +1,4 @@
-
- {
+{
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
@@ -407,6 +406,7 @@
       }
     },
     "OFF" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -424,6 +424,7 @@
       "shouldTranslate" : false
     },
     "ON" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr" : {
           "stringUnit" : {
@@ -479,7 +480,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Giocatore %lld è"
+            "value" : "Giocatore %lld "
           }
         }
       }
