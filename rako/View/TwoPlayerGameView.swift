@@ -70,7 +70,7 @@ struct TwoPlayerGameView: View {
                                                 withAnimation { resetPlayer2Drag() }
                                                 return
                                             }
-                                            if g.translation.height > 120 {
+                                            if g.translation.height < 120 {
                                                 viewModel.playCard()
                                                 viewModel.checkWinner()
                                             }
@@ -79,7 +79,7 @@ struct TwoPlayerGameView: View {
                                             withAnimation { resetPlayer2Drag() }
                                         }
                                 )
-                                .rotationEffect(.degrees(-25))
+                                .rotationEffect(.degrees(155))
                                 .position(x: width * 0.30, y: height * 0.30)
 
                             // Player 2 score
@@ -112,7 +112,8 @@ struct TwoPlayerGameView: View {
                                             radius: 6, x: 0, y: 0)
                             )
                             .frame(width: 140)
-                            .position(x: screenWidth - 290, y: screenHeight - 45)
+                            .position(x: screenWidth - 480, y: screenHeight - 200)
+                            .rotationEffect(.degrees(180))
                         }
                     }
                     .padding(.top, 50)
