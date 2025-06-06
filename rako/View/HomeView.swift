@@ -2,7 +2,7 @@ import SwiftUI
 import GameKit
 
 struct HomeView: View {
-    @State private var selectedMode = 0
+    @State private var selectedMode = 1
     @State private var dragOffset: CGFloat = 0.0
     @State private var isSettingsFlipped = false
     @State private var showSinglePlayer = false
@@ -15,8 +15,8 @@ struct HomeView: View {
     @AppStorage("isLeftHanded") private var isLeftHanded = false
     @StateObject var gameCenterManager = GameCenterManager()
 
-    let gameModes = ["Single Player", "Two Players", "Multiplayer", "Settings"]
-    let cardImages = ["single_player", "two_players", "multiplayer", "card_settings"]
+    let gameModes = ["Settings" ,"Single Player", "Two Players", "Multiplayer"]
+    let cardImages = ["card_settings", "single_player", "two_players", "multiplayer"]
     
     let cardWidth: CGFloat = 250
     let spacing: CGFloat = 10
@@ -123,9 +123,9 @@ struct HomeView: View {
                                         withAnimation(.easeInOut(duration: 0.6)) {
                                             isSettingsFlipped = false
                                         }
-                                        // Se lo swipe è verso destra e non siamo già alla prima card
-                                        if value.translation.width > dragThreshold && selectedMode > 0 {
-                                            selectedMode -= 1
+                                        // Se lo swipe è verso sinistra e non siamo già all'ultima card
+                                        if value.translation.width < -dragThreshold && selectedMode < gameModes.count - 1 {
+                                            selectedMode += 1
                                         }
                                         dragOffset = 0
                                         return
