@@ -107,7 +107,12 @@ struct SettingsCardView: View {
             VStack(spacing: 25) {
                 NavigationLink(destination: TutorialIntroView()) {
                     Text("Tutorial")
-                        .font(.title)
+                        .font(.title2)
+                        .bold()
+                }
+                NavigationLink(destination: RulesView()) {
+                    Text("Game Rules")
+                        .font(.title3)
                         .bold()
                 }
                 Link("Credits", destination: URL(string: "https://sites.google.com/view/rakogame/home-page")!)

@@ -289,14 +289,17 @@ struct TutorialIntroView: View {
                     } else if tutorialStep == 10 {
                         VStack(spacing: 30) {
                             Text(NSLocalizedString("Congratulations!", comment: ""))
-                                .font(.largeTitle)
-                                .fontWeight(.bold)
+                                .font(.custom("Futura-Bold", size: 30))
                             
                             Text(NSLocalizedString("Now you’re ready to start playing!\nWin the game by collecting all 40 cards!", comment: ""))
                                 .multilineTextAlignment(.center)
-                                .font(.title3)
+                                .font(.custom("FuturaPT", size: 20))
                                 .padding(.horizontal)
 
+                            Text(NSLocalizedString("If you want you can watch this tutorial again, just go checking the settings!", comment: ""))
+                                .multilineTextAlignment(.center)
+                                .font(.custom("FuturaPT", size: 20))
+                                .padding(.horizontal)
                             
                             Button(action: {
                                 dismiss()
@@ -307,18 +310,15 @@ struct TutorialIntroView: View {
                                     .padding(.vertical, 15)
                                     .background(Color.blue)
                                     .foregroundColor(.white)
-                                    .cornerRadius(12)
+                                    .cornerRadius(15)
                                     .shadow(radius: 4)
                             }
                             
-                            Text(NSLocalizedString("If you want to consult the TUTORIAL again, you can find it in the settings!", comment: ""))
-                                .multilineTextAlignment(.center)
-                                .font(.title2)
-                                .padding(.horizontal)
+                        
                         }
                         .padding(.trailing, 190)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.white.opacity(0.9))
+                        .background(Color(red: 0.8, green: 0.9, blue: 1.0).opacity(0.8))
                     }
                 }
                 

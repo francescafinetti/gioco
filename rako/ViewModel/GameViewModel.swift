@@ -168,6 +168,8 @@ class GameViewModel: ObservableObject {
             centralPile.removeAll()
             currentPlayer = playerIndex
             forcedPlaysRemaining = 0
+            
+            NSObject.cancelPreviousPerformRequests(withTarget: self)
             checkWinner()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.lastCollector = nil
