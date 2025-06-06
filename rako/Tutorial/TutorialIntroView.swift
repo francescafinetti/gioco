@@ -296,6 +296,7 @@ struct TutorialIntroView: View {
                                 .multilineTextAlignment(.center)
                                 .font(.title3)
                                 .padding(.horizontal)
+
                             
                             Button(action: {
                                 dismiss()
@@ -309,6 +310,11 @@ struct TutorialIntroView: View {
                                     .cornerRadius(12)
                                     .shadow(radius: 4)
                             }
+                            
+                            Text(NSLocalizedString("If you want to consult the TUTORIAL again, you can find it in the settings!", comment: ""))
+                                .multilineTextAlignment(.center)
+                                .font(.title2)
+                                .padding(.horizontal)
                         }
                         .padding(.trailing, 190)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)

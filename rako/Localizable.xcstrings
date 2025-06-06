@@ -392,7 +392,29 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se appare un’altra carta 1,2 o 3, la regola si ripetere e la catena continua fino a che una carta normale non la completa. Quindi, ora devi giocare due carte."
+            "value" : "Se appare un’altra carta 1,2 o 3, \nla regola si ripetere e la catena continua \nfino a che una carta normale non la completa. \nQuindi, ora devi giocare due carte."
+          }
+        }
+      }
+    },
+    "If you want to consult the TUTORIAL again, you can find it in the settings!" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si quieres volver a consultar el TUTORIAL, ¡puedes encontrarlo en la configuración!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si tu veux consulter à nouveau le TUTORIEL, tu peux le trouver dans les paramètres !"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se vuoi consultare il TUTORIAL di nuovo, lo trovi nelle impostazioni!"
           }
         }
       }
@@ -494,10 +516,7 @@
         }
       }
     },
-
-
     "Not 1-2-3. \nThe bot takes the pile!" : {
-
       "localizations" : {
         "es" : {
           "stringUnit" : {
@@ -839,7 +858,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il Bot ha giocato un 2! - le carte speciali sono 1,2 e 3: quando una di loro appare, l’altro giocatore deve buttare esattamente il numero di carte mostrato."
+            "value" : "Il Bot ha giocato un 2! - \nle carte speciali sono 1,2 e 3: \nquando una di loro appare, l’altro giocatore deve \nbuttare esattamente il numero di carte mostrato."
           }
         }
       }
