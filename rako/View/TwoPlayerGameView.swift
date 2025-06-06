@@ -94,6 +94,7 @@ struct TwoPlayerGameView: View {
                                     .bold()
                             }
                             .padding(12)
+                            .rotationEffect(.degrees(180))
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .fill(
